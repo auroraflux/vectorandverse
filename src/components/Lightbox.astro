@@ -1,0 +1,79 @@
+---
+// Lightbox component - client-side only
+---
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+  <img class="lightbox-image" src="" alt="" />
+</div>
+
+<style>
+  @import "tailwindcss";
+  @reference;
+  
+  .lightbox {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/95 opacity-0 pointer-events-none transition-opacity duration-300;
+  }
+  
+  .lightbox.active {
+    @apply opacity-100 pointer-events-auto;
+  }
+  
+  .lightbox-close {
+    @apply absolute top-4 right-4 text-white text-4xl font-light hover:text-gray-300 transition-colors;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .lightbox-image {
+    @apply max-w-[90vw] max-h-[90vh] object-contain;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox?.querySelector('.lightbox-image') as HTMLImageElement;
+    const closeBtn = lightbox?.querySelector('.lightbox-close');
+    
+    // Handle image clicks
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'IMG' && target.dataset.lightbox === 'true') {
+        const fullSrc = target.dataset.fullSrc;
+        if (fullSrc && lightbox && lightboxImg) {
+          lightboxImg.src = fullSrc;
+          lightboxImg.alt = target.getAttribute('alt') || '';
+          lightbox.classList.add('active');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+    });
+    
+    // Close lightbox
+    const closeLightbox = () => {
+      if (lightbox) {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    };
+    
+    closeBtn?.addEventListener('click', closeLightbox);
+    
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  });
+</script>

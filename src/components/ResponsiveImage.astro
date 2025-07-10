@@ -1,0 +1,86 @@
+---
+import { Image, getImage } from 'astro:assets';
+
+export interface Props {
+  src: ImageMetadata;
+  alt: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+  type?: 'hero' | 'inline';
+  caption?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  loading = 'lazy', 
+  class: className = '', 
+  type = 'inline',
+  caption 
+} = Astro.props;
+
+// Define responsive sizes based on image type
+const getSizes = () => {
+  if (type === 'hero') {
+    return {
+      widths: [640, 768, 1024, 1536, 2048],
+      sizes: `(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1200px`
+    };
+  }
+  // Inline images for article content
+  return {
+    widths: [320, 640, 768, 1024],
+    sizes: `(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 768px`
+  };
+};
+
+const { widths, sizes } = getSizes();
+
+// Generate a full-res version for lightbox
+const fullRes = await getImage({ 
+  src, 
+  format: 'webp',
+  quality: 90
+});
+---
+
+<figure class={`responsive-image ${type} ${className}`.trim()}>
+  <Image
+    src={src}
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    loading={loading}
+    format="webp"
+    quality={type === 'hero' ? 85 : 80}
+    class={`${type === 'inline' ? 'cursor-zoom-in' : ''}`}
+    data-lightbox={type === 'inline' ? 'true' : undefined}
+    data-full-src={type === 'inline' ? fullRes.src : undefined}
+  />
+  {caption && (
+    <figcaption class="text-sm text-gray-600 mt-2 text-center italic">
+      {caption}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  @import "tailwindcss";
+  @reference;
+  
+  .responsive-image {
+    @apply w-full;
+  }
+  
+  .responsive-image.hero img {
+    @apply w-full h-full object-cover;
+  }
+  
+  .responsive-image.inline {
+    @apply my-8 mx-auto max-w-full;
+  }
+  
+  .responsive-image.inline img {
+    @apply rounded-lg shadow-lg mx-auto;
+  }
+</style>
