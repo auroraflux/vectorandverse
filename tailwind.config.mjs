@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['"Hanken Grotesk"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        'sans': ['Rubik', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
       },
       fontSize: {
         'base': ['20px', '1.6'],
@@ -17,7 +17,7 @@ export default {
         '5xl': ['60px', '1'],
       },
       fontWeight: {
-        'normal': '450',
+        'normal': '400',
         'bold': '700',
       },
       typography: {
@@ -27,7 +27,7 @@ export default {
             maxWidth: '65ch',
             fontSize: '20px',
             lineHeight: '1.6',
-            fontWeight: '450',
+            fontWeight: '400',
             'h1': {
               fontWeight: '700',
               fontSize: '2.4em',
@@ -70,7 +70,7 @@ export default {
               textDecorationColor: '#d1d5db',
               textDecorationThickness: '1px',
               textUnderlineOffset: '2px',
-              fontWeight: '450',
+              fontWeight: '400',
               '&:hover': {
                 textDecorationColor: '#9ca3af',
               },
@@ -82,7 +82,7 @@ export default {
               borderLeftColor: '#e5e7eb',
               borderLeftWidth: '3px',
               fontStyle: 'normal',
-              fontWeight: '450',
+              fontWeight: '400',
               color: '#6b7280',
               fontSize: '1.1em',
               paddingLeft: '1.2em',
@@ -98,7 +98,7 @@ export default {
               backgroundColor: '#fafafa',
               padding: '0.125rem 0.25rem',
               borderRadius: '0.125rem',
-              fontWeight: '450',
+              fontWeight: '400',
               fontSize: '0.9em',
             },
             'pre code': {
