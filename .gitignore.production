@@ -1,0 +1,6 @@
+# Development files to exclude from production
+CLAUDE.md
+QUICK_STATUS.md
+_workspace/
+.workspace/
+session-notes/

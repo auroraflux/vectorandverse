@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'serif': ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-        'sans': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        'serif': ['"Crimson Text"', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+        'sans': ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
       },
       typography: {
         DEFAULT: {

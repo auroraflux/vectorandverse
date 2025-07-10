@@ -22,7 +22,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
       <a href="/" class="inline-block text-gray-600 hover:text-gray-900 transition-colors mb-8">
         ← Back
       </a>
-      <h1 class="text-4xl md:text-5xl font-medium tracking-tight mb-4 serif">
+      <h1 class="text-4xl md:text-5xl font-medium tracking-tight mb-4 font-serif">
         {title}
       </h1>
       <p class="text-lg text-gray-600 mb-4">
@@ -42,12 +42,15 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 </Layout>
 
 <style>
+  @import "tailwindcss";
+  @reference;
+  
   article :global(h2) {
-    @apply text-2xl font-medium mt-12 mb-4 serif;
+    @apply text-2xl font-medium mt-12 mb-4 font-serif;
   }
   
   article :global(h3) {
-    @apply text-xl font-medium mt-8 mb-3 serif;
+    @apply text-xl font-medium mt-8 mb-3 font-serif;
   }
   
   article :global(p) {
