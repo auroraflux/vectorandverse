@@ -77,10 +77,14 @@ const fullRes = await getImage({
   }
   
   .responsive-image.inline {
-    @apply py-2 mx-auto max-w-full;
+    @apply mx-auto max-w-full;
   }
   
   .responsive-image.inline img {
     @apply rounded-lg shadow-lg mx-auto;
+  }
+  
+  figure.responsive-image.inline {
+    @apply my-2;
   }
 </style>
