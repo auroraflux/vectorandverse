@@ -2,6 +2,8 @@
 title: 'The Philosophy of Minimal Design'
 description: 'Understanding the power of reduction in visual communication.'
 date: 2024-01-20
+heroImage: './images/minimal-hero.svg'
+heroImageAlt: 'Minimal geometric design'
 ---
 
 Minimal design is not about having less for the sake of less. It's about having exactly what you need—nothing more, nothing less.

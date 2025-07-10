@@ -2,6 +2,8 @@
 title: 'On the Nature of Writing'
 description: 'Exploring the relationship between thought and expression in the digital age.'
 date: 2024-01-15
+heroImage: './images/writing-hero.svg'
+heroImageAlt: 'Abstract representation of writing'
 ---
 
 The act of writing is fundamentally an act of thinking made visible. When we write, we crystallize the ephemeral streams of consciousness into something tangible, something that can be examined, refined, and shared.

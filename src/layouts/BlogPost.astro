@@ -1,24 +1,48 @@
 ---
 import Layout from './Layout.astro';
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 
 export interface Props {
   title: string;
   description: string;
   date: Date;
+  heroImage?: ImageMetadata;
+  heroImageAlt?: string;
 }
 
-const { title, description, date } = Astro.props;
+const { title, description, date, heroImage, heroImageAlt } = Astro.props;
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 }).format(date);
+
+let optimizedHeroImage;
+if (heroImage) {
+  optimizedHeroImage = await getImage({ 
+    src: heroImage, 
+    width: 1200,
+    height: 600,
+    format: 'webp'
+  });
+}
 ---
 
 <Layout title={title} description={description}>
   <div class="fade-in">
-    <header class="max-w-3xl mx-auto px-6 pt-16 pb-8">
+    {optimizedHeroImage && (
+      <div class="w-full h-96 md:h-[32rem] relative overflow-hidden">
+        <img 
+          src={optimizedHeroImage.src} 
+          alt={heroImageAlt || title}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+      </div>
+    )}
+    
+    <header class={`max-w-3xl mx-auto px-6 ${optimizedHeroImage ? 'pt-8' : 'pt-16'} pb-8`}>
       <a href="/" class="inline-block text-gray-600 hover:text-gray-900 transition-colors mb-8">
         ← Back
       </a>

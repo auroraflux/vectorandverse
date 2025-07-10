@@ -1,10 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Process hero images
+const postsWithImages = await Promise.all(
+  posts.map(async (post) => {
+    if (post.data.heroImage) {
+      const optimizedImage = await getImage({ 
+        src: post.data.heroImage, 
+        width: 800,
+        height: 400,
+        format: 'webp'
+      });
+      return { ...post, heroImageUrl: optimizedImage.src };
+    }
+    return post;
+  })
 );
 ---
 
@@ -19,9 +36,9 @@ const posts = (await getCollection('blog')).sort(
       </p>
     </header>
     
-    <main class="max-w-3xl mx-auto px-6 pb-24">
-      <div class="space-y-12">
-        {posts.map((post) => {
+    <main class="max-w-5xl mx-auto px-6 pb-24">
+      <div class="space-y-8">
+        {postsWithImages.map((post) => {
           const formattedDate = new Intl.DateTimeFormat('en-US', {
             year: 'numeric',
             month: 'long',
@@ -30,16 +47,31 @@ const posts = (await getCollection('blog')).sort(
           
           return (
             <article class="group">
-              <a href={`/blog/${post.slug}`} class="block">
-                <h2 class="text-2xl md:text-3xl font-medium mb-2 group-hover:text-gray-700 transition-colors font-serif">
-                  {post.data.title}
-                </h2>
-                <p class="text-gray-600 mb-2">
-                  {post.data.description}
-                </p>
-                <time class="text-sm text-gray-500">
-                  {formattedDate}
-                </time>
+              <a href={`/blog/${post.slug}`} class="block relative overflow-hidden rounded-sm">
+                <div class="flex flex-col md:flex-row gap-6 p-6 md:p-8 hover:bg-gray-50 transition-colors">
+                  {post.heroImageUrl && (
+                    <div class="relative w-full md:w-64 h-48 md:h-40 flex-shrink-0 overflow-hidden rounded">
+                      <div class="absolute inset-0 bg-gradient-to-r from-white/60 to-transparent z-10 pointer-events-none"></div>
+                      <img 
+                        src={post.heroImageUrl} 
+                        alt={post.data.heroImageAlt || post.data.title}
+                        class="w-full h-full object-cover filter grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div class="flex-1">
+                    <h2 class="text-2xl md:text-3xl font-medium mb-2 group-hover:text-gray-700 transition-colors font-serif">
+                      {post.data.title}
+                    </h2>
+                    <p class="text-gray-600 mb-2">
+                      {post.data.description}
+                    </p>
+                    <time class="text-sm text-gray-500">
+                      {formattedDate}
+                    </time>
+                  </div>
+                </div>
               </a>
             </article>
           );
