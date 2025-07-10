@@ -24,6 +24,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 10;
   }
   
   .lightbox-image {
@@ -32,48 +33,101 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  // Use a global flag to ensure we only set up listeners once
+  let lightboxInitialized = false;
+  
+  function setupLightbox() {
+    if (lightboxInitialized) return;
+    lightboxInitialized = true;
+    
+    // Global click handler using event delegation
+    document.addEventListener('click', handleClick);
+    
+    // ESC key handler
+    document.addEventListener('keydown', handleKeydown);
+  }
+  
+  function handleClick(e: MouseEvent) {
+    const target = e.target as HTMLElement;
+    
+    // Check if clicked element is an image with lightbox attribute
+    if (target.tagName === 'IMG' && target.dataset.lightbox === 'true') {
+      e.preventDefault();
+      openLightbox(target);
+      return;
+    }
+    
+    // Check if clicked element is the close button
+    if (target.classList.contains('lightbox-close')) {
+      e.preventDefault();
+      closeLightbox();
+      return;
+    }
+    
+    // Check if clicked element is the lightbox backdrop
+    if (target.id === 'lightbox') {
+      closeLightbox();
+      return;
+    }
+  }
+  
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox?.classList.contains('active')) {
+        closeLightbox();
+      }
+    }
+  }
+  
+  function openLightbox(img: HTMLElement) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox?.querySelector('.lightbox-image') as HTMLImageElement;
-    const closeBtn = lightbox?.querySelector('.lightbox-close');
+    const fullSrc = img.dataset.fullSrc;
     
-    // Handle image clicks
-    document.addEventListener('click', (e) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'IMG' && target.dataset.lightbox === 'true') {
-        const fullSrc = target.dataset.fullSrc;
-        if (fullSrc && lightbox && lightboxImg) {
-          lightboxImg.src = fullSrc;
-          lightboxImg.alt = target.getAttribute('alt') || '';
-          lightbox.classList.add('active');
-          lightbox.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
-        }
-      }
+    if (!lightbox || !lightboxImg || !fullSrc) return;
+    
+    // Set image source and alt text
+    lightboxImg.src = fullSrc;
+    lightboxImg.alt = img.getAttribute('alt') || '';
+    
+    // Show lightbox
+    requestAnimationFrame(() => {
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      
+      // Focus close button for accessibility
+      const closeBtn = lightbox.querySelector('.lightbox-close') as HTMLButtonElement;
+      closeBtn?.focus();
     });
+  }
+  
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
     
-    // Close lightbox
-    const closeLightbox = () => {
-      if (lightbox) {
-        lightbox.classList.remove('active');
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    
+    // Clear image source after transition
+    setTimeout(() => {
+      const lightboxImg = lightbox.querySelector('.lightbox-image') as HTMLImageElement;
+      if (lightboxImg) {
+        lightboxImg.src = '';
       }
-    };
-    
-    closeBtn?.addEventListener('click', closeLightbox);
-    
-    lightbox?.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
-    
-    // ESC key to close
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lightbox?.classList.contains('active')) {
-        closeLightbox();
-      }
-    });
-  });
+    }, 300);
+  }
+  
+  // Initialize immediately
+  setupLightbox();
+  
+  // Also ensure it's set up after DOM content is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLightbox);
+  }
+  
+  // Handle Astro view transitions
+  document.addEventListener('astro:page-load', setupLightbox);
 </script>
