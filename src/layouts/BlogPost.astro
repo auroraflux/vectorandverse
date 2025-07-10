@@ -1,0 +1,76 @@
+---
+import Layout from './Layout.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  date: Date;
+}
+
+const { title, description, date } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(date);
+---
+
+<Layout title={title} description={description}>
+  <div class="fade-in">
+    <header class="max-w-3xl mx-auto px-6 pt-16 pb-8">
+      <a href="/" class="inline-block text-gray-600 hover:text-gray-900 transition-colors mb-8">
+        ← Back
+      </a>
+      <h1 class="text-4xl md:text-5xl font-medium tracking-tight mb-4 serif">
+        {title}
+      </h1>
+      <p class="text-lg text-gray-600 mb-4">
+        {description}
+      </p>
+      <time class="text-sm text-gray-500">
+        {formattedDate}
+      </time>
+    </header>
+    
+    <article class="max-w-3xl mx-auto px-6 pb-24">
+      <div class="prose prose-lg max-w-none">
+        <slot />
+      </div>
+    </article>
+  </div>
+</Layout>
+
+<style>
+  article :global(h2) {
+    @apply text-2xl font-medium mt-12 mb-4 serif;
+  }
+  
+  article :global(h3) {
+    @apply text-xl font-medium mt-8 mb-3 serif;
+  }
+  
+  article :global(p) {
+    @apply mb-6 leading-relaxed;
+  }
+  
+  article :global(blockquote) {
+    @apply pl-6 my-8 border-l-3 border-gray-300 text-gray-700;
+  }
+  
+  article :global(blockquote p) {
+    @apply mb-2;
+  }
+  
+  article :global(pre) {
+    @apply bg-gray-50 border border-gray-200 p-4 overflow-x-auto my-6 text-sm;
+  }
+  
+  article :global(code) {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+  }
+  
+  article :global(pre code) {
+    @apply bg-transparent p-0;
+  }
+</style>

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    @apply antialiased;
+    font-feature-settings: "kern" 1;
+    text-rendering: optimizeLegibility;
+  }
+  
+  body {
+    @apply text-gray-900;
+  }
+  
+  ::selection {
+    @apply bg-gray-200;
+  }
+}
+
+@layer components {
+  .admonition {
+    @apply p-4 my-6 border-l-4;
+  }
+  
+  .admonition-note {
+    @apply bg-blue-50 border-blue-400 text-blue-900;
+  }
+  
+  .admonition-warning {
+    @apply bg-amber-50 border-amber-400 text-amber-900;
+  }
+  
+  .admonition-tip {
+    @apply bg-green-50 border-green-400 text-green-900;
+  }
+}
+
+@layer utilities {
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
