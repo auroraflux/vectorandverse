@@ -49,50 +49,22 @@
     font-variation-settings: 'wght' 900;
   }
   
-  /* Homepage article card description hover effect - NO WEIGHT CHANGE */
+  /* Homepage article card description - no weight change to prevent reflow */
   article a[data-has-image] p {
     font-variation-settings: 'wght' 500 !important;
-    /* Only transition color, not weight */
+    /* Smooth transition for hover state */
     transition: opacity 0.3s ease-out;
-    letter-spacing: normal !important;
-    line-height: 1.75 !important;
-    /* Reserve space and prevent any reflow */
+    letter-spacing: normal;
+    line-height: 1.75;
+    /* Let text flow naturally */
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /* Lock the height to prevent expansion */
-    max-height: 4rem; /* Exactly 2 lines at 2rem line height */
   }
   
   article:hover a[data-has-image] p {
-    /* NO weight change - only visual feedback through opacity */
+    /* Keep exact same weight to prevent ANY reflow */
     font-variation-settings: 'wght' 500 !important;
-    letter-spacing: normal !important;
-    line-height: 1.75 !important;
-    opacity: 0.9;
-  }
-  
-  /* Ensure no reflow on any screen size */
-  @media (min-width: 768px) {
-    article a[data-has-image] p {
-      /* Fixed height based on line count */
-      height: 3.5rem; /* 2 lines * 1.75 line-height */
-      /* Clip any overflow */
-      overflow: hidden;
-      position: relative;
-    }
-    
-    /* Add fade-out gradient if text is cut off */
-    article a[data-has-image] p::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 3rem;
-      height: 1.5rem;
-      background: linear-gradient(to right, transparent, rgba(0,0,0,0.7));
-      pointer-events: none;
-    }
+    /* Subtle visual feedback */
+    opacity: 0.95;
   }
   
   /* Interactive weight for headings in prose */
