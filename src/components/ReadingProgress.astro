@@ -2,9 +2,7 @@
 // Reading progress component
 ---
 
-<div class="reading-progress-bar"></div>
-
-<style>
+<style is:global>
   .reading-progress-bar {
     position: fixed;
     top: 0;
@@ -17,7 +15,7 @@
       #14b8a6 66%,
       #9333ea 100%
     );
-    z-index: 100;
+    z-index: 1000;
     transition: width 0.2s ease-out;
     box-shadow: 
       0 2px 20px rgba(59, 130, 246, 0.8),
@@ -32,8 +30,13 @@
     const article = document.querySelector('article');
     if (!article) return;
     
-    const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
-    if (!progressBar) return;
+    // Create progress bar element
+    let progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
+    if (!progressBar) {
+      progressBar = document.createElement('div');
+      progressBar.className = 'reading-progress-bar';
+      document.body.appendChild(progressBar);
+    }
   
   // Calculate progress on scroll
   const updateProgress = () => {
