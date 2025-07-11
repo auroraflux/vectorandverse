@@ -6,8 +6,12 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    heroImage: image().optional(),
+    heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+    series: z.string().optional(),
+    seriesOrder: z.number().optional(),
   }),
 });
 

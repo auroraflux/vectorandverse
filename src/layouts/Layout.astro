@@ -19,7 +19,7 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} - Kilowhat</title>
+    <title>{title} - kilowhat!?</title>
     <ViewTransitions />
     <style>
       /* Satoshi Variable Font */
@@ -29,6 +29,26 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
              url('/fonts/Satoshi-Variable.woff') format('woff-variations');
         font-weight: 300 900;
         font-style: normal;
+        font-display: swap;
+      }
+      
+      /* Light weight for subtle elements */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-Light.woff2') format('woff2'),
+             url('/fonts/Satoshi-Light.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      /* Black Italic for the logo */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-BlackItalic.woff2') format('woff2'),
+             url('/fonts/Satoshi-BlackItalic.woff') format('woff');
+        font-weight: 900;
+        font-style: italic;
         font-display: swap;
       }
       

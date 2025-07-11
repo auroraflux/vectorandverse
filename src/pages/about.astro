@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+
+const title = "Zero Surveillance, Artfully Augmented AI, Full Transparency";
+const description = "No ads, no trackers, just opinions. And maybe some AI help.";
+---
+
+<Layout title={`About - ${title}`} description={description}>
+  <Header variant="minimal" />
+  <div class="fade-in relative">
+    {/* Animated grid background that matches the homepage */}
+    <div class="fixed inset-0 -z-10">
+      <div class="absolute inset-0 bg-gray-50"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+      {/* Moving gradient overlay - subtle variant for content pages */}
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-animated-subtle"></div>
+      </div>
+    </div>
+    <main class="max-w-3xl mx-auto px-6 pt-16 pb-24">
+      <article class="prose prose-lg max-w-none">
+        <h1 class="text-4xl md:text-5xl mb-4" style="font-weight: 850;">
+          {title}
+        </h1>
+        <p class="text-xl text-gray-600 mb-12" style="font-weight: 500;">
+          {description}
+        </p>
+
+        <h2 class="text-3xl mt-12 mb-4" style="font-weight: 850;">no ads or trackers</h2>
+        <p style="font-weight: 500;">
+          This site has zero tracking, not because I'm on a noble privacy crusade, but simply because I genuinely don't care about your browsing habits. My apathy is your best privacy shield. The modern web is a surveillance nightmare fueled by scams and contempt, and I'm not tossing another pixel into that dumpster fire for the price of half a lukewarm coffee.
+        </p>
+
+        <h2 class="text-3xl mt-12 mb-4" style="font-weight: 850;">my tech stack</h2>
+        <p style="font-weight: 500;">
+          Basic HTML, CSS, and minimal JavaScript. Built with Astro and lazily hosted on Netlify's free tier. I make exactly zero dollars here, matching my incentive to exploit your data perfectly at zero.
+        </p>
+
+        <h2 class="text-3xl mt-12 mb-4" style="font-weight: 850;">the ai question</h2>
+        <p style="font-weight: 500;">
+          Yes, I use AI. Anyone with a pulse and deadlines does. It kickstarts my brain when it goes on strike, catches endless typos my caffeine-shaky hands produce, and creates images since artistic talent was apparently not essential for my evolutionary survival. Unlike the flood of "AI-powered" garbage filling your feeds, these tools are just digital interns: useful for basic tasks but requiring constant supervision to prevent confidently fabricated nonsense.
+        </p>
+        
+        <p style="font-weight: 500;">
+          <strong style="font-weight: 850;">AI output never has the final say here.</strong> My BS detector for AI-generated fluff is dialed to eleven. About 80% of AI's first attempts end up straight in the trash for sounding like a middle school book report written at midnight.
+        </p>
+        
+        <p style="font-weight: 500;">
+          AI might help with about 30% of what you read here, but the weird analogies, questionable humor, and chaotic charm? That's pure human nonsense, handcrafted and proudly flawed. No algorithm replicates my uniquely questionable judgment.
+        </p>
+
+        <h2 class="text-3xl mt-12 mb-4" style="font-weight: 850;">why tell you this?</h2>
+        <p style="font-weight: 500;">
+          I'm not some pretentious artisanal blogger typing manifestos on a hand-cranked typewriter powered by sustainably harvested pinecones, perched in a treehouse made of reclaimed driftwood, wearing denim distressed by authentic woodland creatures, and sipping tea from herbs I foraged blindfolded during a new moon. I'm just a flawed, overly caffeinated human using modern tools to throw my thoughts onto your screen.
+        </p>
+        
+        <p style="font-weight: 500;">
+          Sure, bots did their part, but the final chaotic blend of sarcasm, humor, and questionable choices? That's entirely my fault.
+        </p>
+        
+        <p class="text-xl mt-12" style="font-weight: 850;">
+          Bots pitched in; I did the rest. The good, the bad, and the spectacularly questionable? All me.
+        </p>
+      </article>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  @import "tailwindcss";
+  @reference;
+  
+  article h2::after {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-top: 0.5rem;
+    background: linear-gradient(to right, rgb(209, 213, 219), transparent);
+  }
+</style>

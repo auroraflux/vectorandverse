@@ -1,0 +1,87 @@
+---
+title: 'mac mini m4 as a home server: hope, nope, and cope'
+date: 2025-05-6
+description: >-
+  extremely quiet, mostly stable, occasionally functional...an unexpected and
+  disappointing experience (so far)
+tags: []
+draft: false
+heroImage: /images/blog/007-mac-mini-hope-and-cope/mini-hero.jpg
+heroImageAlt: 'space gray, hooray'
+---
+
+So, I grabbed one of those new M4 Mac Minis a little while ago. What got me? Well, 16GB of RAM right out of the box for a decent price. Plus, it’s super efficient, uses hardly any juice, and is quiet as anything. Looked like the perfect thing to finally replace my old Ubuntu server. That old box has been making my closet feel like a sauna and my electricity bill look like a phone number for years. Or, you know, that was the plan. My M1 Max MacBook Pro? It’s probably the best computer I’ve ever had. It's powerful, silent, stays cool, just a total dream. I thought, hey, a Mac Mini server would be just as smooth.
+
+But let me tell you, what actually happened wasn't quite what I pictured. Here’s how it’s been going.
+
+## step one: realizing this won't be easy
+
+First thing was getting remote access sorted. The plan was simple: stick this Mini in a closet and access it from elsewhere. Enabling remote login (SSH) on macOS is actually pretty straightforward. You just dive into `System Settings`, find the `Sharing` section, and flip the switch for `Remote Login`. You can specify which users get access, and it even tells you the SSH command to use. On paper, it's just a few clicks. A bit different than the old `sudo apt install openssh-server` and a quick config edit on my Ubuntu box, but clear enough.
+
+So, SSH was sorted. Next up, the first real "huh?" moment arrived courtesy of FileVault. Now, full disk encryption is on by default, and that’s a good thing, no arguments there. The snag for a headless server, though, became clear after the first remote reboot. I was sitting there, wondering why the Mini wasn't coming back online. After some head-scratching and eventually dragging out a keyboard and monitor to plug into it, I found it patiently waiting at the login screen for the FileVault password. Right. Not ideal when your server is tucked away in a closet. It means either disabling a key security feature or accepting you’ll be performing the occasional reach-around with a keyboard. I get that macOS isn't primarily pitched as a headless OS, and FileVault is doing its job. Still, it was an early sign that this "set it and forget it" server idea might involve more "setting" and less "forgetting" than I'd hoped. Maybe a bit more pre-flight research on my part wouldn't have gone amiss.
+
+My dog, of course, observed this whole ritual with his usual air of quiet superiority. I’m pretty sure his internal monologue was something like, "And you paid actual money for this experience?" Point taken, buddy. Point taken.
+
+## smb and nfs: macos just can't even
+
+This is where my dreams of a neat little server really started hitting turbulence. My old Ubuntu machine? It stayed connected to my Synology NAS solid as a rock for years via NFS and SMB. Never dropped, never gave me any grief, just worked. So, given macOS has Unix roots, I honestly never expected basic network file sharing to be an issue on the Mac Mini. I figured this part would be easy, rock solid even.
+
+Boy, was I wrong. Getting network shares reliably connected turned into my own personal Groundhog Day of frustration. Whether I tried SMB or NFS, the result was depressingly similar: connections would just vanish. One minute Jellyfin is scanning files, the next, poof, the mount point is gone, throwing errors like "connection interrupted" or just silently failing. Finder windows trying to access the dead share would sometimes hang indefinitely, spinning that dreaded beachball. Sometimes they’d stay up for days, looking stable, lulling me into a false sense of security. Other times, especially after the Mac Mini had been idle for a bit, they'd disappear after just a few hours. It felt completely random, like playing connection roulette. I kept having to manually remount them using `mount` commands in the terminal or fiddling in Finder, wondering what fundamental piece I was missing.
+
+For a media server running Jellyfin, this unreliable behavior is basically a showstopper. Your server suddenly can’t find any of its files, so the whole streaming setup just collapses. There’s nothing like settling in to watch a movie only to be greeted by an error because the Mac Mini has, once again, "forgotten" where the media lives.
+
+Believe me, I’ve tried everything I could think of. I messed with every energy saver setting imaginable. I poked around in obscure network parameters via the command line. I dug through config files like `nsmb.conf` hoping for a magic bullet. Each potential fix seemed promising at first, maybe keeping things stable for a day or two, but inevitably the problem would just stroll back in, usually right when I actually wanted to use the server.
+
+And it turns out I’m not alone in this digital purgatory. A quick search reveals Apple's own forums are filled with people wrestling with these exact same flaky network share headaches, stretching back through multiple macOS versions. One user described macOS networking as "just really unreliable," which feels painfully accurate at this point.
+
+That’s what really gets me. This should be table stakes! My old Linux box, six years old and running on much less powerful hardware, handled this basic task without breaking a sweat for years. When the absolute most fundamental thing your server needs (stable access to its files) becomes your biggest, most persistent problem, you really start to wonder if you picked the right tool for the job.
+
+## running linux inside macos because reasons
+
+After wrestling with macOS's flaky network shares long enough, a slightly desperate idea formed. If macOS itself couldn't reliably handle NFS or SMB connections, maybe something *running inside* macOS could. The theory was simple: run an Ubuntu ARM VM, let *it* handle mounting the Synology shares using Linux's known-stable networking stack, and just let the host Mac Mini worry about passing network packets back and forth.
+
+Setting this up using UTM was surprisingly painless. UTM is a nicely polished virtualization tool for macOS, and getting an Ubuntu ARM server VM up and running was straightforward. It's definitely simpler than something like Proxmox, lacking those deeper remote management and monitoring tools I was used to, but for just launching a VM, it did the job well.
+
+And you know what? The crazy workaround actually *worked*. The Ubuntu VM established connections to my NAS shares using the exact same protocols (NFS and SMB) and held onto them like glue. No random disconnects, no disappearing mounts. Performance was decent too, thanks to running native ARM code.
+
+But let's pause and appreciate the sheer absurdity here. I essentially replaced my old Proxmox setup, a dedicated hypervisor running Linux VMs, with a shiny new Mac Mini... which is now *also* basically acting as a hypervisor, running a Linux VM to handle the core server tasks that the host OS struggles with. I bought Apple hardware intending to use macOS, only to find the most reliable way to use it for *my* server needs was to bypass macOS's problematic parts by running Linux inside it. It's functional, yes, but it feels completely backward, like buying that fancy sports car only to discover you need to tow a trailer with a more reliable engine just to get where you're going.
+
+Every time I SSH into the Mac Mini solely to manage the Ubuntu VM that's quietly doing all the heavy lifting in the background, I can't help but feel a little bit ridiculous.
+
+## my external ssd has commitment issues too
+
+With the Ubuntu VM now providing stable network share access, I thought I was finally out of the woods. But then came the next challenge: VM storage. My content download and processing workflow needs a local staging area, a place for files to land and get unpacked before they’re moved to the Synology NAS. The Mac Mini’s base 256GB SSD, while quick, wasn’t going to cut it for that plus the OS and other apps, even with the generous 16GB of RAM.
+
+This was a deliberate choice when I bought it, though. I figured that 256GB was fine because adding fast external storage to a Mac would be a piece of cake. I already had a spare NVMe drive and a USB-C enclosure ready to go. "Perfect," I thought, "I'll just host the VM files on that." I'd even seen those slick Satechi hubs designed to fit under the Mini, some with built-in NVMe slots, and mentally bookmarked them as a neat, though hopefully unnecessary, future upgrade.
+
+So, I set up the Ubuntu VM on this external NVMe drive. And guess what? Another gremlin decided to join the party. The external drive started randomly disconnecting. It wasn’t as frequent as the network share drops, thankfully, but it happened often enough to corrupt the running VM a few times, which is a special kind of frustrating to recover from.
+
+Cue another round of troubleshooting. Was the enclosure overheating? Was macOS being too aggressive with power management on its USB ports? Was it just a bad cable, or maybe, as some forum posts suggested, a specific incompatibility between that enclosure’s chipset and the Mac? I spent hours trying different things, swapping cables, checking temperatures, and digging through system logs, but found no clear culprit. Perhaps this particular enclosure simply wasn't designed for continuous 24/7 operation, meaning another potential expense to test a different one. That "just enough" 256GB internal drive was starting to feel less like a smart saving and more like the source of a fresh new headache.
+
+## what other poor souls are saying
+
+Turns out, a bunch of other people have tried using Mac Minis as servers. The results are pretty mixed. Some people found ways to make it kinda work. Things like turning off SMB packet signing or fiddling with some obscure network settings. Other folks just threw in the towel on normal file sharing and switched to other things, like Nextcloud. You know, full system replacements.
+
+The really scary pattern? A lot of these forum threads end with someone saying "I finally gave up and went back to Linux." Or "I just bought a dedicated NAS instead." That doesn’t exactly fill you with confidence when you're already halfway down the rabbit hole.
+
+## where i stand now: mostly confused and poorer
+
+I haven't completely given up yet. The Mac Mini does have some good points. It is incredibly quiet. It uses very little power. It takes up hardly any room. Those are all great things for a machine that’s going to run all the time. Genuine pluses.
+
+But these reliability problems are tough to just ignore. I'm already about $580 into this thing, with tax. And now I’m stuck wondering. Am I really going to sink another hundred bucks into a fancy Thunderbolt hub? Just hoping that’ll make the external drive behave? Or do I even think about a $200 or $300 third party internal SSD upgrade? That means cracking open the case, voiding the warranty for sure, and buying parts from some small DIY company. Parts that might cost a fortune because of import taxes. The actual DIY work doesn’t bother me too much. It's the extra money and the gamble that give me pause. The whole "throwing good money after bad" jingle keeps playing in my head.
+
+It makes me question everything. Am I just using this Mac Mini wrong? Is there some magic macOS setting I’ve completely missed? Should I try even harder to figure out what the heck is going on with NFS and SMB on this machine? Maybe there's some third party mounting software I haven't heard of yet. Or maybe, just maybe, this thing is just not the right tool for what I need. I really don’t know.
+
+I keep thinking about whether I should spend more money. On an internal storage upgrade. Or a different external enclosure. Or if I should just… stop. When do you finally admit that this shiny new toy might not be the right tool for the job, even if that M4 chip and 16GB of RAM seemed so tempting?
+
+For now, I’m sticking with running Linux in a VM. And I’m keeping an eye out for fixes for these core network and storage headaches. My dog has learned that when I start sighing real loud at my computer and muttering about "sunk costs," it’s probably the Mac Mini acting up again. He just kind of tilts his head. Like he’s saying, "Dude, I tried to tell you."
+
+## the verdict so far: maybe don't do this
+
+The Mac Mini M4 could be a fantastic desktop computer. I know what Apple silicon can do. My MacBook Pro proves it every day. But as a server you can set up and forget about? The jury’s still out on that one. And right now, it’s leaning towards "not really." At least, not without a lot of extra work, or a much higher tolerance for headaches than I seem to have.
+
+If you're thinking about going this route, especially if you’re drawn in by that nice base model price and all that RAM, just be aware of what you might be getting into. The hardware looks great on paper. But macOS seems to have some deep, ongoing problems with the basic network and external storage reliability that a server absolutely needs.
+
+Sometimes the boring solution that just plain works is better than the new, exciting option that needs constant babysitting and threatens to turn into a black hole for your money. My old Ubuntu box wasn’t pretty. But it never randomly forgot where my files were. And it didn’t make me question my life choices on a regular basis. 
+
+I’ll keep fiddling with it. Because that’s what tech people do, right? We tinker. But the idea of this Mac Mini ending up on my desk as a second workstation, instead of hiding in the closet running my server stuff, is looking more and more like a real possibility. We’ll see how it goes.

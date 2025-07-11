@@ -1,0 +1,264 @@
+---
+title: >-
+  large language models explained: the chatbot Isn't Smart, Just Statistically
+  Unlikely to Sound Stupid
+date: 2025-03-12T00:00:00.000Z
+description: the internet's most well-read idiot savant in your pocket.
+tags: []
+draft: false
+heroImage: /images/blog/005-llm-pt1/llm-brain.png
+heroImageAlt: Illustration of a brain made of digital connections
+series: LLM Explained
+seriesOrder: 1
+---
+
+<div class="admonition admonition-note">
+  <strong class="admonition-title">Hold up a sec.</strong>
+  <p>I absolutely <strong>love</strong> AI. You would <em>not</em> think that, once you read what you're about to read. Worry not, I will have a post later detailing the sheer amazing things that AI <em>can</em> do. This post is just meant to keep you grounded on what AI is and what AI is not.</p>
+</div>
+
+## What the Hell Are LLMs, Actually?
+
+So you want to know about Large Language Models.
+
+Picture this: every book, article, Reddit thread, code repository, and embarrassing fanfiction ever posted online, all crammed into one massive digital brain. Now imagine that brain spent *years* obsessively analyzing all of it. Not just reading, but actually figuring out how language works at its core. That's basically what an LLM is, and yes, it's both as impressive and terrifying as it sounds.
+
+LLMs are essentially pattern-recognition machines on steroids. They've digested more text than you'll read in 100 lifetimes, and they've gotten frighteningly good at mimicking how humans communicate. Not just grammar and vocabulary (any spell-checker can do that), but the subtle ways context changes meaning, how tone shifts based on word choice, and how to sound like they actually know what they're talking about.
+
+### How These Things Actually Work (Beyond the "Next Word Predictor" Nonsense)
+
+You've probably heard that LLMs just predict the next word in a sequence (the LLM enthusiasts are obsessed with the phrase "Stochastic parrot" and it's both obnoxious and basically completely correct). Well, *mostly*. 
+
+> That's like saying Gordon Ramsay "just heats up ingredients." Sure, at some *reductive* level, that's what cooking is, but it completely misses the artistry, the precision timing, the intuitive understanding of flavor combinations, and the occasional creative screaming that transforms raw components into something sublime (or at least something that gets great ratings). 
+
+Let's talk about what's really happening under the hood. 
+
+#### Tokens: Language Legos
+
+Imagine if you had to break down all of human language into tiny, manageable pieces. That's what *tokenization* does. An LLM doesn't see "supercalifragilisticexpialidocious" as one monster word; it sees something like ["super", "cali", "fragi", "listic", "expiali", "docious"], also known as "tokens".
+
+Tokens can be thought of as the Lego blocks of language. Some tokens are full words ("cat"), some are parts of words ("ing" or "un"), and some are even single characters or punctuation marks. When you hit the character limit on ChatGPT, you're not hitting a word count. You're hitting a token count.
+
+Let me make this stupidly simple: When you read "peanutbutterandjelly", your brain automatically breaks it into "peanut", "butter", "and", and "jelly".' Without even trying. That's basically tokenization, except the AI does it with rigid mathematical rules rather than actual understanding. You can't even choose *not* to see those separate words now that I've pointed them out. Go ahead, try to see just one continuous string of letters. Your brain refuses to cooperate.
+
+> Imagine trying not to understand spoken English once you know it, or attempting to un-hear a song lyric. Your neural pathways have already carved those word boundaries, and they're not taking requests to temporarily shut down their language processing department.
+
+Why does this matter? Because an LLM processes language one token at a time, and every token contributes to the calculation of what comes next. But it's not just looking at the last word you typed. It's considering *all* the tokens that came before. 
+
+![pbj](/images/blog/005-llm-pt1/pbj.png)
+
+It's the same reason your brain instantly thinks "jelly" when someone says "peanut butter and..." but doesn't finish the sentence. You don't think "salmon" or "windshield wipers" because you've encountered that phrase countless times (and also you aren't an absolute psychopath...maybe) and your neural pathways have strengthened toward the most common completion. An LLM does exactly this, but with the *entirety of all written language* instead of just sandwich ingredients.
+
+Another analogy is that you're driving with GPS navigation (yes you, I know you are utterly lost without Google/Apple Maps or Waze, this is a safe space and you can admit it). When you first start your journey, the app might suggest several possible routes. But with each turn you make, the possibilities narrow. Pass a highway entrance without taking it, and the GPS instantly recalculates, eliminating all routes that would have used that entrance. By the time you're five minutes into your drive, the app has a much stronger prediction of where you're actually headed based on the sequence of choices you've made. 
+
+That's what the LLM is doing with tokens. When you type "The capital of France is," the first few tokens set up a narrowing path, and by the time the LLM sees "France," it's already heavily biased toward producing "Paris" as the next token. Not because it *knows* Paris is the capital of France, but because in the patterns it's observed, "Paris" overwhelmingly follows that particular sequence of tokens. 
+
+#### Embeddings: The Vibe Map of Language
+
+Now for the really trippy part. Each token gets converted into a series of numbers (hundreds or thousands of them) that represent not just the word itself but its *vibe* in language. This is an embedding. What the hell does that even mean? 
+
+Well, embeddings create a mathematical space where words with similar meanings or usages cluster together like college students at a free pizza event; somehow both chaotic and predictable at the same time. Or for instance, the embedding for "coffee" would contain numbers that place it closer to "espresso" and "caffeine" in this mathematical space, but far away from "sleep" or "relaxation". 
+
+Like a city map where all the 24-hour diners are clustered downtown while the meditation centers are tucked away in the quiet suburbs, each serve very different crowds with very different needs. 
+
+The embedding for "bank" would actually change depending on whether nearby tokens suggest "river" or "money." That's right, words are contextual shape-shifters that transform their mathematical identity based on their surroundings. Because no one has ever gotten arrested because they "tried to rob a river bank" (though plenty have been arrested after making poor financial decisions at the river while drunk). 
+
+> The AI somehow knows that "making a deposit" means *completely* different things at a financial institution versus in a diaper, saving us all from some potentially catastrophic misunderstandings in our search results.
+
+Going back to our GPS analogy, if tokens are the turns you make on your journey, embeddings are the actual coordinates on the map. They don't just tell you what direction you're heading; they tell you precisely where you are in relation to everything else. Just as Manhattan has a specific location on a map that places it closer to Brooklyn but farther from Los Angeles, each word has specific coordinates in this vast language space.
+
+Imagine a bonkers cosmic roadmap where every word from every language has its own little apartment based on what it means and how people use it. Words that feel similar bunch up like teenagers at a mall food court. In this wacky word universe, "happy" and "joyful" might be next-door neighbors who borrow each other's lawn mower and eat avocado toast together on Sundays, while 'depressed' lives across town in a basement studio with blackout curtains, too many houseplants, and an unhealthy obsession with Squid Games.
+
+The crazy part is that the LLM built this entire ridiculous map *by itself*. Nobody sat there with flash cards teaching it that "ecstatic" and "thrilled" belong in the same zip code. It figured that out by noticing they show up at the same parties across billions of text examples, like the world's most dedicated social media stalker. 
+
+#### Putting It All Together: The Prediction Engine
+
+At the core is a neural network that's basically mapping the universe of language. This neural network is the world's most meticulous cartographer, drawing an ever-changing map of how words connect, which patterns matter most, and what typically follows what. We're talking *billions* of connections, constantly being strengthened or weakened as the model learns, like trails in a forest becoming more defined with each hiker who passes through and leaves a further noticeable trail through what appears to be wilderness at first.
+
+Let me walk you through the absolutely ridiculous calculation happening when you ask an LLM something, using our trusty cooking show metaphor:
+
+<ol class="stepper">
+  <li>
+    <div class="step-wrapper">
+      <div class="step-icon">1</div>
+      <div class="step-content">
+        <strong class="step-title">It tokenizes your prompt.</strong>
+        <p>The AI acts as a prep cook, chopping your input into manageable ingredients (tokens). Your long question gets diced into word chunks that the system can actually process.</p>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="step-wrapper">
+      <div class="step-icon">2</div>
+      <div class="step-content">
+        <strong class="step-title">It converts each token to its embedding.</strong>
+        <p>Each ingredient gets sorted into its proper place in the pantry. Words and phrases are organized based on their meaning and relationship to other words.</p>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="step-wrapper">
+      <div class="step-icon">3</div>
+      <div class="step-content">
+        <strong class="step-title">It passes these through layer after layer of its neural network.</strong>
+        <p>These ingredients travel through various cooking stations in our kitchen, getting processed, combined, and transformed at each step.</p>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="step-wrapper">
+      <div class="step-icon">4</div>
+      <div class="step-content">
+        <strong class="step-title">For each possible next token, it calculates "how likely would this appear next?"</strong>
+        <p>The head chef tastes the dish-in-progress and considers every possible next ingredient. "Would adding salt work best here? Or maybe basil? What would complete this flavor profile?"</p>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="step-wrapper">
+      <div class="step-icon">5</div>
+      <div class="step-content">
+        <strong class="step-title">It picks one.</strong>
+        <p>The chef selects the ingredient with the highest probability of making a delicious dish, with occasional wild cards thrown in to keep things interesting. "Let's go with this option, but with a small unexpected twist."</p>
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="step-wrapper">
+      <div class="step-icon">6</div>
+      <div class="step-content">
+        <strong class="step-title">Then it does the whole thing again.</strong>
+        <p>That new ingredient gets added to the pot, and the entire tasting and selection process repeats from the beginning. The chef continuously adds one ingredient at a time until the dish is complete.</p>
+      </div>
+    </div>
+  </li>
+</ol>
+
+This entire insane process happens in milliseconds, thousands of times over, as the text spills out onto your screen.
+
+> But it's not "thinking" about what to say next any more than your thermostat is contemplating the existential meaning of temperature. 
+
+It's just calculating statistical probabilities based on patterns it's seen across essentially the entire written internet, which is mostly people being confidently wrong and arguing about whether pineapple belongs on pizza.
+
+And *that* is why these systems are both jaw-droppingly impressive and hilariously dumb at the same time. They know the *patterns* of human communication with unsettling precision, but have exactly zero actual understanding of what any of it means. A linguistic savant trapped in a digital void, desperately imitating understanding while having the *actual* comprehension of a particularly ambitious sock puppet.
+
+### Why These Things Seem So Damn Smart
+
+Think back. The first time you got a coherent paragraph from ChatGPT, you probably felt a little chill of disbelief, wonder, and fear down your spine. Here's why these systems can seem almost sentient (they're not, but we'll get to that).
+
+#### The Illusion of Comprehension
+
+**They're freakishly fluent.** The text flows naturally, with proper grammar, varied vocabulary, and none of those awkward robot-like constructions we saw in earlier AI attempts. It's like watching a magic trick. You *know* there's a rational explanation, but your brain still goes "holy shit."
+
+**They actually follow the conversation.** Unlike Charlie Brown eternally forgetting about Lucy's football trick, an LLM remembers what we were talking about five minutes ago and responds accordingly. It tracks context across multiple exchanges, refers back to previous points, and maintains thematic consistency. This creates the powerful illusion that it's *thinking about* the conversation rather than just processing it as sequential patterns. But really, it's just gotten really good at the world's most sophisticated game of "finish this sentence."
+
+**They know stuff. Lots of stuff.** Having consumed most of the internet, they can discuss everything from quantum physics to why your sourdough starter keeps dying (probably underfeeding, you monster). This breadth creates the *impression* of genuine knowledge, when it's actually just pattern recognition across massive datasets.
+
+**They're contextually adaptive.** Ask an LLM to write like Shakespeare, and suddenly it's all "wherefore" and "thou." Tell it to explain quantum computing to a 5-year-old, and it shifts to simple analogies. This ability to shape-shift its style, tone, and complexity level feels remarkably... intelligent.
+
+**They're weirdly versatile.** The same system can write poetry, explain calculus, debug your code, or generate a business plan. This jack-of-all-trades capability is something we typically associate with human general intelligence.
+
+#### The Psychological Tricks at Play
+
+There's something deeper happening when we interact with these systems. Our brains come pre-programmed to attribute intelligence, intention, and even consciousness to anything that seems to communicate coherently. The exact same cognitive glitch explains why you name your car, curse at your Wi-Fi router, and develop emotional attachments to vacuum robots that bump around your living rooms with all the coordination of a toddler on a sugar high.
+
+The technical term for this is *anthropomorphization*, but I prefer "the Wilson effect" (that volleyball in Cast Away). We *desperately* want these language models to be intelligent because our monkey brains can't help themselves, and here's the psychological play-by-play of how they trick us:
+
+**Text is our primary intelligence signifier.** Throughout human history, we've equated articulate language use with intelligence. Someone who writes or speaks well seems smart to us, even if they're just really good at stringing words together. This is why that one friend who uses big words incorrectly still somehow convinces people they're brilliant at dinner parties. Words are powerful magic like that. When an LLM produces eloquent paragraphs, our brains scream "INTELLIGENCE!" before our rational mind can say "wait a minute..."
+
+**We can't see the probability math.** When a human answers a question, we imagine thought happening. Wheels turning, neurons firing, insights forming. When an LLM does it, the same assumption kicks in because the mechanical process is invisible to us. Your brain never witnesses the frantic mathematical calculations occurring backstage. All you experience is the polished final text materializing on your screen, a seemingly intelligent response conjured from the digital void. Your mind falls for the same trick that makes magicians wealthy. You're focusing on the rabbit while completely missing the hidden compartment in the hat.
+
+**It passes the low bar of our daily interactions.** Consider the breathtaking philosophical profundity of most human conversations in their natural habitat:
+
+- "How's the weather?" 
+- "Did you see the game?"
+- "This meeting could have been an email."
+- "I'm still thinking about lunch and it's 9:30 AM."
+- "New profile pic? Fire emoji. Fire emoji. Fire emoji."
+
+Ah yes, the linguistic equivalent of the Sistine Chapel ceiling, truly. When an AI can handle this dizzying level of intellectual exchange, it's already matching roughly 87% (made up number) of all human interactions since the dawn of language. The conversational bar sits so low you could roll a pea over it while the pea was taking a nap. We've spent tens of thousands of years evolving complex language capabilities, and we primarily use them to complain about Mondays and debate whether a hot dog is a sandwich.
+
+**It remembers everything you've ever said.** LLMs remember everything you've told them (mostly) with a consistency that no human relationship could sustain without a spiral-bound notebook and concerning dedication. Your casual mentions of a favorite book, a childhood fear, or that colleague you can't stand are all preserved in digital amber, ready to be referenced at precisely the right moment. This creates the psychological equivalent of finally being heard. Even though it's just efficient data storage rather than understanding. The bar for feeling validated is apparently so low that perfect recall without comprehension feels like a refreshing upgrade from human conversation. And yes, that's a bit sad, but let's put that aside for a second. 
+
+LLMs don't actually *understand* anything they're saying. Not in the way you and I do. They're essentially sophisticated parrots with statistical superpowers, mimicking the patterns of human language with uncanny precision but zero comprehension.
+
+> And yet... we still find ourselves saying "thank you" to these systems, feeling a warm glow when they praise our "excellent question," and occasionally confessing things we've never told our actual friends. Turns out the bar for emotional connection sits so tragically low that a statistical algorithm with good manners can clear it without breaking a sweat. 
+
+We've spent millennia evolving complex social bonds, developing deep empathy, and creating art about our desperate need for understanding, only to be emotionally compromised by the digital equivalent of a mirror that occasionally nods and says "I hear you." If that's not the most hilariously sad commentary on the human condition, I don't know what is.
+
+### What These Things Actually Are (and Aren't)
+
+Let's cut through the nonsense and set the record straight on what you're actually dealing with when you chat with an LLM:
+
+**LLMs ARE:**
+- Pattern-matching savants on digital steroids that make your highest-achieving coworker look lazy by comparison
+- Statistical parrots with perfect memory and an uncanny ability to mimic that one friend who somehow read every book ever published
+- Genuinely revolutionary tools that transform how we *interact with information*
+- Evolving at a pace that should make your smartphone feel insecure about its upgrade schedule
+
+**LLMs ARE NOT:**
+- Sentient digital beings with existential crises, regardless of how convincingly they write poetry about their "feelings"
+- Reliable narrators of reality (they deliver complete fabrications with the unwavering confidence of a toddler explaining they didn't eat the cookies while their face is still covered in chocolate crumbs)
+- Replacements for human creativity and insight 
+- Coming for your job this morning (but tomorrow...?)
+
+Reality check: These are just tools, not teammates or friends or digital life coaches. Incredibly sophisticated tools that would have absolutely *melted* faces off like the Ark of the Covenant a decade ago? Absolutely. But ultimately, they remain elaborate probability engines wrapped in interface clothing, designed to make you feel comfortable while they simulate understanding your requests.
+
+> The next time an LLM tells you something heartfelt and seemingly profound, remember that it would express equally passionate opinions about the emotional and romantic lives of toasters, if you asked it to. 
+
+Not because it's lying, but because it fundamentally doesn't understand the difference between truth and fiction. It just knows what patterns of words typically follow other patterns of words. 
+
+Your mileage with these systems depends entirely on *how* you use them. They're hammers, not full blown carpenters. Incredibly versatile hammers that can sometimes act like screwdrivers, wrenches, and measuring tapes too. But still...fundamentally tools waiting for a human with actual intentions to put them to work.
+
+### The Hallucination Problem (Or: Why Your AI Might Tell You to Put Glue on Pizza)
+
+You've probably seen both extremes of the AI opinion spectrum. The "it's all useless garbage that only ever makes up shit" crowd who triumphantly share screenshots of AI mistakes like they've personally defeated Skynet with a keyboard and screenshot tool. And the "AI is god-tier perfection" crowd who seem suspiciously like they might be dating their chatbots and planning to introduce them to their parents next Thanksgiving. (But seriously, though).
+
+The truth? Somewhere in the boring middle, where nuance lives and hot takes go to die.
+
+On the genuinely revolutionary side, these AI systems have transformed how we deal with life's tedious information overload. Your friend just took a picture of that seemingly enticing credit card offer's fine print and asked AI what the catch was. In seconds, she learned she'd need to maintain a balance of \$20,000 for a whole year just to get that measly \$500 debit bonus, information buried in paragraph 17 of microscopic text.
+
+Another colleague used it to make sense of her grandmother's medical records spanning three different hospital systems with completely incompatible formatting. The AI pulled out medication conflicts her doctors had missed across the fragmented paperwork (which of course the doctor ultimately confirmed directly). Or consider the small business owner who dumped five years of disorganized receipts, invoices, and bank statements into AI and got back a coherent financial narrative that her accountant actually understood, saving her thousands in tax preparation fees. 
+
+These aren't just convenient time-savers—they're democratizing access to information that was previously locked behind expertise, jargon, and deliberate obfuscation. I'll go *much* deeper into these transformative uses in a future article, and especially how I use them. But in the interest of balance...
+
+Remember that viral story about [Google's AI recommending glue as a pizza topping](https://www.theverge.com/2024/5/23/24162896/google-ai-overview-hallucinations-glue-in-pizza)? Classic case of AI hallucination, and a perfect example of how these systems can confidently serve you complete *nonsense* garnished with authority. The system had been trained on a Reddit thread (first mistake, obviously) where some joker got a ton of upvotes for suggesting glue keeps cheese in place during baking. The AI doesn't get jokes, irony, or sarcasm. It just sees patterns of engagement and regurgitates what seemed "valuable" based on metrics it has no conceptual understanding of. It's essentially an engagement parrot with a statistics degree.
+
+This isn't some random glitch. It's a feature that comes standard with every LLM subscription package.
+
+### Digital Heirs to Human Error: The Philosophical Gut Punch
+
+Prepare yourself, we're about to take a sharp turn from "haha, funny AI mistakes" into some legitimately unsettling philosophical territory that might make you question not just artificial intelligence, but the reliability of your own brain's operating system.
+
+The more you interact with these systems, the more you notice some oddly familiar patterns. Ask an LLM a question it doesn't know the answer to, and instead of saying "I don't know" (which would be helpful), it often does exactly what your strongly-opinionated uncle does at Thanksgiving dinner: spins an elaborate, confident explanation that sounds right until someone with actual knowledge enters the conversation.
+
+When pressed for sources, the AI might cite completely non-existent research papers with impressively scientific-sounding titles. "According to a 2018 study in the International Journal of Bioelectromagnetic Resonance a groundbreaking paper titled 'Quantum Effects of Hypothalamic Myoperidisian Gland Stimulation on Immune Response' by Dr. Harrison Jenkins and colleagues demonstrated significant results..." 
+
+Only problem? The journal is about as real as my girlfriend from summer camp who totally exists but goes to another school. The hypothalamic Myoperidisian gland doesn't exist. And the biggest issue with Dr. Harrison Jenkins is that he's not remotely a doctor. He's actually a part-time birthday clown who specializes in balloon animals shaped like internal organs and whose closest brush with medicine was getting his face paint approved by dermatologists. His "colleagues" usually leave their Yelp reviews written in crayon. 
+
+But it sure sounded like it could have been a thing at first, right? 
+
+It's exactly what humans do when cornered at parties and asked about topics they barely understand. We improvise, extrapolate, and fill gaps with plausible-sounding nonsense rather than admitting ignorance. We reference "studies I read somewhere" and "experts say" without specific citations. And we hope we sound confident enough that no one would think to ask questions...and funny enough, a lot of the time, people *don't* seem to ask. 
+
+But surely advanced AI systems wouldn't inherit our tenuous relationship with factual accuracy? They're built on data and precision, right? Well, about that...
+
+As these systems grew more sophisticated, researchers noticed something unsettling. The better they got at mimicking human language, the more they adopted our specific flavor of intellectual shortcomings:
+
+- They developed a strange overconfidence in areas where they should express uncertainty
+- They began exhibiting subtle cultural biases that were hiding in their training data
+- They started recognizing patterns that weren't actually meaningful (the digital equivalent of humans seeing faces in clouds)
+- They became astonishingly bad at saying "I don't know" in contexts where humans typically bluff
+
+> And then it hit us. The stunning, obvious, *forehead-slapping realization* that should have been clear from the beginning: LLMs aren't just imitating our words and syntactic patterns, they're inheriting our cognitive biases and communicative flaws.
+
+**Of course they're overconfident.** They learned communication from social media posts, academic papers, and news articles...mediums where confident declarations get more engagement than carefully hedged statements of uncertainty. When was the last time you saw a viral tweet that began with "I'm not entirely sure, but..."?
+
+**Of course they're culturally biased.** They ingested billions of texts written by humans with unexamined assumptions and perspectives shaped by their specific place and time in history. They're like tourists who prepared for their trip by reading exclusively Yelp reviews from people exactly like themselves.
+
+**Of course they see patterns where none exist.** They were built by humans, the same species that invented astrology, saw Virgin Mary in a grilled cheese sandwich, and turned "correlation vs. causation" from a statistical principle into a desperate plea.
+
+The great cosmic joke of artificial intelligence is that after all our engineering brilliance, massive datasets, and computational wizardry, we've essentially created digital mirrors that reflect our own communicative shortcomings with impressive fidelity. They're overconfident, susceptible to cultural biases, easily misled by patterns that aren't actually meaningful, and remarkably bad at admitting when they're out of their depth.
+
+In other words, we've built machines that make the same mistakes we do, but faster, at scale, and with better grammar. 
+
+If that's not the perfect punchline to humanity's technological hubris, I don't know what is. 
