@@ -22,19 +22,43 @@
 
 @layer components {
   .admonition {
-    @apply p-4 my-6 border-l-4;
+    @apply relative pl-20 my-8;
+  }
+  
+  .admonition::before {
+    @apply absolute left-0 top-0 text-xs font-bold uppercase tracking-wider select-none;
+    content: attr(data-type);
   }
   
   .admonition-note {
-    @apply bg-blue-50 border-blue-400 text-blue-900;
+    @apply text-gray-700;
+  }
+  
+  .admonition-note::before {
+    @apply text-blue-500;
+    content: 'note';
   }
   
   .admonition-warning {
-    @apply bg-amber-50 border-amber-400 text-amber-900;
+    @apply text-gray-700;
+  }
+  
+  .admonition-warning::before {
+    @apply text-amber-500;
+    content: 'warning';
   }
   
   .admonition-tip {
-    @apply bg-green-50 border-green-400 text-green-900;
+    @apply text-gray-700;
+  }
+  
+  .admonition-tip::before {
+    @apply text-green-600;
+    content: 'tip';
+  }
+  
+  .admonition strong:first-child {
+    @apply hidden;
   }
 }
 

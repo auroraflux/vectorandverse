@@ -1,0 +1,196 @@
+---
+title: 'Complete Formatting Showcase'
+description: 'A comprehensive demonstration of all typography and formatting options available in this blog.'
+date: 2024-02-10
+heroImage: './images/technology.jpg'
+heroImageAlt: 'Technology and code visualization'
+---
+
+import ArticleImage from '../../components/ArticleImage.astro';
+
+This article demonstrates every formatting option available in our minimal blog design, serving as both a reference guide and a visual showcase of our typography system.
+
+## Basic Text Formatting
+
+Let's start with the fundamentals. This paragraph contains **bold text** for emphasis, *italic text* for subtle emphasis, and ***bold italic text*** when you really need to make a point. We can also use `inline code` for technical terms or short code snippets.
+
+Here's a [link to an external resource](https://example.com) that demonstrates our link styling, which uses subtle underlines that darken on hover.
+
+### Lists and Structure
+
+Unordered lists help organize related points:
+
+- First item with some descriptive text
+- Second item that's a bit longer to show how wrapping works
+- Third item with a **bold emphasis**
+- Fourth item containing `inline code`
+
+Ordered lists for sequential information:
+
+1. Initialize the project with proper configuration
+2. Install necessary dependencies using your package manager
+3. Configure the build system for optimal performance
+4. Deploy to your preferred hosting platform
+
+## Blockquotes
+
+Sometimes you need to quote external sources or highlight important statements:
+
+> "The best typography is invisible—it serves the content without calling attention to itself."
+> — A wise typographer
+
+Blockquotes can also contain multiple paragraphs:
+
+> This is the first paragraph of a longer quote that demonstrates how our blockquote styling handles multiple paragraphs.
+>
+> This second paragraph shows that spacing is maintained properly within the blockquote structure.
+
+## Code Blocks
+
+Code blocks are essential for technical content. Here's a JavaScript example:
+
+```javascript
+// A simple function to demonstrate syntax highlighting
+function calculateFibonacci(n) {
+  if (n <= 1) return n;
+  
+  let prev = 0, curr = 1;
+  for (let i = 2; i <= n; i++) {
+    [prev, curr] = [curr, prev + curr];
+  }
+  
+  return curr;
+}
+
+// Usage example
+console.log(calculateFibonacci(10)); // Output: 55
+```
+
+Python example with different syntax:
+
+```python
+def process_data(items):
+    """Process a list of items and return filtered results."""
+    return [
+        item.strip().lower()
+        for item in items
+        if item and not item.startswith('#')
+    ]
+
+# Example usage
+data = ['  Item1  ', '#comment', 'ITEM2', '', 'item3']
+processed = process_data(data)
+print(processed)  # ['item1', 'item2', 'item3']
+```
+
+## Admonitions
+
+<div class="admonition admonition-note">
+<strong>Note:</strong> This is a note admonition. Use it to provide additional context or supplementary information that enhances understanding without being critical to the main flow.
+</div>
+
+<div class="admonition admonition-warning">
+<strong>Warning:</strong> This is a warning admonition. It highlights potential issues, gotchas, or important considerations that readers should be aware of before proceeding.
+</div>
+
+<div class="admonition admonition-tip">
+<strong>Tip:</strong> This is a tip admonition. Perfect for sharing best practices, shortcuts, or helpful suggestions that can improve the reader's experience or workflow.
+</div>
+
+## Images with Captions
+
+Images can be embedded with optional captions that provide context:
+
+<ArticleImage 
+  src="coding-screen.jpg" 
+  alt="A developer's screen showing colorful syntax-highlighted code" 
+  caption="Modern development environments provide sophisticated syntax highlighting to improve code readability."
+/>
+
+Images without captions work just as well:
+
+<ArticleImage 
+  src="workspace.jpg" 
+  alt="A clean, minimal workspace with a laptop and notebook" 
+/>
+
+## Complex Content Combinations
+
+Real articles often combine multiple formatting types. Here's a technical explanation with various elements:
+
+### The Event Loop Explained
+
+The JavaScript event loop is a fundamental concept that enables asynchronous programming. Here's how it works:
+
+1. **Call Stack**: Executes synchronous code
+2. **Task Queue**: Holds callbacks from asynchronous operations
+3. **Microtask Queue**: Priority queue for promises and mutation observers
+
+<div class="admonition admonition-note">
+<strong>Note:</strong> Understanding the event loop is crucial for writing performant JavaScript applications. It affects everything from UI responsiveness to API call handling.
+</div>
+
+Here's a simplified visualization in code:
+
+```javascript
+console.log('1'); // Synchronous - executes immediately
+
+setTimeout(() => {
+  console.log('2'); // Asynchronous - goes to task queue
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('3'); // Microtask - has priority
+});
+
+console.log('4'); // Synchronous - executes immediately
+
+// Output: 1, 4, 3, 2
+```
+
+<div class="admonition admonition-tip">
+<strong>Tip:</strong> Always remember that microtasks (promises) execute before regular tasks (setTimeout), even if the timeout is set to 0.
+</div>
+
+## Tables (Markdown)
+
+While not styled with custom CSS, basic markdown tables are supported:
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| Typography | Custom font scaling and spacing | ✓ Complete |
+| Images | Responsive with lightbox | ✓ Complete |
+| Code Blocks | Syntax highlighting | ✓ Complete |
+| Admonitions | Minimal, unique design | ✓ Complete |
+
+## Horizontal Rules
+
+Sometimes you need to separate major sections:
+
+---
+
+## Nested Elements
+
+Lists can contain various elements:
+
+1. **First point** with some emphasis
+   - Nested item with `inline code`
+   - Another nested item with a [link](https://example.com)
+   
+2. **Second point** with a longer explanation that demonstrates how text wrapping works in nested list items when content extends beyond a single line
+
+3. A point with a code block:
+   ```bash
+   npm install @astrojs/mdx
+   npm run dev
+   ```
+
+## Conclusion
+
+This showcase demonstrates the complete range of formatting options available in our minimal blog design. Each element has been carefully styled to maintain readability while providing clear visual hierarchy.
+
+<div class="admonition admonition-note">
+<strong>Remember:</strong> Good typography enhances content without overwhelming it. Use these formatting options judiciously to create clear, engaging articles.
+</div>
+
+The key is finding the right balance—enough variety to maintain interest and clarify structure, but not so much that it becomes distracting. When in doubt, err on the side of simplicity.
