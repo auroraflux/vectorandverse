@@ -344,30 +344,38 @@
     background-size: 40px 40px;
   }
   
-  /* Animated gradient background */
+  /* Animated gradient background with smoother transitions */
   .bg-gradient-animated {
     background: linear-gradient(
       -45deg,
-      rgba(59, 130, 246, 0.15),
-      rgba(251, 146, 60, 0.15),
-      rgba(20, 184, 166, 0.15),
-      rgba(244, 63, 94, 0.15)
+      rgba(59, 130, 246, 0.15) 0%,
+      rgba(155, 138, 153, 0.15) 12.5%,
+      rgba(251, 146, 60, 0.15) 25%,
+      rgba(135, 165, 113, 0.15) 37.5%,
+      rgba(20, 184, 166, 0.15) 50%,
+      rgba(132, 123, 130, 0.15) 62.5%,
+      rgba(244, 63, 94, 0.15) 75%,
+      rgba(151, 96, 170, 0.15) 87.5%,
+      rgba(59, 130, 246, 0.15) 100%
     );
     background-size: 400% 400%;
-    animation: gradientMove 20s ease infinite;
+    animation: gradientMove 30s ease infinite;
   }
   
-  /* Subtle variant for article pages */
+  /* Subtle variant for article pages with smoother transitions */
   .bg-gradient-animated-subtle {
     background: linear-gradient(
       -45deg,
-      rgba(156, 163, 175, 0.08),
-      rgba(209, 213, 219, 0.08),
-      rgba(156, 163, 175, 0.08),
-      rgba(209, 213, 219, 0.08)
+      rgba(156, 163, 175, 0.08) 0%,
+      rgba(182, 188, 197, 0.08) 16.66%,
+      rgba(209, 213, 219, 0.08) 33.33%,
+      rgba(182, 188, 197, 0.08) 50%,
+      rgba(156, 163, 175, 0.08) 66.66%,
+      rgba(182, 188, 197, 0.08) 83.33%,
+      rgba(209, 213, 219, 0.08) 100%
     );
     background-size: 400% 400%;
-    animation: gradientMove 40s ease infinite;
+    animation: gradientMove 60s ease infinite;
   }
   
   @keyframes gradientMove {

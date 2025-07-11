@@ -66,15 +66,17 @@
     );
   }
   
-  /* Alternative: per-element opacity approach */
+  /* Per-element opacity approach with stronger effect */
   .prose-content p,
   .prose-content h2,
   .prose-content h3,
   .prose-content h4,
   .prose-content blockquote,
   .prose-content ul,
-  .prose-content ol {
-    transition: opacity 0.3s ease-out;
+  .prose-content ol,
+  .prose-content pre,
+  .prose-content .admonition {
+    transition: opacity 0.4s ease-out, filter 0.4s ease-out;
   }
   
   .prose-content.reading-focus-active p,
@@ -83,12 +85,44 @@
   .prose-content.reading-focus-active h4,
   .prose-content.reading-focus-active blockquote,
   .prose-content.reading-focus-active ul,
-  .prose-content.reading-focus-active ol {
-    opacity: 0.4;
+  .prose-content.reading-focus-active ol,
+  .prose-content.reading-focus-active pre,
+  .prose-content.reading-focus-active .admonition {
+    opacity: 0.25;
+    filter: blur(0.5px);
   }
   
   .prose-content.reading-focus-active .in-focus {
     opacity: 1;
+    filter: none;
+  }
+  
+  /* Add subtle highlight to focused content */
+  .prose-content.reading-focus-active .in-focus {
+    position: relative;
+  }
+  
+  .prose-content.reading-focus-active .in-focus::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    right: -1rem;
+    top: -0.5rem;
+    bottom: -0.5rem;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(59, 130, 246, 0.03) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    opacity: 0;
+    animation: focusPulse 2s ease-out;
+  }
+  
+  @keyframes focusPulse {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
   }
 </style>
 
@@ -125,7 +159,7 @@
     */
     
     // Option 2: Per-element opacity approach
-    const elements = article.querySelectorAll('p, h2, h3, h4, blockquote, ul, ol');
+    const elements = article.querySelectorAll('p, h2, h3, h4, blockquote, ul, ol, pre, .admonition');
     
     // Create intersection observer
     const observerOptions = {

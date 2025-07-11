@@ -30,6 +30,36 @@
     font-variation-settings: 'wght' 900;
   }
   
+  /* Homepage article card description hover effect */
+  article a[data-has-image] p {
+    font-variation-settings: 'wght' 500;
+    transition: font-variation-settings 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                letter-spacing 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s ease-out;
+    letter-spacing: normal;
+    transform-origin: left center;
+  }
+  
+  article:hover a[data-has-image] p {
+    font-variation-settings: 'wght' 580;
+    /* Compensate for weight increase with slight scale and letter spacing */
+    letter-spacing: -0.015em;
+    transform: scaleX(0.99);
+  }
+  
+  /* Ensure smooth intermediate steps for variable font */
+  @supports (font-variation-settings: 'wght' 500) {
+    article a[data-has-image] p {
+      /* Force GPU acceleration for smoother transitions */
+      will-change: font-variation-settings;
+    }
+    
+    /* Remove will-change after hover to prevent memory issues */
+    article:not(:hover) a[data-has-image] p {
+      will-change: auto;
+    }
+  }
+  
   /* Interactive weight for headings in prose */
   .prose h2, .prose h3, .prose h4 {
     font-variation-settings: 'wght' 700;
@@ -60,14 +90,18 @@
     font-style: italic;
     background: linear-gradient(
       to right,
-      rgba(229, 231, 235, 0.1),
-      transparent 50%
+      rgba(229, 231, 235, 0.1) 0%,
+      rgba(229, 231, 235, 0.075) 25%,
+      rgba(229, 231, 235, 0.05) 50%,
+      rgba(229, 231, 235, 0.025) 75%,
+      transparent 100%
     );
     border-left: 3px solid transparent;
     background-image: linear-gradient(
       to bottom,
-      theme('colors.gray.300'),
-      theme('colors.gray.400')
+      theme('colors.gray.300') 0%,
+      theme('colors.gray.350') 50%,
+      theme('colors.gray.400') 100%
     );
     background-size: 3px 100%;
     background-repeat: no-repeat;
