@@ -22,43 +22,40 @@
 
 @layer components {
   .admonition {
-    @apply relative pl-20 my-8;
+    @apply relative my-8 pl-8 text-gray-600;
   }
   
   .admonition::before {
-    @apply absolute left-0 top-0 text-xs font-bold uppercase tracking-wider select-none;
-    content: attr(data-type);
-  }
-  
-  .admonition-note {
-    @apply text-gray-700;
+    @apply absolute left-0 top-0 bottom-0 w-px bg-gray-300;
+    content: '';
   }
   
   .admonition-note::before {
-    @apply text-blue-500;
-    content: 'note';
-  }
-  
-  .admonition-warning {
-    @apply text-gray-700;
+    @apply bg-blue-300;
   }
   
   .admonition-warning::before {
-    @apply text-amber-500;
-    content: 'warning';
-  }
-  
-  .admonition-tip {
-    @apply text-gray-700;
+    @apply bg-amber-400;
   }
   
   .admonition-tip::before {
-    @apply text-green-600;
-    content: 'tip';
+    @apply bg-green-400;
   }
   
   .admonition strong:first-child {
-    @apply hidden;
+    @apply text-xs font-semibold uppercase tracking-wider text-gray-500 mr-2;
+  }
+  
+  .admonition-note strong:first-child {
+    @apply text-blue-600;
+  }
+  
+  .admonition-warning strong:first-child {
+    @apply text-amber-600;
+  }
+  
+  .admonition-tip strong:first-child {
+    @apply text-green-700;
   }
 }
 
