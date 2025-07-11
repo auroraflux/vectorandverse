@@ -1,0 +1,46 @@
+/* Typewriter cursor for static text elements */
+.typewriter-cursor {
+  position: relative;
+  display: inline-block;
+}
+
+/* Blinking cursor after text */
+.typewriter-cursor::after {
+  content: '│';
+  position: absolute;
+  right: -0.2em;
+  top: 0;
+  color: currentColor;
+  font-weight: 200;
+  font-size: 0.9em;
+  opacity: 0;
+  animation: blinkCursor 1.2s step-end infinite;
+}
+
+/* Only show cursor on visible tagline */
+.typewriter-cursor.animate-tagline-rotate::after {
+  animation-delay: 0.5s;
+}
+
+/* Cursor blink animation */
+@keyframes blinkCursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* For pull quotes or static text that needs cursor */
+.static-typewriter {
+  position: relative;
+  display: inline-block;
+}
+
+.static-typewriter::after {
+  content: '│';
+  position: absolute;
+  right: -0.2em;
+  top: 0.1em;
+  color: currentColor;
+  font-weight: 200;
+  font-size: 0.8em;
+  animation: blinkCursor 1.2s step-end infinite;
+}

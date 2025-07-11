@@ -6,8 +6,10 @@ test.describe('Baseline Tests - Navigation', () => {
     await expect(page).toHaveTitle(/kilowhat/);
     
     // Click About link
-    await page.locator('a[href="/about"]').click();
-    await expect(page).toHaveURL('/about');
+    const aboutLink = page.locator('a[href="/about"]');
+    await expect(aboutLink).toBeVisible();
+    await aboutLink.click();
+    await page.waitForURL('/about');
     await expect(page.locator('main h1').first()).toContainText('Zero Surveillance');
   });
 

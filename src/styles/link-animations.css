@@ -1,0 +1,60 @@
+/* Animated gradient underlines for links */
+a:not(.no-underline) {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* Gradient underline using pseudo-element */
+a:not(.no-underline)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.8),
+    rgba(251, 146, 60, 0.8),
+    rgba(20, 184, 166, 0.8)
+  );
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+/* Expand underline on hover/focus */
+a:not(.no-underline):hover::after,
+a:not(.no-underline):focus::after {
+  width: 100%;
+}
+
+/* Special styling for article links */
+article a:not(.no-underline) {
+  color: rgb(59, 130, 246);
+  font-weight: 500;
+}
+
+article a:not(.no-underline):hover {
+  color: rgb(251, 146, 60);
+}
+
+/* Navigation links get subtle underline */
+nav a::after,
+.nav-link::after {
+  height: 1px;
+  opacity: 0.6;
+}
+
+/* Button links don't need underlines */
+.button,
+.btn,
+[role="button"] {
+  position: static;
+}
+
+.button::after,
+.btn::after,
+[role="button"]::after {
+  display: none;
+}

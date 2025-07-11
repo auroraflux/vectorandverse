@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./link-animations.css";
+@import "./typewriter-cursor.css";
 
 @layer base {
   :root {

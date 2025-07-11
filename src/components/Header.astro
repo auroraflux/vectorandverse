@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  variant?: 'home' | 'article';
+  variant?: 'home' | 'article' | 'minimal';
 }
 
 const { variant = 'home' } = Astro.props;
@@ -27,7 +27,7 @@ const { variant = 'home' } = Astro.props;
   
   <div class="relative max-w-7xl mx-auto px-6 py-6">
     <nav class="flex items-center justify-between">
-      <a href="/" class="group">
+      <a href="/" class="group no-underline">
         <h1 class={`text-3xl md:text-4xl tracking-tight transition-all duration-300 group-hover:translate-x-1 hero-logo-transition ${variant === 'article' ? 'text-white' : 'text-gray-900'}`} 
             style={`${variant === 'article' ? 'text-shadow: 0 2px 20px rgba(0,0,0,0.5);' : ''}`}>
           <span style="font-weight: 900;">kilo</span><span style="font-weight: 900; font-style: italic;">what!?</span>
