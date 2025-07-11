@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import { getCollection } from 'astro:content';
 import { getImage } from 'astro:assets';
+import LogoScrollTransform from '../components/LogoScrollTransform.astro';
 import '../styles/global.css';
 
 const posts = (await getCollection('blog')).sort(
@@ -17,6 +18,7 @@ const postsWithImages = posts.map(post => ({
 ---
 
 <Layout title="kilowhat!?">
+  <LogoScrollTransform />
   <div class="fade-in relative">
     {/* Animated grid background that spans the whole page */}
     <div class="fixed inset-0 -z-10">

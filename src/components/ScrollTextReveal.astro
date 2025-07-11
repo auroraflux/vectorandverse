@@ -1,0 +1,79 @@
+---
+// Component for scroll-triggered text reveal animations
+---
+
+<style>
+  /* Text reveal animation styles */
+  .reveal-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reveal-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger animation for multiple elements */
+  .reveal-text.delay-100 {
+    transition-delay: 100ms;
+  }
+
+  .reveal-text.delay-200 {
+    transition-delay: 200ms;
+  }
+
+  .reveal-text.delay-300 {
+    transition-delay: 300ms;
+  }
+
+  .reveal-text.delay-400 {
+    transition-delay: 400ms;
+  }
+</style>
+
+<script>
+  function initTextReveal() {
+    // Only run on article pages
+    const article = document.querySelector('article');
+    if (!article) return;
+
+    // Add reveal class to all paragraphs and headings in articles
+    const elements = article.querySelectorAll('p, h2, h3, h4, blockquote, ul, ol');
+    elements.forEach((el, index) => {
+      el.classList.add('reveal-text');
+      
+      // Add stagger delay for elements (except the first one)
+      if (index > 0) {
+        const delay = ((index - 1) % 4 + 1) * 100;
+        el.classList.add(`delay-${delay}`);
+      }
+    });
+
+    // Create intersection observer
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            // Once revealed, stop observing
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -100px 0px', // Trigger when element is 100px from bottom
+        threshold: 0.1
+      }
+    );
+
+    // Observe all reveal elements
+    const revealElements = document.querySelectorAll('.reveal-text');
+    revealElements.forEach((el) => observer.observe(el));
+  }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initTextReveal);
+</script>

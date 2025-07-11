@@ -1,0 +1,65 @@
+---
+// Component for logo transformation on scroll
+---
+
+<style>
+  /* Logo scroll transformation styles */
+  .logo-scroll-transform {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+</style>
+
+<script>
+  function initLogoTransform() {
+    const logo = document.querySelector('.hero-logo-transition');
+    if (!logo) return;
+
+    // Add transform class
+    logo.classList.add('logo-scroll-transform');
+
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function updateLogoTransform() {
+      const scrollY = window.scrollY;
+      const maxScroll = 500; // Maximum scroll distance for effect
+      
+      // Calculate progress from 0 to 1
+      const progress = Math.min(scrollY / maxScroll, 1);
+      
+      // Scale from 1 to 0.8
+      const scale = 1 - (progress * 0.2);
+      
+      // Rotate based on scroll direction and position
+      const rotation = progress * 5 * (scrollY > lastScrollY ? 1 : -1);
+      
+      // Apply transformation
+      logo.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+      
+      lastScrollY = scrollY;
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateLogoTransform);
+        ticking = true;
+      }
+    }
+
+    // Listen for scroll events
+    window.addEventListener('scroll', requestTick, { passive: true });
+
+    // Initial update
+    updateLogoTransform();
+
+    // Clean up on page navigation
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', requestTick);
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initLogoTransform);
+</script>
