@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { navigateToPage, clickAndNavigate } from './astro-test-utils';
 
 test.describe('Phase 3 Features - Basic Tests', () => {
   test('reading progress indicator appears on articles', async ({ page }) => {

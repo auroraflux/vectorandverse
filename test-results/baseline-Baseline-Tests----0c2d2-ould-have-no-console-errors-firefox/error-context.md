@@ -1,0 +1,103 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - navigation:
+    - link "kilowhat!?":
+      - /url: /
+      - heading "kilowhat!?" [level=1]
+    - link "About":
+      - /url: /about
+- banner:
+  - img "illustration of life as chaotic"
+  - text: 29 Jun 2025
+  - 'heading "Reality Check: Everyone''s Winging It and You''re Just Bad at Lying About It" [level=1]'
+  - paragraph: The technical explanation for your impostor syndrome that actually helps
+- article:
+  - paragraph: "You’re thirty-five, lying in bed at 2 AM, scrolling through social media. Your college roommate just posted about their third startup exit on LinkedIn. Someone from high school is posting sunset photos from Bali on Instagram with captions about “living their truth.” Your cousin’s Facebook is full of perfect family photos at pumpkin patches. Everyone’s life story reads like a perfectly crafted narrative: “Started here, which led to this, which opened doors to that, and now look where I am.”"
+  - paragraph: The posts glow with inevitability. Every career move looks strategic. Every relationship seems destined. Every pivot appears purposeful. It’s a greatest hits album of their life, each track flowing seamlessly into the next. No B-sides, no studio outtakes, definitely no recordings of them ugly-crying in their car after a failed interview.
+  - paragraph: Your story? You’re still trying to figure out what the hell you’re doing. Your career path looks like someone threw darts at a job board while blindfolded. Marketing analyst to failed food blogger to product manager to that weird six months you tried to become a pottery instructor. None of it connects. None of it makes sense. You close Instagram and stare at the ceiling, wondering when your life will finally start making sense.
+  - paragraph: The problem might not be your life at all. The problem might be that you’re trying to read it wrong.
+  - heading "Two Ways to Create Meaning" [level=2]
+  - paragraph: To understand what’s really happening, we need to steal an insight from AI. Don’t worry, this’ll be quick.
+  - paragraph: In the world of AI, there are two radically different approaches to creating content. It all starts with tokens. Think of a “token” as just a chunk of meaning, usually a word or part of a word. When AI writes “The cat sat on the mat,” that’s six tokens strung together. AI tools don’t understand or think in terms of “words”, they think in terms of “tokens”.
+  - heading "autoregression" [level=3]
+  - paragraph:
+    - emphasis: Autoregression
+    - text: "is how language works, and is how LLMs like ChatGPT, Gemini, and Claude create text. You generate one token at a time, each one building on what came before. The key part: every single token depends on literally every token that came before it. Not just the last word, not just the last sentence. Everything."
+  - paragraph: This is actually how large language models learn. They don’t “know” that the capital of France is Paris. They’ve just seen millions of text fragments where “The capital of France is…” is followed by “Paris.” They’ve noticed the pattern. When they see those tokens in that order, they predict “Paris” comes next. Same way you instinctively know “We Will Rock You” needs two stomps and a clap.
+  - paragraph:
+    - img "autoregress"
+  - paragraph: It’s why you can sometimes predict the next word in a song even if you’ve never heard it before. Your brain processes the narrative arc, the rhyme scheme, the artist’s style, the rhythm, everything that came before, and sometimes you nail the next lyric perfectly. You’re running autoregression in your head, calculating what token must come next based on all the constraints that came before.
+  - paragraph: Write “The cat sat on the…” and the next token is probably “mat” or “chair” or “floor.” But it’s not random. It’s based on every word in the sentence, the context, the style, everything. You can’t write the end of a sentence before the beginning. You can’t skip to the punchline without the setup. The past determines the future, one token at a time. Once you’ve written “The cat,” you’ve already constrained what can come next. Each token locks in more of the future, narrowing possibilities until there’s only one way forward.
+  - heading "diffusion" [level=3]
+  - paragraph:
+    - emphasis: Diffusion
+    - text: "is how image generation works. It’s how Midjourney, Ideogram, Flux, and DALL-E create images. You start with pure noise, random static across your entire canvas. Then through repeated rounds of refinement, you gradually denoise the whole thing simultaneously. These models learned by watching millions of images dissolve into static, memorizing each stage of decay. Now they run the process backwards, asking thousands of times: “What would this look like with slightly less chaos?”"
+  - paragraph: You know when you start streaming a video on terrible Wi-Fi? First few seconds are just chunky pixels, like someone smeared vaseline on your screen. Then it jumps to 480p and you can tell there are people, but their faces are still blobs. By 720p, you recognize who’s who, but the details are soft.
+  - paragraph: Diffusion works the same way, except instead of buffering quality, you’re watching iterations tick by. At iteration 20 of 100, you’re stuck at potato quality, mostly static with hints of something. By iteration 50, you’ve hit that 480p moment where you can make out basic shapes. Is that a face? A landscape? Your ex’s new partner who somehow looks like a better version of you? You see structure forming but can’t tell what it’ll become. By iteration 70, you’re at 720p confidence. That’s definitely a person, but who? What are they doing?
+  - paragraph: "Even at iteration 90, the image can still surprise you. Anyone who’s watched AI generate images knows this feeling: you think it’s creating a sunset, then in the final iterations it clarifies into a sunrise. You thought it was a cat, but those last few denoising steps reveal it was a fox all along. The image sharpens gradually, but you don’t really know what you have until the very end."
+  - paragraph: Every pixel gets adjusted based on every other pixel in each iteration. The entire image evolves together. It’s not cleaning up one corner then moving to another. Everything affects everything else, all at once.
+  - paragraph:
+    - strong: So why does any of this matter?
+  - paragraph: Both approaches create meaning in fundamentally different ways.
+  - paragraph:
+    - strong: Language
+    - text: "needs to be autoregressive because that’s what makes it comprehensible. Stories need sequential causation: this happened, therefore that happened, which caused this. Without that chain of cause and effect, you don’t have a story, you just have a list of events."
+  - paragraph:
+    - strong: Images
+    - text: ", on the other hand, exist all at once. You don’t read a painting left-to-right like a sentence. You absorb the whole thing simultaneously."
+  - paragraph: "Which brings us to the question that matters: When you think about your own life, which process does it actually resemble?"
+  - heading "The Universal Truth Nobody Talks About" [level=2]
+  - paragraph: Your life isn’t a sentence. It’s an image.
+  - paragraph: Think about your actual, lived experience. Your relationships, your skills, your memories, your hopes, they’re not sequential. They all exist simultaneously, influencing each other in complex ways. Your career affects your relationships affects your hobbies affects your worldview affects your career. It’s all interconnected, all happening at once.
+  - paragraph: That rough breakup three years ago? It’s still a pixel affecting your current work ambitions. The book you read last month? It’s retroactively changing how you understand your childhood. Your friendship with Sarah? It’s simultaneously shaped by your shared history, your current dynamics, and your imagined futures.
+  - paragraph: This is diffusion. Every part affecting every other part, the whole image slowly emerging through iterations you call days, weeks, years. You’re not generating your life one token at a time. You’re denoising an image that’s always existed in potential, slowly revealing what was always there.
+  - paragraph: Everyone lives this way. Everyone. That LinkedIn superstar with the perfect career arc? They’re living in diffusion too. The only difference (and it’s a big one) is what happens when they try to tell their story.
+  - heading "The Brutal Translation Problem" [level=2]
+  - paragraph: Society runs on autoregression. Stories, resumes, social media posts, party conversations, they all demand sequential narratives. “Tell me about yourself” means “Generate tokens that make linear sense.”
+  - paragraph: "The thing about stories: they require causation. In a story, this happens, which causes that, which leads to this. Every event must follow logically from what came before. That’s literally what makes it a story instead of just a list of things that happened. Beginning, middle, end. Setup, conflict, resolution. Token by token by token."
+  - paragraph: "So we all face the same impossible task: translating our diffusion reality into autoregressive fiction. We have to pretend our image is a sentence. We have to force our simultaneous, interconnected experience into a sequential story that suggests each thing led logically to the next."
+  - paragraph: But people diverge dramatically at this point. Some people’s diffusion process happens to create patterns that map easily onto narratives. Their pixels, when squinted at just right, look like they could be words in a sentence.
+  - paragraph: Started with an engineering degree → Got a job at a tech company → Became senior engineer → Led a team → VP of Engineering
+  - paragraph:
+    - text: The arrow is doing
+    - strong: a lot
+    - text: of work here. It suggests causation, inevitability, logic. As if the engineering degree necessarily led to the tech job, which naturally evolved into leadership. But that’s the story talking, not the reality. The reality was probably full of doubts, dead ends, lucky breaks, and pixels that don’t fit the narrative. The reality included that time they almost quit to become a yoga instructor and the six months they spent convinced they were meant to breed alpacas.
+  - paragraph: "These people aren’t living differently than you. But when they post online, they’re not showing you their whole image. They’re showing you the prettiest, clearest, most sequential slice they can extract. The interesting part: they tell different stories on different platforms. LinkedIn gets the professional victory lap. Instagram gets the “blessed and grateful” lifestyle shots. Twitter gets the hot takes that suggest deep thinking. Same diffusion process, different autoregressive outputs based on what each audience expects."
+  - paragraph: "Take your VP friend. On LinkedIn: “Thrilled to announce I’ve been promoted to VP of Engineering after leading our team through a successful product launch.” On Instagram: “Sunday vibes ☕ Grateful for this view from the new office.” On Twitter: “Hot take: The best code is the code you don’t write.” Same person, same week, three completely different narratives extracted from their actual messy reality of imposter syndrome, coffee addiction, and deleted code that definitely should have been written."
+  - paragraph: But you? Your diffusion process is creating something else entirely. Something that doesn’t map neatly onto “and then, and then, and then.” Your image is forming, but it doesn’t contain easy narrative shapes. Not yet, anyway.
+  - heading "Why You Feel Like You’re Failing" [level=2]
+  - paragraph: You’re not failing. You’re mid-render.
+  - paragraph: When you try to network, when you update your resume, when someone asks about your career, you’re being asked to describe a photograph that’s maybe 50% formed. You can see shapes emerging. That marketing experience, that pottery phase, that food blog, they’re forming into something, but what? Looking at your half-formed image feels like staring at clouds. Is that a dragon? A ship? A promising career trajectory? Wait, now it looks like something else entirely. Maybe it’s just a cloud.
+  - paragraph: "So you do what everyone in your position does: you either make up a story that isn’t really there, or you tell the truth and watch people’s eyes glaze over as you try to explain the non-connections between pottery and product management. “Well, you see, clay is a lot like user experience…” No. Stop. Even you don’t believe that."
+  - paragraph: Meanwhile, you’re scrolling through everyone else’s highlight reels. Their posts show the clearest, most successful, most coherent slices of their lives. The moments when their image happened to look most like a story. You’re comparing your half-formed, shifting image to their carefully curated narrative snapshots. It’s like comparing your rough draft to someone else’s published novel, forgetting they had twenty drafts you never saw.
+  - heading "The Premature Narrative Trap" [level=2]
+  - paragraph: The real damage comes when you start believing your own premature story.
+  - paragraph: “I’m someone who can’t stick with anything.” “I’m a failure who keeps changing directions." "I’m lost.”
+  - paragraph: These aren’t accurate descriptions. They’re desperate attempts to autoregressively narrate an image that hasn’t finished rendering. You’re trying to tell a story about noise, and the only stories that fit are stories of failure.
+  - paragraph: But what if you just… stopped? What if you accepted that you’re mid-diffusion, that the image isn’t clear yet, that any story you tell right now is fiction anyway?
+  - heading "How Stories Really Emerge" [level=2]
+  - paragraph: "When a diffusion life clarifies, something interesting happens:"
+  - paragraph: The image gradually sharpens over time. What looked like random static at 30% starts showing structure at 50%, becomes recognizable shapes at 70%, and continues refining. But even at 90%, the image can still surprise you. Those final iterations can transform what you thought was forming.
+  - paragraph: You might spend years thinking your pottery phase was about creativity, only to realize in the final rendering that it was about patience. The food blog you thought was a failure might clarify into the place where you learned to connect with audiences. That “random” marketing job might reveal itself as where you discovered your real passion was helping makers tell their stories. (Or maybe it was just a paycheck. Not everything has to be profound. Sometimes pixels are just pixels.)
+  - paragraph: At iteration 95, when the picture becomes clear enough to describe, you finally see how the pottery teaching developed your patience, which made you better at user research in your PM role, which helped you understand your customers’ creative struggles when you were food blogging, which gave you unique insights that… oh. OH. That’s what you were becoming all along.
+  - paragraph: The story was always there. You just couldn’t write it until you could see it. And you couldn’t see it clearly enough until the image had mostly rendered. Even then, those final iterations might still shift everything.
+  - paragraph: That’s why memoirs make sense but life advice often doesn’t. The memoirist is describing a mostly-complete image. The advice-giver is trying to help you generate tokens when you might be rendering pixels, and they’re probably working from their own image that clarified in a completely different way than yours will.
+  - heading "Living Between Two Worlds" [level=2]
+  - paragraph: So how do you live when you understand this truth?
+  - paragraph: First, accept that your daily experience is diffusion, always. You’re not building your life sequentially. You’re revealing an image through iterations. Every choice, every experience, every random Tuesday is affecting every other part of your life in ways you won’t understand until the picture clarifies. Yes, even that Tuesday you spent binge-watching a show about competitive dog grooming. That’s a pixel too. (A weird pixel, but still.)
+  - paragraph: Second, recognize that you’ll still need to generate autoregressive stories for others. Job interviews, social situations, online profiles, they all require narrative. But now you know these stories are just useful fictions, best-guess translations of your current static into sequential tokens. Don’t believe them too much. Your social media bios are basically professional fan fiction you’re writing about yourself.
+  - paragraph: Third, have different timescales for evaluation. Your autoregressive stories might need updating monthly (for practical purposes). But your diffusion process needs years, maybe decades. You can’t judge an image at iteration 50.
+  - paragraph: Finally, find your fellow static-watchers. The people who get that you’re mid-render, who don’t need you to force a narrative, who can sit with you in the uncertainty of an image still forming.
+  - heading "The 2 AM Peace" [level=2]
+  - paragraph: So you’re back in bed at 2 AM. The infinite scroll beckons. Your college roommate just posted another update about their latest achievement. That person from high school is still in Bali, still “living their truth.” Your cousin’s kids are still adorable at yet another seasonal photo shoot.
+  - paragraph: "But now you understand something profound: they’re not showing you their diffusion process. They’re showing you the one clean narrative thread they managed to extract from their messy, complex image. The pretty story they tell at dinner parties. The sequential version that fits in a status update. Different stories for different platforms, all extracted from the same chaotic, beautiful mess of their actual life."
+  - paragraph: They’re not living a fundamentally different life than you. They’re also in diffusion, also rendering an image one iteration at a time. They just happened to develop shapes that translate easily into success stories. Their image contains elements that look impressive when compressed into tokens.
+  - paragraph: "What they’re not showing you: the 2 AM anxiety spirals, the failed projects, the moments of complete confusion about what they’re doing with their lives. Those pixels don’t make it into the narrative. Nobody posts “Still trying to figure out what this all means” when they can post “Excited to announce…” Nobody’s Instagram bio reads “Just winging it with better lighting” or their LinkedIn headline reads “Senior Director of Hoping This Works Out.”"
+  - paragraph: Your static hasn’t resolved into a clear story yet. That’s all. Not better, not worse, just at a different iteration in the rendering process. And maybe when it does clarify, it’ll be something none of the traditional narrative shapes could have predicted.
+  - paragraph: Close Instagram. Exit LinkedIn. Put down your phone. In the darkness, stop trying to read your life like a sentence. Feel it instead, like an image still forming. Every pixel affecting every other pixel. The pottery and the marketing and the food blog all part of some larger picture you can’t see yet.
+  - paragraph: Trust the process. Not because it’s generating tokens in a sensible order, but because it’s slowly revealing an image that’s uniquely yours. One that might not make sense as a story until iteration 90, 95, 99. One that definitely won’t fit into a status update no matter how many hashtags you use.
+  - paragraph: The narrative will write itself when the image is ready.
+  - paragraph: For now, just keep denoising.
+```
