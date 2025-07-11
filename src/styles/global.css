@@ -13,49 +13,141 @@
   
   h1, h2, h3, h4, h5, h6 {
     @apply lowercase;
+    letter-spacing: -0.03em;
   }
   
   ::selection {
     @apply bg-gray-200;
   }
+  
+  /* Ensure list styles are not reset */
+  .prose ul {
+    list-style-type: disc !important;
+    list-style-position: outside !important;
+  }
+  
+  .prose ol {
+    list-style-type: decimal !important;
+    list-style-position: outside !important;
+  }
+  
+  .prose li::marker {
+    color: inherit !important;
+  }
+  
+  /* Table styles */
+  .prose table {
+    width: 100% !important;
+    margin-top: 2em !important;
+    margin-bottom: 2em !important;
+    border-collapse: collapse !important;
+  }
+  
+  .prose thead {
+    border-bottom: 2px solid #e5e7eb !important;
+  }
+  
+  .prose th {
+    font-weight: 600 !important;
+    text-align: left !important;
+    padding: 0.75em !important;
+  }
+  
+  .prose td {
+    padding: 0.75em !important;
+  }
+  
+  .prose tbody tr {
+    border-bottom: 1px solid #f3f4f6 !important;
+  }
+  
+  .prose tbody tr:last-child {
+    border-bottom: none !important;
+  }
 }
 
 @layer components {
+  /* Unified content block system */
   .admonition {
-    @apply relative my-8 pl-8 text-gray-600;
+    @apply relative my-8 pl-8 pr-8 pt-3 bg-gray-50;
+    padding-bottom: 0.1rem;
   }
   
-  .admonition::before {
-    @apply absolute left-0 top-0 bottom-0 w-px bg-gray-300;
+  .prose blockquote {
+    @apply relative my-6 pl-8 py-6;
+  }
+  
+  /* Vertical anchor line for admonitions and blockquotes */
+  .admonition::before,
+  .prose blockquote::before {
+    @apply absolute left-0 top-0 bottom-0 w-1 bg-gray-300;
     content: '';
   }
   
+  /* Admonition-specific styles */
+  .admonition-title {
+    @apply block mb-2 text-base font-semibold lowercase;
+    letter-spacing: -0.02em;
+  }
+  
   .admonition-note::before {
-    @apply bg-blue-300;
+    @apply bg-blue-400;
+  }
+  
+  .admonition-note .admonition-title {
+    @apply text-blue-600;
   }
   
   .admonition-warning::before {
     @apply bg-amber-400;
   }
   
-  .admonition-tip::before {
-    @apply bg-green-400;
-  }
-  
-  .admonition strong:first-child {
-    @apply text-xs font-semibold uppercase tracking-wider text-gray-500 mr-2;
-  }
-  
-  .admonition-note strong:first-child {
-    @apply text-blue-600;
-  }
-  
-  .admonition-warning strong:first-child {
+  .admonition-warning .admonition-title {
     @apply text-amber-600;
   }
   
-  .admonition-tip strong:first-child {
+  .admonition-tip::before {
+    @apply bg-green-500;
+  }
+  
+  .admonition-tip .admonition-title {
     @apply text-green-700;
+  }
+  
+  .admonition-danger::before {
+    @apply bg-red-500;
+  }
+  
+  .admonition-danger .admonition-title {
+    @apply text-red-600;
+  }
+  
+  /* Remove bottom margin from last paragraph in admonitions */
+  .admonition p:last-child {
+    @apply mb-0;
+  }
+  
+  /* Blockquote specific styles */
+  .prose blockquote {
+    @apply italic;
+  }
+  
+  .prose blockquote p {
+    @apply text-3xl;
+  }
+  
+  /* Heading gradient underlines */
+  .prose h1::after,
+  .prose h2::after,
+  .prose h3::after,
+  .prose h4::after,
+  .prose h5::after,
+  .prose h6::after {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-top: 0.5rem;
+    background: linear-gradient(to right, rgb(209, 213, 219), transparent);
   }
 }
 

@@ -86,15 +86,23 @@ print(processed)  # ['item1', 'item2', 'item3']
 ## Admonitions
 
 <div class="admonition admonition-note">
-<strong>Note:</strong> This is a note admonition. Use it to provide additional context or supplementary information that enhances understanding without being critical to the main flow.
+<span class="admonition-title">note</span>
+This is a note admonition. Use it to provide additional context or supplementary information that enhances understanding without being critical to the main flow.
 </div>
 
 <div class="admonition admonition-warning">
-<strong>Warning:</strong> This is a warning admonition. It highlights potential issues, gotchas, or important considerations that readers should be aware of before proceeding.
+<span class="admonition-title">warning</span>
+This is a warning admonition. It highlights potential issues, gotchas, or important considerations that readers should be aware of before proceeding.
 </div>
 
 <div class="admonition admonition-tip">
-<strong>Tip:</strong> This is a tip admonition. Perfect for sharing best practices, shortcuts, or helpful suggestions that can improve the reader's experience or workflow.
+<span class="admonition-title">tip</span>
+This is a tip admonition. Perfect for sharing best practices, shortcuts, or helpful suggestions that can improve the reader's experience or workflow.
+</div>
+
+<div class="admonition admonition-danger">
+<span class="admonition-title">danger</span>
+This is a danger admonition. Use it to warn about critical issues, destructive operations, or security vulnerabilities that could cause serious problems if ignored.
 </div>
 
 ## Images with Captions
@@ -127,7 +135,8 @@ The JavaScript event loop is a fundamental concept that enables asynchronous pro
 3. **Microtask Queue**: Priority queue for promises and mutation observers
 
 <div class="admonition admonition-note">
-<strong>Note:</strong> Understanding the event loop is crucial for writing performant JavaScript applications. It affects everything from UI responsiveness to API call handling.
+<span class="admonition-title">note</span>
+Understanding the event loop is crucial for writing performant JavaScript applications. It affects everything from UI responsiveness to API call handling.
 </div>
 
 Here's a simplified visualization in code:
@@ -149,7 +158,8 @@ console.log('4'); // Synchronous - executes immediately
 ```
 
 <div class="admonition admonition-tip">
-<strong>Tip:</strong> Always remember that microtasks (promises) execute before regular tasks (setTimeout), even if the timeout is set to 0.
+<span class="admonition-title">tip</span>
+Always remember that microtasks (promises) execute before regular tasks (setTimeout), even if the timeout is set to 0.
 </div>
 
 ## Tables (Markdown)
@@ -190,7 +200,8 @@ Lists can contain various elements:
 This showcase demonstrates the complete range of formatting options available in our minimal blog design. Each element has been carefully styled to maintain readability while providing clear visual hierarchy.
 
 <div class="admonition admonition-note">
-<strong>Remember:</strong> Good typography enhances content without overwhelming it. Use these formatting options judiciously to create clear, engaging articles.
+<span class="admonition-title">remember</span>
+Good typography enhances content without overwhelming it. Use these formatting options judiciously to create clear, engaging articles.
 </div>
 
 The key is finding the right balance—enough variety to maintain interest and clarify structure, but not so much that it becomes distracting. When in doubt, err on the side of simplicity.

@@ -64,8 +64,24 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     @apply text-3xl font-bold mt-12 mb-4 lowercase;
   }
   
+  article :global(h2::after) {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-top: 0.5rem;
+    background: linear-gradient(to right, rgb(209, 213, 219), transparent);
+  }
+  
   article :global(h3) {
     @apply text-2xl font-bold mt-8 mb-3 lowercase;
+  }
+  
+  article :global(h3::after) {
+    content: '';
+    display: block;
+    height: 2px;
+    margin-top: 0.5rem;
+    background: linear-gradient(to right, rgb(209, 213, 219), transparent);
   }
   
   article :global(p) {
@@ -90,5 +106,45 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   
   article :global(pre code) {
     @apply bg-transparent p-0;
+  }
+  
+  article :global(ul) {
+    @apply list-disc pl-6 my-6;
+  }
+  
+  article :global(ol) {
+    @apply list-decimal pl-6 my-6;
+  }
+  
+  article :global(li) {
+    @apply mb-2;
+  }
+  
+  article :global(table) {
+    @apply w-full my-8 text-base;
+  }
+  
+  article :global(thead) {
+    @apply border-b-2 border-gray-200;
+  }
+  
+  article :global(th) {
+    @apply font-semibold text-left px-3 py-3;
+  }
+  
+  article :global(td) {
+    @apply px-3 py-3;
+  }
+  
+  article :global(tbody tr) {
+    @apply border-b border-gray-100;
+  }
+  
+  article :global(tbody tr:last-child) {
+    @apply border-b-0;
+  }
+  
+  article :global(tbody td:first-child) {
+    @apply font-medium;
   }
 </style>
