@@ -26,12 +26,14 @@
 </style>
 
 <script>
-  // Only run on article pages
-  const article = document.querySelector('article');
-  if (!article) return;
-  
-  const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
-  if (!progressBar) return;
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run on article pages
+    const article = document.querySelector('article');
+    if (!article) return;
+    
+    const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
+    if (!progressBar) return;
   
   // Calculate progress on scroll
   const updateProgress = () => {
@@ -65,4 +67,5 @@
   
   // Initial update
   updateProgress();
+  });
 </script>

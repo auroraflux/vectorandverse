@@ -143,4 +143,9 @@ const postsWithImages = posts.map(post => ({
   </div>
 </Layout>
 
-<script src="../scripts/typewriter-taglines.js"></script>
+<script>
+  import typewriterScript from '../scripts/typewriter-taglines.js?raw';
+  const script = document.createElement('script');
+  script.textContent = typewriterScript;
+  document.body.appendChild(script);
+</script>
