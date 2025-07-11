@@ -5,8 +5,8 @@ test.describe('Baseline Tests - Navigation', () => {
     await page.goto('/');
     await expect(page).toHaveTitle(/kilowhat/);
     
-    // Click About link
-    const aboutLink = page.locator('a[href="/about"]');
+    // Click About link (in the fixed position, not sticky header)
+    const aboutLink = page.locator('a[href="/about"]').first();
     await expect(aboutLink).toBeVisible();
     await aboutLink.click();
     await page.waitForURL('/about');

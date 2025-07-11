@@ -4,7 +4,7 @@ test.describe('CSS Enhancements - Link Animations', () => {
   test('should have animated underlines on About link', async ({ page }) => {
     await page.goto('/');
     
-    const aboutLink = page.locator('a[href="/about"]');
+    const aboutLink = page.locator('a[href="/about"]').first();
     
     // Check that underline is initially hidden
     const initialWidth = await aboutLink.evaluate(el => 
@@ -77,7 +77,7 @@ test.describe('CSS Enhancements - Visual Regression', () => {
     expect(heroHeight).toBeGreaterThan(50); // Reasonable height
     
     // Verify gradient colors are applied to link underlines
-    const aboutLink = page.locator('a[href="/about"]');
+    const aboutLink = page.locator('a[href="/about"]').first();
     const gradient = await aboutLink.evaluate(el => 
       window.getComputedStyle(el, '::after').background
     );
