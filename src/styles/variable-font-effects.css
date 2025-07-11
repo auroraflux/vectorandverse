@@ -1,0 +1,188 @@
+/* Variable Font Weight Animations */
+@layer components {
+  /* Interactive font weight on links */
+  a {
+    font-variation-settings: 'wght' 400;
+    transition: font-variation-settings 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  a:hover, a:focus-visible {
+    font-variation-settings: 'wght' 550;
+  }
+  
+  /* Interactive weight for nav links */
+  nav a, .sticky-logo {
+    font-variation-settings: 'wght' 500;
+  }
+  
+  nav a:hover, nav a:focus-visible,
+  .sticky-logo:hover, .sticky-logo:focus-visible {
+    font-variation-settings: 'wght' 700;
+  }
+  
+  /* Blog post title hover effect */
+  article h2 {
+    font-variation-settings: 'wght' 850;
+    transition: font-variation-settings 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  article:hover h2 {
+    font-variation-settings: 'wght' 900;
+  }
+  
+  /* Interactive weight for headings in prose */
+  .prose h2, .prose h3, .prose h4 {
+    font-variation-settings: 'wght' 700;
+    transition: font-variation-settings 0.3s ease-out;
+  }
+  
+  .prose h2:hover, .prose h3:hover, .prose h4:hover {
+    font-variation-settings: 'wght' 800;
+  }
+  
+  /* Button hover effects */
+  button, .button {
+    font-variation-settings: 'wght' 500;
+    transition: font-variation-settings 0.2s ease-out;
+  }
+  
+  button:hover, button:focus-visible,
+  .button:hover, .button:focus-visible {
+    font-variation-settings: 'wght' 600;
+  }
+  
+  /* Enhanced Blockquote Styling */
+  .prose blockquote {
+    position: relative;
+    margin: 3rem 0;
+    padding: 2rem 2rem 2rem 3rem;
+    font-variation-settings: 'wght' 350;
+    font-style: italic;
+    background: linear-gradient(
+      to right,
+      rgba(229, 231, 235, 0.1),
+      transparent 50%
+    );
+    border-left: 3px solid transparent;
+    background-image: linear-gradient(
+      to bottom,
+      theme('colors.gray.300'),
+      theme('colors.gray.400')
+    );
+    background-size: 3px 100%;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+  
+  /* Large decorative quotation mark */
+  .prose blockquote::before {
+    content: '"';
+    position: absolute;
+    left: -0.5rem;
+    top: -1rem;
+    font-size: 6rem;
+    line-height: 1;
+    font-style: normal;
+    font-variation-settings: 'wght' 900;
+    color: rgba(156, 163, 175, 0.2);
+    z-index: -1;
+    font-feature-settings: 'ss01' 1; /* Use stylistic set if available */
+  }
+  
+  /* Closing quotation mark */
+  .prose blockquote::after {
+    content: '"';
+    position: absolute;
+    right: 1rem;
+    bottom: -2rem;
+    font-size: 6rem;
+    line-height: 1;
+    font-style: normal;
+    font-variation-settings: 'wght' 900;
+    color: rgba(156, 163, 175, 0.1);
+    z-index: -1;
+    font-feature-settings: 'ss01' 1;
+  }
+  
+  /* Blockquote text styling */
+  .prose blockquote p {
+    @apply text-2xl leading-relaxed;
+    margin: 0;
+    font-variation-settings: 'wght' 350;
+    transition: font-variation-settings 0.4s ease-out;
+  }
+  
+  .prose blockquote:hover p {
+    font-variation-settings: 'wght' 400;
+  }
+  
+  /* Citation styling within blockquotes */
+  .prose blockquote cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-style: normal;
+    font-variation-settings: 'wght' 500;
+    color: theme('colors.gray.600');
+  }
+  
+  .prose blockquote cite::before {
+    content: '— ';
+  }
+  
+  /* Pull quote variant */
+  .prose .pull-quote {
+    margin: 4rem -2rem;
+    padding: 2rem 0;
+    border-left: none;
+    border-top: 2px solid theme('colors.gray.200');
+    border-bottom: 2px solid theme('colors.gray.200');
+    text-align: center;
+    background: transparent;
+  }
+  
+  .prose .pull-quote::before,
+  .prose .pull-quote::after {
+    display: none;
+  }
+  
+  .prose .pull-quote p {
+    @apply text-3xl;
+    font-variation-settings: 'wght' 300;
+  }
+}
+
+/* Dark mode adjustments */
+@layer components {
+  .dark .prose blockquote {
+    background: linear-gradient(
+      to right,
+      rgba(31, 41, 55, 0.2),
+      transparent 50%
+    );
+    background-image: linear-gradient(
+      to bottom,
+      theme('colors.gray.600'),
+      theme('colors.gray.500')
+    );
+    background-size: 3px 100%;
+    background-repeat: no-repeat;
+    background-position: left center;
+  }
+  
+  .dark .prose blockquote::before {
+    color: rgba(107, 114, 128, 0.3);
+  }
+  
+  .dark .prose blockquote::after {
+    color: rgba(107, 114, 128, 0.2);
+  }
+  
+  .dark .prose blockquote cite {
+    color: theme('colors.gray.400');
+  }
+  
+  .dark .prose .pull-quote {
+    border-color: theme('colors.gray.700');
+  }
+}

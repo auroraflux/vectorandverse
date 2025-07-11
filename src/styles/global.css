@@ -2,6 +2,7 @@
 @import "./link-animations.css";
 @import "./typewriter-cursor.css";
 @import "./sticky-header.css";
+@import "./variable-font-effects.css";
 
 @layer base {
   :root {
