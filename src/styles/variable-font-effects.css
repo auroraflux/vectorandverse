@@ -100,7 +100,6 @@
     background-image: linear-gradient(
       to bottom,
       theme('colors.gray.300') 0%,
-      theme('colors.gray.350') 50%,
       theme('colors.gray.400') 100%
     );
     background-size: 3px 100%;
