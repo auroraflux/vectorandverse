@@ -29,13 +29,29 @@ a:not(.no-underline):focus::after {
   width: 100%;
 }
 
-/* Special styling for article links */
-article a:not(.no-underline) {
+/* Special styling for article/prose links */
+article a:not(.no-underline),
+.prose a:not(.no-underline) {
   color: rgb(59, 130, 246);
 }
 
-article a:not(.no-underline):hover {
+article a:not(.no-underline):hover,
+.prose a:not(.no-underline):hover {
   color: rgb(251, 146, 60);
+}
+
+/* Make gradient underline more prominent for prose links */
+.prose a:not(.no-underline)::after {
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 1),
+    rgba(155, 138, 153, 0.9),
+    rgba(251, 146, 60, 1),
+    rgba(135, 165, 113, 0.9),
+    rgba(20, 184, 166, 1)
+  );
+  height: 2.5px;
+  bottom: -3px;
 }
 
 

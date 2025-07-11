@@ -14,19 +14,19 @@
     letter-spacing: -0.01em;
   }
   
-  /* Prose links - keep them inline with minimal weight change */
+  /* Prose links - no weight change to prevent reflow */
   .prose a {
-    font-variation-settings: 'wght' 500;
-    transition: font-variation-settings 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                color 0.3s ease;
+    font-variation-settings: 'wght' 500 !important;
+    /* Only transition color, not weight */
+    transition: color 0.3s ease;
     /* Reset general link styles */
-    letter-spacing: normal;
+    letter-spacing: normal !important;
   }
   
   .prose a:hover, .prose a:focus-visible {
-    font-variation-settings: 'wght' 520;
-    /* Very subtle weight increase to minimize reflow */
-    letter-spacing: -0.005em;
+    /* Keep same weight - rely on color and underline for feedback */
+    font-variation-settings: 'wght' 500 !important;
+    letter-spacing: normal !important;
   }
   
   /* Interactive weight for nav links */
