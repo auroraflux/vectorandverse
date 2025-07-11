@@ -1,6 +1,82 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    /* Note/Info Colors */
+    --color-note-bg: theme('colors.sky.50');
+    --color-note-border: theme('colors.sky.400');
+    --color-note-text: theme('colors.sky.700');
+    
+    /* Warning Colors */
+    --color-warning-bg: theme('colors.amber.50');
+    --color-warning-border: theme('colors.amber.400');
+    --color-warning-text: theme('colors.amber.700');
+    
+    /* Tip/Success Colors */
+    --color-tip-bg: theme('colors.teal.50');
+    --color-tip-border: theme('colors.teal.400');
+    --color-tip-text: theme('colors.teal.700');
+    
+    /* Danger/Error Colors */
+    --color-danger-bg: theme('colors.rose.50');
+    --color-danger-border: theme('colors.rose.400');
+    --color-danger-text: theme('colors.rose.700');
+    
+    /* Stepper Colors */
+    --color-step-line: theme('colors.sky.100');
+    --color-step-line-completed: theme('colors.sky.400');
+    --color-step-icon-bg: theme('colors.white');
+    --color-step-icon-border: theme('colors.sky.100');
+    --color-step-icon-text: theme('colors.slate.400');
+    --color-step-current-bg: theme('colors.sky.50');
+    --color-step-current-border: theme('colors.sky.400');
+    --color-step-current-text: theme('colors.sky.700');
+    --color-step-completed-bg: theme('colors.sky.400');
+    --color-step-completed-border: theme('colors.sky.400');
+    --color-step-completed-text: theme('colors.white');
+    --color-step-title-inactive: theme('colors.slate.400');
+    --color-step-title-current: theme('colors.sky.700');
+    --color-step-title-completed: theme('colors.slate.800');
+  }
+  
+  .dark {
+    /* Note/Info Colors */
+    --color-note-bg: theme('colors.sky.950');
+    --color-note-border: theme('colors.sky.600');
+    --color-note-text: theme('colors.sky.300');
+    
+    /* Warning Colors */
+    --color-warning-bg: theme('colors.amber.950');
+    --color-warning-border: theme('colors.amber.600');
+    --color-warning-text: theme('colors.amber.300');
+    
+    /* Tip/Success Colors */
+    --color-tip-bg: theme('colors.teal.950');
+    --color-tip-border: theme('colors.teal.600');
+    --color-tip-text: theme('colors.teal.300');
+    
+    /* Danger/Error Colors */
+    --color-danger-bg: theme('colors.rose.950');
+    --color-danger-border: theme('colors.rose.600');
+    --color-danger-text: theme('colors.rose.300');
+    
+    /* Stepper Colors */
+    --color-step-line: theme('colors.sky.900');
+    --color-step-line-completed: theme('colors.sky.600');
+    --color-step-icon-bg: theme('colors.gray.800');
+    --color-step-icon-border: theme('colors.sky.900');
+    --color-step-icon-text: theme('colors.slate.500');
+    --color-step-current-bg: theme('colors.sky.950');
+    --color-step-current-border: theme('colors.sky.600');
+    --color-step-current-text: theme('colors.sky.300');
+    --color-step-completed-bg: theme('colors.sky.600');
+    --color-step-completed-border: theme('colors.sky.600');
+    --color-step-completed-text: theme('colors.white');
+    --color-step-title-inactive: theme('colors.slate.500');
+    --color-step-title-current: theme('colors.sky.300');
+    --color-step-title-completed: theme('colors.slate.200');
+  }
+  
   html {
     @apply antialiased;
     font-feature-settings: "kern" 1;
@@ -8,16 +84,24 @@
   }
   
   body {
-    @apply text-gray-900;
+    @apply text-gray-900 font-sans;
+  }
+  
+  .dark body {
+    @apply text-gray-100 bg-gray-900;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply lowercase;
+    @apply lowercase font-sans;
     letter-spacing: -0.03em;
   }
   
   ::selection {
     @apply bg-gray-200;
+  }
+  
+  .dark ::selection {
+    @apply bg-gray-700;
   }
   
   /* Ensure list styles are not reset */
@@ -70,7 +154,7 @@
 @layer components {
   /* Unified content block system */
   .admonition {
-    @apply relative my-8 pl-8 pr-8 pt-3 bg-gray-50;
+    @apply relative my-8 pl-8 pr-8 pt-3;
     padding-bottom: 0.1rem;
   }
   
@@ -91,36 +175,56 @@
     letter-spacing: -0.02em;
   }
   
+  /* Note admonition */
+  .admonition-note {
+    background-color: var(--color-note-bg);
+  }
+  
   .admonition-note::before {
-    @apply bg-slate-400;
+    background-color: var(--color-note-border);
   }
   
   .admonition-note .admonition-title {
-    @apply text-slate-600;
+    color: var(--color-note-text);
+  }
+  
+  /* Warning admonition */
+  .admonition-warning {
+    background-color: var(--color-warning-bg);
   }
   
   .admonition-warning::before {
-    @apply bg-stone-400;
+    background-color: var(--color-warning-border);
   }
   
   .admonition-warning .admonition-title {
-    @apply text-stone-600;
+    color: var(--color-warning-text);
+  }
+  
+  /* Tip admonition */
+  .admonition-tip {
+    background-color: var(--color-tip-bg);
   }
   
   .admonition-tip::before {
-    @apply bg-gray-500;
+    background-color: var(--color-tip-border);
   }
   
   .admonition-tip .admonition-title {
-    @apply text-gray-700;
+    color: var(--color-tip-text);
+  }
+  
+  /* Danger admonition */
+  .admonition-danger {
+    background-color: var(--color-danger-bg);
   }
   
   .admonition-danger::before {
-    @apply bg-zinc-500;
+    background-color: var(--color-danger-border);
   }
   
   .admonition-danger .admonition-title {
-    @apply text-zinc-700;
+    color: var(--color-danger-text);
   }
   
   /* Remove bottom margin from last paragraph in admonitions */

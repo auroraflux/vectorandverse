@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import Lightbox from '../components/Lightbox.astro';
+import '../styles/global.css';
 
 export interface Props {
   title: string;
@@ -20,15 +21,32 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
     <meta name="generator" content={Astro.generator} />
     <title>{title} - Kilowhat</title>
     <ViewTransitions />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <style>
+      /* Satoshi Variable Font */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-Variable.woff2') format('woff2-variations'),
+             url('/fonts/Satoshi-Variable.woff') format('woff-variations');
+        font-weight: 300 900;
+        font-style: normal;
+        font-display: swap;
+      }
+      
+      :root {
+        --font-sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      
       body {
-        font-family: 'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-weight: 400;
+        font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-weight: 500;
         font-size: 20px;
         letter-spacing: -0.02em;
+      }
+      
+      /* Ensure headings use correct weight */
+      h1, h2, h3, h4, h5, h6 {
+        font-weight: 850;
+        font-variation-settings: 'wght' 850;
       }
     </style>
   </head>

@@ -36,11 +36,11 @@ const { title, step, state = 'inactive' } = Astro.props;
     top: 3.25rem;
     bottom: -1.75rem;
     width: 4px;
-    background-color: #e5e7eb;
+    background-color: var(--color-step-line);
   }
   
   .step[data-state="completed"]:not(:last-child)::after {
-    background-color: #64748b;
+    background-color: var(--color-step-line-completed);
   }
   
   .step-icon {
@@ -48,27 +48,27 @@ const { title, step, state = 'inactive' } = Astro.props;
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    background-color: #f9fafb;
-    border: 4px solid #e5e7eb;
+    background-color: var(--color-step-icon-bg);
+    border: 4px solid var(--color-step-icon-border);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.125rem;
     font-weight: 600;
-    color: #9ca3af;
+    color: var(--color-step-icon-text);
     z-index: 1;
     margin-right: 1.5rem;
   }
   
   .step[data-state="current"] .step-icon {
-    background-color: #f1f5f9;
-    border-color: #64748b;
-    color: #475569;
+    background-color: var(--color-step-current-bg);
+    border-color: var(--color-step-current-border);
+    color: var(--color-step-current-text);
   }
   
   .step[data-state="completed"] .step-icon {
-    background-color: #64748b;
-    border-color: #64748b;
+    background-color: var(--color-step-completed-bg);
+    border-color: var(--color-step-completed-border);
   }
   
   .step-number {
@@ -77,7 +77,7 @@ const { title, step, state = 'inactive' } = Astro.props;
   
   .step-check {
     display: none;
-    color: white;
+    color: var(--color-step-completed-text);
     font-size: 1.25rem;
   }
   
@@ -95,17 +95,21 @@ const { title, step, state = 'inactive' } = Astro.props;
   }
   
   .step-title {
-    font-size: 1rem;
+    font-size: 20px;
+    line-height: 1.6;
     font-weight: 600;
     text-transform: lowercase;
     letter-spacing: -0.02em;
-    color: #9ca3af;
+    color: var(--color-step-title-inactive);
     margin: 0 0 0.25rem 0;
   }
   
-  .step[data-state="current"] .step-title,
+  .step[data-state="current"] .step-title {
+    color: var(--color-step-title-current);
+  }
+  
   .step[data-state="completed"] .step-title {
-    color: #111827;
+    color: var(--color-step-title-completed);
   }
   
   .step[data-state="current"] .step-title::after {
@@ -113,12 +117,12 @@ const { title, step, state = 'inactive' } = Astro.props;
     display: block;
     height: 2px;
     margin-top: 0.25rem;
-    background: linear-gradient(to right, rgb(209, 213, 219), transparent);
+    background: linear-gradient(to right, var(--color-step-current-border), transparent);
   }
   
   .step-description {
     color: #6b7280;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 20px;
+    line-height: 1.6;
   }
 </style>

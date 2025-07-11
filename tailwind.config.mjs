@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['"Schibsted Grotesk"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        'sans': ['Satoshi', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
       },
       fontSize: {
         'base': ['20px', '1.6'],
@@ -17,40 +17,48 @@ export default {
         '5xl': ['60px', '1'],
       },
       fontWeight: {
-        'normal': '400',
+        'normal': '500',
+        'medium': '500',
+        'semibold': '600',
         'bold': '700',
+        'extrabold': '800',
       },
       typography: {
         DEFAULT: {
           css: {
+            fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
             color: '#1a1a1a',
             maxWidth: '65ch',
             fontSize: '20px',
             lineHeight: '1.6',
-            fontWeight: '400',
+            fontWeight: '500',
             'h1': {
-              fontWeight: '700',
+              fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              fontWeight: '850',
               fontSize: '2.4em',
               lineHeight: '1.1',
               marginTop: '0',
               marginBottom: '0.8em',
             },
             'h2': {
-              fontWeight: '700',
+              fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              fontWeight: '850',
               fontSize: '1.8em',
               lineHeight: '1.2',
               marginTop: '1.5em',
               marginBottom: '0.8em',
             },
             'h3': {
-              fontWeight: '700',
+              fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              fontWeight: '850',
               fontSize: '1.4em',
               lineHeight: '1.3',
               marginTop: '1.2em',
               marginBottom: '0.6em',
             },
             'h4': {
-              fontWeight: '700',
+              fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+              fontWeight: '850',
               fontSize: '1.2em',
               lineHeight: '1.4',
               marginTop: '1em',
