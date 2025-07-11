@@ -52,30 +52,31 @@
   /* Homepage article card description hover effect */
   article a[data-has-image] p {
     font-variation-settings: 'wght' 500;
-    transition: font-variation-settings 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                letter-spacing 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.3s ease-out;
-    letter-spacing: normal;
-    transform-origin: left center;
+    transition: font-variation-settings 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                letter-spacing 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                line-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0;
+    line-height: 1.75;
+    /* Reserve space to prevent reflow */
+    display: block;
+    min-height: 3.5rem; /* Approximately 2 lines at current size */
   }
   
   article:hover a[data-has-image] p {
-    font-variation-settings: 'wght' 580;
-    /* Compensate for weight increase with slight scale and letter spacing */
-    letter-spacing: -0.015em;
-    transform: scaleX(0.99);
+    font-variation-settings: 'wght' 550;
+    /* Tighten spacing to compensate for weight increase */
+    letter-spacing: -0.02em;
+    line-height: 1.7;
   }
   
-  /* Ensure smooth intermediate steps for variable font */
-  @supports (font-variation-settings: 'wght' 500) {
+  /* Prevent text wrapping changes during animation */
+  @media (min-width: 768px) {
     article a[data-has-image] p {
-      /* Force GPU acceleration for smoother transitions */
-      will-change: font-variation-settings;
-    }
-    
-    /* Remove will-change after hover to prevent memory issues */
-    article:not(:hover) a[data-has-image] p {
-      will-change: auto;
+      /* Use CSS containment to prevent layout recalculation */
+      contain: layout style;
+      /* Ensure consistent text rendering */
+      text-rendering: geometricPrecision;
+      -webkit-font-smoothing: antialiased;
     }
   }
   
