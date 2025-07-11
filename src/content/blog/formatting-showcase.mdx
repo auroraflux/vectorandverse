@@ -7,6 +7,8 @@ heroImageAlt: 'Technology and code visualization'
 ---
 
 import ArticleImage from '../../components/ArticleImage.astro';
+import Stepper from '../../components/Stepper.astro';
+import Step from '../../components/Step.astro';
 
 This article demonstrates every formatting option available in our minimal blog design, serving as both a reference guide and a visual showcase of our typography system.
 
@@ -172,6 +174,22 @@ While not styled with custom CSS, basic markdown tables are supported:
 | Images | Responsive with lightbox | ✓ Complete |
 | Code Blocks | Syntax highlighting | ✓ Complete |
 | Admonitions | Minimal, unique design | ✓ Complete |
+
+## Step-by-Step Processes
+
+Use the stepper component to guide readers through sequential processes:
+
+<Stepper>
+  <Step title="create an account" step={1} state="completed">
+    Sign up with your email address and choose a strong password. You'll receive a confirmation email shortly after.
+  </Step>
+  <Step title="verify email" step={2} state="current">
+    Check your inbox for our verification email and click the confirmation link to activate your account.
+  </Step>
+  <Step title="get full access" step={3} state="inactive">
+    Once verified, you'll have complete access to all features and can start exploring the platform.
+  </Step>
+</Stepper>
 
 ## Horizontal Rules
 

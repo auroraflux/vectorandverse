@@ -1,0 +1,19 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class={`stepper ${className}`.trim()}>
+  <slot />
+</div>
+
+<style>
+  .stepper {
+    position: relative;
+    padding-left: 2rem;
+    margin: 2rem 0;
+  }
+</style>

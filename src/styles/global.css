@@ -64,6 +64,7 @@
   .prose tbody tr:last-child {
     border-bottom: none !important;
   }
+  
 }
 
 @layer components {
