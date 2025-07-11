@@ -38,15 +38,17 @@ test.describe('CSS Enhancements - Typewriter Cursor', () => {
   test('should show typewriter cursor on rotating taglines', async ({ page }) => {
     await page.goto('/');
     
-    // Check taglines have typewriter cursor class
-    const tagline = page.locator('.animate-tagline-rotate').first();
-    await expect(tagline).toHaveClass(/typewriter-cursor/);
+    // Wait for typewriter script to load
+    await page.waitForTimeout(500);
     
-    // Check cursor pseudo-element exists
-    const cursorContent = await tagline.evaluate(el => 
-      window.getComputedStyle(el, '::after').content
-    );
-    expect(cursorContent).toContain('│');
+    // Check taglines have typewriter-tagline span
+    const tagline = page.locator('.typewriter-tagline').first();
+    await expect(tagline).toBeVisible();
+    
+    // Check cursor element exists
+    const cursor = page.locator('.typewriter-cursor-element').first();
+    await expect(cursor).toBeVisible();
+    expect(await cursor.textContent()).toBe('│');
   });
 
   test('should show static typewriter cursor on About page', async ({ page }) => {

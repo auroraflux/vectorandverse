@@ -410,7 +410,7 @@
   .animate-tagline-rotate {
     opacity: 0;
     transform: translateY(20px);
-    animation: taglineRotate 15s ease-in-out infinite;
+    animation: taglineRotate 25s ease-in-out infinite;
   }
   
   @keyframes taglineRotate {
@@ -418,7 +418,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
-    5%, 15% {
+    4%, 16% {
       opacity: 1;
       transform: translateY(0);
     }

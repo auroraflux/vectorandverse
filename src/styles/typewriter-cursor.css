@@ -1,28 +1,10 @@
-/* Typewriter cursor for static text elements */
-.typewriter-cursor {
+/* Typewriter effect for rotating taglines */
+.typewriter-tagline {
   position: relative;
   display: inline-block;
 }
 
-/* Blinking cursor after text */
-.typewriter-cursor::after {
-  content: '│';
-  position: absolute;
-  right: -0.2em;
-  top: 0;
-  color: currentColor;
-  font-weight: 200;
-  font-size: 0.9em;
-  opacity: 0;
-  animation: blinkCursor 1.2s step-end infinite;
-}
-
-/* Only show cursor on visible tagline */
-.typewriter-cursor.animate-tagline-rotate::after {
-  animation-delay: 0.5s;
-}
-
-/* Cursor blink animation */
+/* Cursor blink animation - used by JavaScript */
 @keyframes blinkCursor {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
@@ -31,16 +13,43 @@
 /* For pull quotes or static text that needs cursor */
 .static-typewriter {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
 }
 
 .static-typewriter::after {
   content: '│';
-  position: absolute;
-  right: -0.2em;
-  top: 0.1em;
+  position: relative;
+  margin-left: 0.1em;
   color: currentColor;
-  font-weight: 200;
-  font-size: 0.8em;
-  animation: blinkCursor 1.2s step-end infinite;
+  font-weight: 300;
+  font-size: 0.9em;
+  line-height: 1;
+  animation: blinkCursor 1s step-end infinite;
+}
+
+/* Reset typewriter animations when tagline rotates */
+.animate-tagline-rotate {
+  animation: taglineRotate 25s ease-in-out infinite;
+}
+
+/* Ensure each new tagline gets fresh typewriter animation */
+.animate-tagline-rotate .typewriter-tagline {
+  animation: none;
+}
+
+.animate-tagline-rotate .typewriter-tagline::before,
+.animate-tagline-rotate .typewriter-tagline::after {
+  animation: none;
+}
+
+/* Active tagline gets typewriter effect */
+.animate-tagline-rotate.active .typewriter-tagline::before {
+  animation: typewriterReveal 2s steps(30, end) forwards;
+}
+
+.animate-tagline-rotate.active .typewriter-tagline::after {
+  animation: 
+    typewriterCursor 2s steps(30, end) forwards,
+    blinkCursor 1s step-end 2s infinite;
 }
