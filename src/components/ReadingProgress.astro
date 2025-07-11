@@ -1,0 +1,68 @@
+---
+// Reading progress component
+---
+
+<div class="reading-progress-bar"></div>
+
+<style>
+  .reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 6px;
+    background: linear-gradient(90deg, 
+      #3b82f6 0%, 
+      #fb923c 33%, 
+      #14b8a6 66%,
+      #9333ea 100%
+    );
+    z-index: 100;
+    transition: width 0.2s ease-out;
+    box-shadow: 
+      0 2px 20px rgba(59, 130, 246, 0.8),
+      0 4px 30px rgba(59, 130, 246, 0.5);
+  }
+</style>
+
+<script>
+  // Only run on article pages
+  const article = document.querySelector('article');
+  if (!article) return;
+  
+  const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
+  if (!progressBar) return;
+  
+  // Calculate progress on scroll
+  const updateProgress = () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    
+    // Account for the fact that you can't scroll past documentHeight - windowHeight
+    const scrollableHeight = documentHeight - windowHeight;
+    const progress = (scrollTop / scrollableHeight) * 100;
+    
+    // Update progress bar width
+    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+  };
+  
+  // Throttle scroll events for performance
+  let ticking = false;
+  const handleScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateProgress();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+  
+  // Listen for scroll events
+  window.addEventListener('scroll', handleScroll);
+  window.addEventListener('resize', updateProgress);
+  
+  // Initial update
+  updateProgress();
+</script>
