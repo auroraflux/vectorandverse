@@ -24,51 +24,57 @@
 </style>
 
 <script>
-  // Wait for DOM to be ready
-  document.addEventListener('DOMContentLoaded', () => {
+  function initProgressBar() {
     // Only run on article pages
     const article = document.querySelector('article');
     if (!article) return;
     
+    // Remove any existing progress bar
+    const existingBar = document.querySelector('.reading-progress-bar');
+    if (existingBar) existingBar.remove();
+    
     // Create progress bar element
-    let progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
-    if (!progressBar) {
-      progressBar = document.createElement('div');
-      progressBar.className = 'reading-progress-bar';
-      document.body.appendChild(progressBar);
-    }
-  
-  // Calculate progress on scroll
-  const updateProgress = () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
+    const progressBar = document.createElement('div');
+    progressBar.className = 'reading-progress-bar';
+    document.body.appendChild(progressBar);
     
-    // Account for the fact that you can't scroll past documentHeight - windowHeight
-    const scrollableHeight = documentHeight - windowHeight;
-    const progress = (scrollTop / scrollableHeight) * 100;
+    // Calculate progress on scroll
+    const updateProgress = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Account for the fact that you can't scroll past documentHeight - windowHeight
+      const scrollableHeight = documentHeight - windowHeight;
+      const progress = (scrollTop / scrollableHeight) * 100;
+      
+      // Update progress bar width
+      progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    };
     
-    // Update progress bar width
-    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
-  };
+    // Throttle scroll events for performance
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', updateProgress);
+    
+    // Initial update
+    updateProgress();
+  }
+
+  // Initialize on page load
+  initProgressBar();
   
-  // Throttle scroll events for performance
-  let ticking = false;
-  const handleScroll = () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updateProgress();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  };
-  
-  // Listen for scroll events
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('resize', updateProgress);
-  
-  // Initial update
-  updateProgress();
-  });
+  // Re-initialize on Astro page navigation
+  document.addEventListener('astro:page-load', initProgressBar);
 </script>
