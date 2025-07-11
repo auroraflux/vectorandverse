@@ -60,6 +60,10 @@ export default {
               marginTop: '1.2em',
               marginBottom: '1.2em',
             },
+            'figure': {
+              marginTop: '2rem',
+              marginBottom: '2rem',
+            },
             'li': {
               marginTop: '0.4em',
               marginBottom: '0.4em',
