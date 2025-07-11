@@ -2,9 +2,10 @@
 // Component for reading focus effect that highlights current reading area
 ---
 
-<div data-reading-focus></div>
+<!-- Empty element to ensure component is rendered -->
+<div data-reading-focus style="display: none;"></div>
 
-<style>
+<style is:global>
   /* Reading focus gradient overlay */
   .reading-focus-gradient {
     position: fixed;
@@ -130,13 +131,8 @@
 
 <script>
   function initReadingFocus() {
-    console.log('Reading focus: Initializing...');
     const article = document.querySelector('article');
-    if (!article) {
-      console.log('Reading focus: No article found');
-      return;
-    }
-    console.log('Reading focus: Article found', article);
+    if (!article) return;
     
     // Add class to enable focus mode
     article.classList.add('prose-content');
@@ -173,7 +169,6 @@
     
     // Option 2: Per-element opacity approach
     const elements = article.querySelectorAll('p, h2, h3, h4, blockquote, ul, ol, pre, .admonition');
-    console.log('Reading focus: Found elements', elements.length);
     
     // Create intersection observer
     const observerOptions = {
@@ -200,9 +195,7 @@
     let scrollEndTimer: number;
     
     function handleScroll() {
-      console.log('Reading focus: Scroll detected');
       if (!isScrolling) {
-        console.log('Reading focus: Activating effect');
         article.classList.add('reading-focus-active');
         indicator.classList.add('active');
         isScrolling = true;
