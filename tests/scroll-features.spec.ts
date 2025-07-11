@@ -26,29 +26,27 @@ test.describe('Scroll Features', () => {
     await expect(firstParagraph).toHaveClass(/revealed/);
   });
 
-  test('should transform logo on scroll', async ({ page }) => {
+  test('should show sticky header on scroll', async ({ page }) => {
     await page.goto('/');
     
-    // Check logo has transform class
-    const logo = page.locator('.hero-logo-transition');
-    await expect(logo).toHaveClass(/logo-scroll-transform/);
+    // Check sticky header is not visible initially
+    const stickyHeader = page.locator('.sticky-header');
+    await expect(stickyHeader).toHaveCount(1);
+    await expect(stickyHeader).not.toHaveClass(/visible/);
     
-    // Get initial transform
-    const initialTransform = await logo.evaluate(el => 
-      window.getComputedStyle(el).transform
-    );
+    // Get hero section height
+    const heroHeight = await page.locator('.hero-section').evaluate(el => el.offsetHeight);
     
-    // Scroll down
-    await page.evaluate(() => window.scrollBy(0, 300));
-    await page.waitForTimeout(350); // Wait for animation frame
+    // Scroll past threshold (50% of hero height)
+    await page.evaluate((height) => window.scrollBy(0, height * 0.6), heroHeight);
+    await page.waitForTimeout(350); // Wait for animation
     
-    // Get new transform
-    const scrolledTransform = await logo.evaluate(el => 
-      window.getComputedStyle(el).transform
-    );
+    // Check sticky header is now visible
+    await expect(stickyHeader).toHaveClass(/visible/);
     
-    // Verify transform has changed
-    expect(scrolledTransform).not.toBe(initialTransform);
+    // Check hero section is faded
+    const heroSection = page.locator('.hero-section');
+    await expect(heroSection).toHaveClass(/scrolled/);
   });
 
   test('should reveal multiple text elements with stagger', async ({ page }) => {
@@ -78,23 +76,30 @@ test.describe('Scroll Features', () => {
     }
   });
 
-  test('should handle logo transform cleanup on navigation', async ({ page }) => {
+  test('should handle sticky header cleanup on navigation', async ({ page }) => {
     await page.goto('/');
     
-    // Scroll down to transform logo
-    await page.evaluate(() => window.scrollBy(0, 300));
+    // Get hero height and scroll to show sticky header
+    const heroHeight = await page.locator('.hero-section').evaluate(el => el.offsetHeight);
+    await page.evaluate((height) => window.scrollBy(0, height * 0.6), heroHeight);
     await page.waitForTimeout(350);
+    
+    // Verify sticky header is visible
+    const stickyHeader = page.locator('.sticky-header');
+    await expect(stickyHeader).toHaveClass(/visible/);
     
     // Navigate to about page
     await page.click('a[href="/about"]');
     await page.waitForURL('/about');
     
+    // Sticky header should be removed
+    await expect(page.locator('.sticky-header')).toHaveCount(0);
+    
     // Navigate back
     await page.goBack();
     await page.waitForURL('/');
     
-    // Verify logo still has transform capability
-    const logo = page.locator('.hero-logo-transition');
-    await expect(logo).toHaveClass(/logo-scroll-transform/);
+    // Verify sticky header is recreated
+    await expect(page.locator('.sticky-header')).toHaveCount(1);
   });
 });

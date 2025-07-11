@@ -3,47 +3,98 @@
 ---
 
 <style>
-  /* Logo scroll transformation styles */
-  .logo-scroll-transform {
+  /* Sticky header styles */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: rgba(249, 250, 251, 0.95);
+    backdrop-filter: blur(8px);
+    transform: translateY(-100%);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
+    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  }
+
+  .sticky-header.visible {
+    transform: translateY(0);
+  }
+
+  .sticky-header-content {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sticky-logo {
+    font-size: 2rem;
+    color: rgb(17, 24, 39);
+    text-decoration: none;
+    transition: transform 0.3s;
+  }
+
+  .sticky-logo:hover {
+    transform: translateX(4px);
+  }
+
+  /* Hero logo fade effect */
+  .hero-section {
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hero-section.scrolled {
+    opacity: 0;
   }
 </style>
 
 <script>
   function initLogoTransform() {
-    const logo = document.querySelector('.hero-logo-transition');
-    if (!logo) return;
+    // Only run on homepage
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) return;
 
-    // Add transform class
-    logo.classList.add('logo-scroll-transform');
+    // Create sticky header
+    const stickyHeader = document.createElement('div');
+    stickyHeader.className = 'sticky-header';
+    stickyHeader.innerHTML = `
+      <div class="sticky-header-content">
+        <a href="/" class="sticky-logo group no-underline">
+          <span style="font-weight: 900;">kilo</span><span style="font-weight: 900; font-style: italic;">what!?</span>
+        </a>
+        <a href="/about" class="text-sm text-gray-600 hover:text-gray-900 transition-all duration-300 hover:translate-x-1" style="font-weight: 500;">
+          About
+        </a>
+      </div>
+    `;
+    document.body.appendChild(stickyHeader);
 
     let lastScrollY = 0;
     let ticking = false;
 
-    function updateLogoTransform() {
+    function updateHeader() {
       const scrollY = window.scrollY;
-      const maxScroll = 500; // Maximum scroll distance for effect
-      
-      // Calculate progress from 0 to 1
-      const progress = Math.min(scrollY / maxScroll, 1);
-      
-      // Scale from 1 to 0.8
-      const scale = 1 - (progress * 0.2);
-      
-      // Rotate based on scroll direction and position
-      const rotation = progress * 5 * (scrollY > lastScrollY ? 1 : -1);
-      
-      // Apply transformation
-      logo.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
-      
+      const heroHeight = heroSection.offsetHeight;
+      const threshold = heroHeight * 0.5; // Show sticky header when scrolled past 50% of hero
+
+      if (scrollY > threshold) {
+        stickyHeader.classList.add('visible');
+        heroSection.classList.add('scrolled');
+      } else {
+        stickyHeader.classList.remove('visible');
+        heroSection.classList.remove('scrolled');
+      }
+
       lastScrollY = scrollY;
       ticking = false;
     }
 
     function requestTick() {
       if (!ticking) {
-        window.requestAnimationFrame(updateLogoTransform);
+        window.requestAnimationFrame(updateHeader);
         ticking = true;
       }
     }
@@ -52,11 +103,12 @@
     window.addEventListener('scroll', requestTick, { passive: true });
 
     // Initial update
-    updateLogoTransform();
+    updateHeader();
 
     // Clean up on page navigation
     document.addEventListener('astro:before-swap', () => {
       window.removeEventListener('scroll', requestTick);
+      stickyHeader?.remove();
     });
   }
 
