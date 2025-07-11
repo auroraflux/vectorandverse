@@ -12,6 +12,9 @@ series: LLM Explained
 seriesOrder: 1
 ---
 
+import Stepper from '../../components/Stepper.astro';
+import Step from '../../components/Step.astro';
+
 <div class="admonition admonition-note">
   <strong class="admonition-title">Hold up a sec.</strong>
   <p>I absolutely <strong>love</strong> AI. You would <em>not</em> think that, once you read what you're about to read. Worry not, I will have a post later detailing the sheer amazing things that AI <em>can</em> do. This post is just meant to keep you grounded on what AI is and what AI is not.</p>
@@ -39,7 +42,7 @@ Imagine if you had to break down all of human language into tiny, manageable pie
 
 Tokens can be thought of as the Lego blocks of language. Some tokens are full words ("cat"), some are parts of words ("ing" or "un"), and some are even single characters or punctuation marks. When you hit the character limit on ChatGPT, you're not hitting a word count. You're hitting a token count.
 
-Let me make this stupidly simple: When you read "peanutbutterandjelly", your brain automatically breaks it into "peanut", "butter", "and", and "jelly".' Without even trying. That's basically tokenization, except the AI does it with rigid mathematical rules rather than actual understanding. You can't even choose *not* to see those separate words now that I've pointed them out. Go ahead, try to see just one continuous string of letters. Your brain refuses to cooperate.
+Let me make this stupidly simple: When you read "peanutbutterandjelly", your brain automatically breaks it into "peanut", "butter", "and", and "jelly".' Without even trying. That's basically tokenization, except the AI does it with rigid mathematical rules rather than actual understanding. You can't even choose ***not*** to see those separate words now that I've pointed them out. Go ahead, try to see just one continuous string of letters. Your brain refuses to cooperate.
 
 > Imagine trying not to understand spoken English once you know it, or attempting to un-hear a song lyric. Your neural pathways have already carved those word boundaries, and they're not taking requests to temporarily shut down their language processing department.
 
@@ -77,62 +80,31 @@ At the core is a neural network that's basically mapping the universe of languag
 
 Let me walk you through the absolutely ridiculous calculation happening when you ask an LLM something, using our trusty cooking show metaphor:
 
-<ol class="stepper">
-  <li>
-    <div class="step-wrapper">
-      <div class="step-icon">1</div>
-      <div class="step-content">
-        <strong class="step-title">It tokenizes your prompt.</strong>
-        <p>The AI acts as a prep cook, chopping your input into manageable ingredients (tokens). Your long question gets diced into word chunks that the system can actually process.</p>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="step-wrapper">
-      <div class="step-icon">2</div>
-      <div class="step-content">
-        <strong class="step-title">It converts each token to its embedding.</strong>
-        <p>Each ingredient gets sorted into its proper place in the pantry. Words and phrases are organized based on their meaning and relationship to other words.</p>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="step-wrapper">
-      <div class="step-icon">3</div>
-      <div class="step-content">
-        <strong class="step-title">It passes these through layer after layer of its neural network.</strong>
-        <p>These ingredients travel through various cooking stations in our kitchen, getting processed, combined, and transformed at each step.</p>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="step-wrapper">
-      <div class="step-icon">4</div>
-      <div class="step-content">
-        <strong class="step-title">For each possible next token, it calculates "how likely would this appear next?"</strong>
-        <p>The head chef tastes the dish-in-progress and considers every possible next ingredient. "Would adding salt work best here? Or maybe basil? What would complete this flavor profile?"</p>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="step-wrapper">
-      <div class="step-icon">5</div>
-      <div class="step-content">
-        <strong class="step-title">It picks one.</strong>
-        <p>The chef selects the ingredient with the highest probability of making a delicious dish, with occasional wild cards thrown in to keep things interesting. "Let's go with this option, but with a small unexpected twist."</p>
-      </div>
-    </div>
-  </li>
-  <li>
-    <div class="step-wrapper">
-      <div class="step-icon">6</div>
-      <div class="step-content">
-        <strong class="step-title">Then it does the whole thing again.</strong>
-        <p>That new ingredient gets added to the pot, and the entire tasting and selection process repeats from the beginning. The chef continuously adds one ingredient at a time until the dish is complete.</p>
-      </div>
-    </div>
-  </li>
-</ol>
+<Stepper>
+  <Step title="It tokenizes your prompt." step={1} state="current">
+    The AI acts as a prep cook, chopping your input into manageable ingredients (tokens). Your long question gets diced into word chunks that the system can actually process.
+  </Step>
+  
+  <Step title="It converts each token to its embedding." step={2} state="current">
+    Each ingredient gets sorted into its proper place in the pantry. Words and phrases are organized based on their meaning and relationship to other words.
+  </Step>
+  
+  <Step title="It passes these through layer after layer of its neural network." step={3} state="current">
+    These ingredients travel through various cooking stations in our kitchen, getting processed, combined, and transformed at each step.
+  </Step>
+  
+  <Step title="For each possible next token, it calculates 'how likely would this appear next?'" step={4} state="current">
+    The head chef tastes the dish-in-progress and considers every possible next ingredient. "Would adding salt work best here? Or maybe basil? What would complete this flavor profile?"
+  </Step>
+  
+  <Step title="It picks one." step={5} state="current">
+    The chef selects the ingredient with the highest probability of making a delicious dish, with occasional wild cards thrown in to keep things interesting. "Let's go with this option, but with a small unexpected twist."
+  </Step>
+  
+  <Step title="Then it does the whole thing again." step={6} state="current">
+    That new ingredient gets added to the pot, and the entire tasting and selection process repeats from the beginning. The chef continuously adds one ingredient at a time until the dish is complete.
+  </Step>
+</Stepper>
 
 This entire insane process happens in milliseconds, thousands of times over, as the text spills out onto your screen.
 

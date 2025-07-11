@@ -42,6 +42,36 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
         font-display: swap;
       }
       
+      /* Light Italic for taglines */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-LightItalic.woff2') format('woff2'),
+             url('/fonts/Satoshi-LightItalic.woff') format('woff');
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+      }
+      
+      /* Medium Italic for intro text */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-MediumItalic.woff2') format('woff2'),
+             url('/fonts/Satoshi-MediumItalic.woff') format('woff');
+        font-weight: 500;
+        font-style: italic;
+        font-display: swap;
+      }
+      
+      /* Bold Italic for body text emphasis */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-BoldItalic.woff2') format('woff2'),
+             url('/fonts/Satoshi-BoldItalic.woff') format('woff');
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+      }
+      
       /* Black Italic for the logo */
       @font-face {
         font-family: 'Satoshi';

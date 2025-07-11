@@ -30,46 +30,101 @@ const postsWithImages = posts.map(post => ({
       </div>
     </div>
     
-    {/* About link in top right */}
-    <div class="fixed top-6 right-6 z-30">
-      <a href="/about" class="text-sm text-gray-600 hover:text-gray-900 transition-all duration-300 hover:translate-x-1" 
-         style="font-weight: 500;">
-        About
-      </a>
-    </div>
     
     {/* Hero Section - Logo-centric design */}
-    <section class="relative py-20 md:py-28 flex items-center justify-center min-h-[50vh] hero-section">
+    <section class="relative py-20 md:py-28 flex items-center justify-center min-h-[50vh] hero-section overflow-hidden">
+      {/* Animated grid pulses for hero only */}
+      <div class="absolute inset-0 -z-10" style="top: -80px; left: 0; right: 0; bottom: -80px;">
+        <div class="grid-pulse-container absolute inset-0">
+          <div class="pulse pulse-h1"></div>
+          <div class="pulse pulse-h2"></div>
+          <div class="pulse pulse-h3"></div>
+          <div class="pulse pulse-h4"></div>
+          <div class="pulse pulse-h5"></div>
+          <div class="pulse pulse-h6"></div>
+          <div class="pulse pulse-h7"></div>
+          <div class="pulse pulse-h8"></div>
+          <div class="pulse pulse-v1"></div>
+          <div class="pulse pulse-v2"></div>
+          <div class="pulse pulse-v3"></div>
+          <div class="pulse pulse-v4"></div>
+          <div class="pulse pulse-v5"></div>
+          <div class="pulse pulse-v6"></div>
+          <div class="pulse pulse-v7"></div>
+          <div class="pulse pulse-v8"></div>
+        </div>
+      </div>
+      
       <div class="relative z-10 text-center">
-        {/* Large animated logo with typewriter effect */}
-        <h1 class="text-7xl md:text-8xl lg:text-9xl mb-8 color-morph hero-logo-transition" 
-            style="letter-spacing: -0.04em; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3);">
-          <span class="typewriter-effect"><span class="char" style="font-weight: 900;">k</span><span class="char" style="font-weight: 900;">i</span><span class="char" style="font-weight: 900;">l</span><span class="char" style="font-weight: 900;">o</span><span class="char" style="font-weight: 900; font-style: italic;">w</span><span class="char" style="font-weight: 900; font-style: italic;">h</span><span class="char" style="font-weight: 900; font-style: italic;">a</span><span class="char" style="font-weight: 900; font-style: italic;">t</span><span class="char" style="font-weight: 900; font-style: italic;">!</span><span class="char" style="font-weight: 900; font-style: italic;">?</span></span>
+        {/* Large static logo */}
+        <h1 class="text-[7rem] md:text-[12rem] lg:text-[13.5rem] mb-4 color-morph hero-logo-transition" 
+            style="letter-spacing: -0.04em; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3); line-height: 0.9;">
+          <span style="font-weight: 600;">kilo</span><span style="font-weight: 900; font-style: italic;">what!?</span>
         </h1>
         
         {/* Rotating taglines container */}
-        <div class="relative h-8 md:h-10 overflow-hidden">
-          {/* Define your taglines here - easy to change! */}
-          {[
-            "snark meets optimism",
-            "tech criticism with a pulse",
-            "debugging the human condition",
-            "optimism despite evidence",
-            "ctrl+alt+believe"
-          ].map((tagline, index) => (
-            <p 
-              key={index}
-              class="absolute inset-0 text-lg md:text-xl text-gray-600 animate-tagline-rotate"
-              style={`font-weight: 500; animation-delay: ${index * 5}s;`}
-            >
-              <span class="typewriter-tagline">{tagline}</span>
-            </p>
-          ))}
+        <div class="relative h-14 md:h-16 overflow-visible flex items-center justify-center">
+          <div id="tagline-container" class="relative text-4xl md:text-6xl text-gray-400" style="font-weight: 300; font-variation-settings: 'wght' 300; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);">
+            <!-- Content dynamically inserted by JavaScript -->
+          </div>
+        </div>
+        
+        {/* Snarky about section - closer to tagline */}
+        <div class="mt-12 md:mt-16 text-center max-w-2xl mx-auto px-6">
+          {/* Profile Image */}
+          <div class="mb-8 flex justify-center">
+            <div class="relative group">
+              <img 
+                src="/images/hk.png" 
+                alt="Harsha - Digital native, analog soul"
+                class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover transition-all duration-300 group-hover:scale-105"
+                style="filter: grayscale(20%); 
+                       box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 
+                                   inset 0 -2px 4px rgba(255,255,255,0.5),
+                                   0 1px 2px rgba(255,255,255,0.7);
+                       border: 2px solid rgba(255,255,255,0.3);"
+              />
+              <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          </div>
+
+          <p class="text-xl text-gray-600 leading-relaxed" style="font-weight: 500;">
+            Digital <span class="native-emphasis">native</span>. Analog <span class="soul-emphasis">soul</span>.
+          </p>
+          
+          {/* Snarky intro paragraph */}
+          <p class="text-xl text-gray-600 leading-relaxed mt-6 mb-4" style="font-weight: 500; font-style: italic; font-variation-settings: 'wght' 500;">
+            I'm Harsha. I spend my days making sure AI clusters don't catch fire while simultaneously feeding them enough data to ensure they eventually will. 
+            It's like being a zookeeper, but the animals are smarter than you and they know it.
+          </p>
+          
+          <p class="text-xl text-gray-600 leading-relaxed mt-4" style="font-weight: 500;">
+            My hobby is writing about tech with the enthusiasm of someone who's seen enough to know better, but hopes anyway.
+          </p>
+        </div>
+        
+        {/* About link - minimal style */}
+        <div class="mt-6 md:mt-8 text-center">
+          <a href="/about" 
+             class="about-button inline-block text-sm text-gray-500 hover:text-gray-700 transition-all duration-300 px-6 py-2 rounded-full"
+             style="font-weight: 500; letter-spacing: 0.05em;">
+            <span>More About This Place</span>
+          </a>
         </div>
       </div>
     </section>
     
-    <main class="max-w-7xl mx-auto px-6 pb-24">
+    <main class="max-w-7xl mx-auto px-6 pb-24 mt-2">
+      {/* Latest posts indicator */}
+      <div class="mb-6 text-center">
+        <p class="text-xl uppercase tracking-[0.3em] text-gray-500 animate-fade-in-up" style="font-weight: 600; animation-delay: 0.5s;">
+          Latest Thoughts
+        </p>
+        <div class="mt-4 text-gray-400 text-2xl animate-enhanced-bounce" style="font-weight: 300;">
+          ↓
+        </div>
+      </div>
+      
       <div class="space-y-8">
         {postsWithImages.map((post, index) => {
           const formattedDate = new Intl.DateTimeFormat('en-US', {
@@ -78,8 +133,11 @@ const postsWithImages = posts.map(post => ({
             day: 'numeric'
           }).format(post.data.date);
           
-          const monthYear = new Intl.DateTimeFormat('en-US', {
-            month: 'short',
+          const month = new Intl.DateTimeFormat('en-US', {
+            month: 'short'
+          }).format(post.data.date).toUpperCase();
+          
+          const year = new Intl.DateTimeFormat('en-US', {
             year: 'numeric'
           }).format(post.data.date);
           
@@ -89,13 +147,13 @@ const postsWithImages = posts.map(post => ({
           
           return (
             <article class="group relative">
-              <a href={`/blog/${post.slug}`} class="block relative overflow-hidden h-[400px] md:h-[500px] no-underline" data-has-image={post.heroImageUrl ? "true" : "false"}>
+              <a href={`/blog/${post.slug}`} class="block relative overflow-hidden h-[400px] md:h-[500px] no-underline rounded-[8px]" data-has-image={post.heroImageUrl ? "true" : "false"}>
                 {/* Background Image or Gradient */}
                 {post.heroImageUrl ? (
                   <img 
                     src={post.heroImageUrl} 
                     alt={post.data.heroImageAlt || post.data.title}
-                    class="absolute inset-0 w-full h-full object-cover filter saturate-0 transition-all duration-700 group-hover:saturate-100 group-hover:scale-105"
+                    class="absolute inset-0 w-full h-full object-cover hero-image-transition"
                     loading="lazy"
                   />
                 ) : (
@@ -103,19 +161,24 @@ const postsWithImages = posts.map(post => ({
                 )}
                 
                 {/* Gradient Overlay for readability */}
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-all duration-500 group-hover:from-black/70 group-hover:via-black/20"></div>
+                <div class="absolute inset-0 transition-all duration-500" style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.75) 10%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.05) 90%, rgba(0,0,0,0) 100%);"></div>
                 
                 {/* Content Container */}
                 <div class="relative z-10 h-full p-8 md:p-12 lg:p-16 flex flex-col justify-end">
                   <div class="max-w-4xl">
                     {/* Date Display */}
-                    <div class="flex items-baseline gap-3 mb-6">
-                      <span class="text-5xl md:text-6xl text-white/90 leading-none" style="font-weight: 300; font-feature-settings: 'tnum'; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3), 0 4px 30px rgba(0,0,0,0.7);">
-                        {day}
-                      </span>
-                      <span class="text-sm uppercase tracking-wider text-white/70" style="font-weight: 500; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3), 0 4px 30px rgba(0,0,0,0.7);">
-                        {monthYear}
-                      </span>
+                    <div class="mb-6">
+                      <div class="inline-flex items-baseline text-white/90 text-2xl md:text-3xl leading-none" style="text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3), 0 4px 30px rgba(0,0,0,0.7);">
+                        <span style="font-weight: 800; font-feature-settings: 'tnum'; font-variation-settings: 'wght' 800;">
+                          {day}
+                        </span>
+                        <span class="uppercase" style="font-weight: 300; letter-spacing: -0.05em; font-variation-settings: 'wght' 300;">
+                          {month}
+                        </span>
+                        <span style="font-weight: 800; font-feature-settings: 'tnum'; font-variation-settings: 'wght' 800;">
+                          {year}
+                        </span>
+                      </div>
                     </div>
                     
                     {/* Title */}
@@ -146,8 +209,127 @@ const postsWithImages = posts.map(post => ({
 </Layout>
 
 <script>
-  import typewriterScript from '../scripts/typewriter-taglines.js?raw';
-  const script = document.createElement('script');
-  script.textContent = typewriterScript;
-  document.body.appendChild(script);
+  // Simple tagline rotation with typewriter effect
+  const taglines = [
+    "git commit -m 'still believing'",
+    "segfault optimism since 2024",
+    "try { hope() } catch { blog() }",
+    "npm install faith --save-dev",
+    "sudo make me believe",
+    "undefined is not a feeling",
+    "console.log('everything is fine')",
+    "AI won't replace my anxiety",
+    "docker run -it hope:latest",
+    "// TODO: fix everything",
+    "merge conflicts with reality",
+    "stack overflow but make it poetry",
+    "kubernetes for my emotions",
+    "cached optimism (expires: never)",
+    "rm -rf doubts 2>/dev/null",
+    "404: pessimism not found",
+    "debugging life in production",
+    "ctrl+z doesn't work here",
+    "async/await the apocalypse",
+    "<div class='silver-lining' />"
+  ];
+  
+  // Fisher-Yates shuffle algorithm
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+  
+  function initTaglines() {
+    const container = document.getElementById('tagline-container');
+    if (!container) return;
+    
+    // Clear any existing content
+    container.innerHTML = '';
+    
+    // Cancel any existing animations
+    if (window.taglineAnimation) {
+      clearInterval(window.taglineAnimation.typeInterval);
+      clearInterval(window.taglineAnimation.eraseInterval);
+      window.taglineAnimation.timeouts.forEach(t => clearTimeout(t));
+    }
+    
+    // Initialize animation state
+    window.taglineAnimation = {
+      typeInterval: null,
+      eraseInterval: null,
+      timeouts: []
+    };
+    
+    const shuffledTaglines = shuffleArray(taglines);
+    let currentIndex = 0;
+    
+    function updateDisplay(text, showCursor = true) {
+      if (showCursor) {
+        container.innerHTML = `<span>${text}</span><span class="tagline-cursor text-gray-400">│</span>`;
+      } else {
+        container.innerHTML = `<span>${text}</span>`;
+      }
+    }
+    
+    function typeTagline() {
+      const tagline = shuffledTaglines[currentIndex];
+      let charIndex = 0;
+      
+      updateDisplay('');
+      
+      window.taglineAnimation.typeInterval = setInterval(() => {
+        if (charIndex < tagline.length) {
+          updateDisplay(tagline.substring(0, charIndex + 1));
+          charIndex++;
+        } else {
+          clearInterval(window.taglineAnimation.typeInterval);
+          
+          const timeout = setTimeout(() => {
+            eraseTagline();
+          }, 3000);
+          window.taglineAnimation.timeouts.push(timeout);
+        }
+      }, 70);
+    }
+    
+    function eraseTagline() {
+      let text = shuffledTaglines[currentIndex];
+      let charIndex = text.length;
+      
+      window.taglineAnimation.eraseInterval = setInterval(() => {
+        if (charIndex > 0) {
+          charIndex--;
+          updateDisplay(text.substring(0, charIndex));
+        } else {
+          clearInterval(window.taglineAnimation.eraseInterval);
+          currentIndex = (currentIndex + 1) % shuffledTaglines.length;
+          
+          const timeout = setTimeout(() => {
+            typeTagline();
+          }, 500);
+          window.taglineAnimation.timeouts.push(timeout);
+        }
+      }, 50);
+    }
+    
+    // Start animation
+    typeTagline();
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTaglines);
+  } else {
+    initTaglines();
+  }
+  
+  // Re-initialize on Astro navigation
+  document.addEventListener('astro:page-load', () => {
+    setTimeout(initTaglines, 100);
+  });
 </script>
+
