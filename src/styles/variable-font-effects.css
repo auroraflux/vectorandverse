@@ -3,11 +3,30 @@
   /* Interactive font weight on links */
   a {
     font-variation-settings: 'wght' 400;
-    transition: font-variation-settings 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: font-variation-settings 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                letter-spacing 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    letter-spacing: normal;
   }
   
   a:hover, a:focus-visible {
-    font-variation-settings: 'wght' 550;
+    font-variation-settings: 'wght' 500;
+    /* Slightly tighten spacing to prevent reflow */
+    letter-spacing: -0.01em;
+  }
+  
+  /* Prose links need special handling to prevent reflow in continuous text */
+  .prose a {
+    display: inline-block;
+    font-variation-settings: 'wght' 500;
+    transition: font-variation-settings 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center center;
+  }
+  
+  .prose a:hover, .prose a:focus-visible {
+    font-variation-settings: 'wght' 600;
+    /* Use transform instead of letter-spacing for inline text */
+    transform: scaleX(0.98);
   }
   
   /* Interactive weight for nav links */

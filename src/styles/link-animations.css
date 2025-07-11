@@ -32,11 +32,15 @@ a:not(.no-underline):focus::after {
 /* Special styling for article links */
 article a:not(.no-underline) {
   color: rgb(59, 130, 246);
-  font-weight: 500;
 }
 
 article a:not(.no-underline):hover {
   color: rgb(251, 146, 60);
+}
+
+/* Ensure underline works with inline-block links */
+.prose a:not(.no-underline)::after {
+  bottom: -4px; /* Slightly lower for inline-block */
 }
 
 /* Navigation links get subtle underline */
