@@ -5,6 +5,12 @@ a:not(.no-underline) {
   transition: color 0.3s ease;
 }
 
+/* Ensure prose links are positioned for pseudo-elements */
+.prose a:not(.no-underline) {
+  position: relative;
+  display: inline;
+}
+
 /* Gradient underline using pseudo-element */
 a:not(.no-underline)::after {
   content: '';
@@ -40,8 +46,16 @@ article a:not(.no-underline):hover,
   color: rgb(251, 146, 60);
 }
 
+/* Override Tailwind prose underline styles */
+.prose a {
+  text-decoration: none !important;
+  text-underline-offset: 0 !important;
+}
+
 /* Make gradient underline more prominent for prose links */
 .prose a:not(.no-underline)::after {
+  content: '' !important;
+  position: absolute !important;
   background: linear-gradient(
     90deg,
     rgba(59, 130, 246, 1),
@@ -50,8 +64,16 @@ article a:not(.no-underline):hover,
     rgba(135, 165, 113, 0.9),
     rgba(20, 184, 166, 1)
   );
-  height: 2.5px;
-  bottom: -3px;
+  height: 2.5px !important;
+  bottom: -3px !important;
+  left: 50% !important;
+  width: 0 !important;
+  transform: translateX(-50%) !important;
+  transition: width 0.3s ease !important;
+}
+
+.prose a:not(.no-underline):hover::after {
+  width: 100% !important;
 }
 
 
