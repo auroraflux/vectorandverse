@@ -92,35 +92,35 @@
   }
   
   .admonition-note::before {
-    @apply bg-blue-400;
+    @apply bg-slate-400;
   }
   
   .admonition-note .admonition-title {
-    @apply text-blue-600;
+    @apply text-slate-600;
   }
   
   .admonition-warning::before {
-    @apply bg-amber-400;
+    @apply bg-stone-400;
   }
   
   .admonition-warning .admonition-title {
-    @apply text-amber-600;
+    @apply text-stone-600;
   }
   
   .admonition-tip::before {
-    @apply bg-green-500;
+    @apply bg-gray-500;
   }
   
   .admonition-tip .admonition-title {
-    @apply text-green-700;
+    @apply text-gray-700;
   }
   
   .admonition-danger::before {
-    @apply bg-red-500;
+    @apply bg-zinc-500;
   }
   
   .admonition-danger .admonition-title {
-    @apply text-red-600;
+    @apply text-zinc-700;
   }
   
   /* Remove bottom margin from last paragraph in admonitions */

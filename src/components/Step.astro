@@ -40,7 +40,7 @@ const { title, step, state = 'inactive' } = Astro.props;
   }
   
   .step[data-state="completed"]:not(:last-child)::after {
-    background-color: #3b82f6;
+    background-color: #64748b;
   }
   
   .step-icon {
@@ -61,14 +61,14 @@ const { title, step, state = 'inactive' } = Astro.props;
   }
   
   .step[data-state="current"] .step-icon {
-    background-color: #dbeafe;
-    border-color: #3b82f6;
-    color: #3b82f6;
+    background-color: #f1f5f9;
+    border-color: #64748b;
+    color: #475569;
   }
   
   .step[data-state="completed"] .step-icon {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
+    background-color: #64748b;
+    border-color: #64748b;
   }
   
   .step-number {
@@ -95,7 +95,7 @@ const { title, step, state = 'inactive' } = Astro.props;
   }
   
   .step-title {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 600;
     text-transform: lowercase;
     letter-spacing: -0.02em;
@@ -118,7 +118,7 @@ const { title, step, state = 'inactive' } = Astro.props;
   
   .step-description {
     color: #6b7280;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
   }
 </style>
