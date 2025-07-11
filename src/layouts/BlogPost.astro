@@ -39,7 +39,7 @@ const day = new Intl.DateTimeFormat('en-US', {
   <Header variant="article" />
   <ReadingProgress />
   <ScrollTextReveal />
-  <ReadingFocus />
+  {/* <ReadingFocus /> - Temporarily disabled */}
   <div class="fade-in relative">
     {/* Animated grid background that matches the homepage */}
     <div class="fixed inset-0 -z-10">
@@ -111,7 +111,7 @@ const day = new Intl.DateTimeFormat('en-US', {
       )}
       
       {/* Content Container */}
-      <div class="relative z-10 w-full pb-12 md:pb-16 lg:pb-20">
+      <div class="relative z-10 w-full pt-20 md:pt-0 pb-12 md:pb-16 lg:pb-20">
         <div class="max-w-3xl mx-auto px-6">
           {/* Date Display */}
           <div class="mb-8">
@@ -129,7 +129,7 @@ const day = new Intl.DateTimeFormat('en-US', {
           </div>
           
           {/* Title */}
-          <h1 class="text-5xl md:text-6xl lg:text-7xl text-white leading-[0.9] mb-6" 
+          <h1 class="text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] md:leading-[0.9] mb-6" 
               style="font-weight: 850; letter-spacing: -0.04em; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3), 0 4px 30px rgba(0,0,0,0.7);">
             {title}
           </h1>
