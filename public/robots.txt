@@ -1,0 +1,8 @@
+# https://kilowhat.harsha.run/robots.txt
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://kilowhat.harsha.run/sitemap-index.xml
