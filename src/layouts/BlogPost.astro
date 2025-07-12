@@ -300,28 +300,3 @@ const day = new Intl.DateTimeFormat('en-US', {
   }
 </style>
 
-<script>
-  // Add lightbox functionality to all images in the article
-  document.addEventListener('astro:page-load', () => {
-    const article = document.querySelector('article');
-    if (!article) return;
-    
-    // Find all images in the article
-    const images = article.querySelectorAll('img');
-    
-    images.forEach((img) => {
-      // Skip if already processed
-      if (img.dataset.lightbox === 'true') return;
-      
-      // Add lightbox attributes
-      img.dataset.lightbox = 'true';
-      img.dataset.fullSrc = img.src;
-      
-      // Add lazy loading
-      img.loading = 'lazy';
-      
-      // Ensure proper styling
-      img.classList.add('w-full', 'rounded-lg', 'shadow-lg', 'cursor-zoom-in', 'hover:shadow-xl', 'transition-shadow', 'duration-300');
-    });
-  });
-</script>

@@ -156,6 +156,49 @@ export class MyComponent extends BaseComponent<HTMLDivElement> {
 - New blog posts go in `src/content/blog/` as MDX files
 - Follow the architecture in `docs/ARCHITECTURE.md`
 
+## Adding Images to Blog Posts
+
+### Quick Start
+Simply use standard markdown image syntax in your MDX files:
+```markdown
+![Alt text describing the image](/images/blog/post-slug/image-name.png)
+```
+
+### How It Works
+- **Automatic Lightbox**: All images automatically get click-to-open lightbox functionality
+- **No Special Components Needed**: Just use regular markdown syntax
+- **Touch Gestures**: Swipe to close, pinch to zoom on mobile devices
+- **Keyboard Support**: Press ESC to close the lightbox
+
+### Image Storage
+Place your images in: `public/images/blog/[post-slug]/`
+
+Example for a post called "my-awesome-post":
+```
+public/
+  images/
+    blog/
+      my-awesome-post/
+        hero-image.png
+        diagram-1.png
+        screenshot.jpg
+```
+
+### Best Practices
+1. **Use descriptive alt text** for accessibility
+2. **Optimize images** before uploading (use WebP when possible)
+3. **Name images descriptively** (not IMG_1234.png)
+4. **Keep images under 2MB** for performance
+
+### Hero Images
+For the main hero image, set it in the frontmatter:
+```yaml
+---
+heroImage: /images/blog/post-slug/hero.png
+heroImageAlt: Description of the hero image
+---
+```
+
 ## Deployment Notes
 - Site builds to `dist/` for static hosting
 - All assets are optimized during build
