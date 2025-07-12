@@ -41,4 +41,15 @@
 - **file, directory, structure** → `reference/file-structure.md`
 - **font, typography, weight** → `reference/fonts.md`
 
+### MCP Tool Keywords
+- **debug complex, trace issue, root cause** → Use `mcp__zen__debug`
+- **review code, code quality, pre-commit** → Use `mcp__zen__codereview`
+- **plan feature, break down, complex task** → Use `mcp__zen__planner`
+- **generate tests, test suite, edge cases** → Use `mcp__zen__testgen`
+- **refactor, code smell, improve code** → Use `mcp__zen__refactor`
+- **security audit, OWASP, vulnerabilities** → Use `mcp__zen__secaudit`
+- **document code, generate docs** → Use `mcp__zen__docgen`
+- **visual test, screenshot, browser test** → Use Playwright MCP
+- **find pattern, search code, similar** → Use Context7 MCP
+
 **Usage**: When user mentions keywords, go directly to the mapped file instead of searching multiple files.

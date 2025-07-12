@@ -50,4 +50,28 @@
 3. Add `await page.pause()` in tests
 4. See specific error in test output
 
+## When debugging complex issues
+1. Use `mcp__zen__debug` for systematic root cause analysis
+2. Provide error messages and symptoms
+3. Let it trace through code systematically
+4. Follow its investigation steps
+
+## When planning major features
+1. Use `mcp__zen__planner` to break down complexity
+2. Get step-by-step implementation plan
+3. Identify dependencies and risks early
+4. Branch strategies for different approaches
+
+## When reviewing code before commit
+1. Use `mcp__zen__codereview` for comprehensive analysis
+2. Catches security issues, performance problems
+3. Suggests improvements and best practices
+4. Run BEFORE `git commit`
+
+## When generating tests
+1. Use `mcp__zen__testgen` for edge case coverage
+2. Specify which components/functions to test
+3. Generates Playwright tests following project patterns
+4. Includes happy path and failure scenarios
+
 **Remember**: Always use port 4322 for Claude Code operations

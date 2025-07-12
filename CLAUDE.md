@@ -60,3 +60,79 @@ tests/           # Playwright tests
 - Images: `/public/images/blog/[post-slug]/`
 - Always check existing code before adding features
 - Run smoke test before considering changes complete
+
+## MCP Server Usage for Kilowhat
+
+### 🧠 Zen MCP (Complex Analysis & Workflows)
+**When to use**:
+- **Debugging mysterious issues**: `mcp__zen__debug` - traces root causes systematically
+- **Code review before commits**: `mcp__zen__codereview` - comprehensive quality analysis
+- **Planning new features**: `mcp__zen__planner` - breaks down complex tasks
+- **Refactoring opportunities**: `mcp__zen__refactor` - identifies improvements
+- **Documentation generation**: `mcp__zen__docgen` - creates comprehensive docs
+- **Test generation**: `mcp__zen__testgen` - creates test suites with edge cases
+- **Security audits**: `mcp__zen__secaudit` - OWASP compliance checks
+- **Pre-commit validation**: `mcp__zen__precommit` - ensures quality before commits
+
+**Example triggers**:
+- "Debug why lightbox isn't working" → Use `debug`
+- "Review my component changes" → Use `codereview`
+- "Generate tests for new feature" → Use `testgen`
+
+### 🎭 Playwright MCP (Browser Testing)
+**When to use**:
+- Visual regression testing
+- Cross-browser compatibility checks
+- Automated screenshot capture
+- E2E test recording
+
+**Example triggers**:
+- "Test if blog looks good on mobile"
+- "Capture screenshots of all pages"
+- "Record user interaction test"
+
+### 🔍 Context7 MCP (Semantic Search)
+**When to use**:
+- Finding similar code patterns across codebase
+- Searching for implementation examples
+- Context-aware code discovery
+
+**Example triggers**:
+- "Find all places using EventManager pattern"
+- "Show similar component implementations"
+
+### 💻 IDE MCP (VS Code Integration)
+**When to use**:
+- Getting TypeScript diagnostics
+- Checking for linting errors
+- Real-time code analysis
+
+**Already active**: Automatically provides diagnostics
+
+### 🖥️ Desktop Commander MCP
+**When to use**:
+- Opening files in external editors
+- Taking screenshots of issues
+- System-level automation
+
+**Example triggers**:
+- "Take screenshot of rendering issue"
+- "Open this in VS Code"
+
+## MCP Best Practices
+
+1. **Use Zen for complex tasks** - Don't manually debug when `zen__debug` can trace systematically
+2. **Leverage Playwright for visual testing** - Better than manual browser checks
+3. **Context7 for pattern discovery** - Find code examples before implementing
+4. **Combine MCPs** - Use Zen to plan, then Playwright to test
+
+## Quick MCP Reference
+
+| Task | MCP Tool | Why |
+|------|----------|-----|
+| Bug hunting | `zen__debug` | Systematic root cause analysis |
+| Code quality | `zen__codereview` | Comprehensive review |
+| Test creation | `zen__testgen` | Edge case coverage |
+| Feature planning | `zen__planner` | Step-by-step breakdown |
+| Visual testing | `playwright` | Cross-browser checks |
+| Code search | `context7` | Semantic understanding |
