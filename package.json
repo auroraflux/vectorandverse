@@ -3,13 +3,20 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node scripts/dev-safe.js 4321",
+    "dev:claude": "node scripts/dev-safe.js 4322",
+    "dev:raw": "astro dev",
+    "kill-port": "node scripts/kill-port.js",
+    "kill-all-dev": "node scripts/kill-all-dev.js",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:debug": "playwright test --debug"
+    "test:debug": "playwright test --debug",
+    "test:claude": "CLAUDE_MODE=true playwright test",
+    "test:smoke": "playwright test smoke.spec.ts",
+    "test:smoke:claude": "CLAUDE_MODE=true playwright test smoke.spec.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",

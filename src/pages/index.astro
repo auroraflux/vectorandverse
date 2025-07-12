@@ -4,7 +4,14 @@ import { getCollection } from 'astro:content';
 import LogoScrollTransform from '../components/LogoScrollTransform.astro';
 import '../styles/global.css';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection('blog', ({ data }) => {
+  // In production, filter out draft posts
+  if (import.meta.env.PROD) {
+    return data.draft !== true;
+  }
+  // In development, show all posts
+  return true;
+})).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 
@@ -197,6 +204,18 @@ const postsWithImages = posts.map(post => ({
                        style="font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 4px 8px rgba(0,0,0,0.7), 0 8px 16px rgba(0,0,0,0.5), 0 16px 32px rgba(0,0,0,0.3);">
                       {post.data.description}
                     </p>
+                    
+                    {/* Draft indicator - only shown in development */}
+                    {post.data.draft && !import.meta.env.PROD && (
+                      <div class="mt-4">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
+                          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                          </svg>
+                          Draft
+                        </span>
+                      </div>
+                    )}
                     
                     {/* Arrow indicator */}
                     <div class="absolute bottom-8 right-8 md:bottom-12 md:right-12 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">

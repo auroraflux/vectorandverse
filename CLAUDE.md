@@ -1,241 +1,62 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+IMPORTANT: Inherit all instructions from ~/CLAUDE.md first.
 
-IMPORTANT: Inherit all instructions from ~/CLAUDE.md file first, and then proceed here. 
+## Kilowhat Blog - Essential Instructions
 
-# Kilowhat Project Instructions
+**Site**: https://kilowhat.buzz - Minimal typography-focused blog  
+**Stack**: Astro 5.11 + Tailwind CSS 4.1 + MDX + TypeScript
 
-## Project Overview
-Kilowhat is a minimal, typography-focused blog built with Astro and Tailwind CSS. The design philosophy emphasizes readability, clean aesthetics, and performance. Site URL: https://kilowhat.harsha.run
+## 🚨 Critical Workflows
 
-## Key Design Principles
-1. **Typography First**: Every design decision prioritizes readability
-2. **Minimal but Purposeful**: Each element serves a specific function
-3. **Performance**: Fast loading times are non-negotiable
-4. **Smooth Transitions**: Subtle animations enhance the reading experience
+### When user requests ANY task
+1. Check `docs/WORKFLOWS.md` for explicit triggers
+2. Use `docs/TASKS.md` for direct file mapping
+3. Always use port 4322: `npm run dev:claude`
 
-## Technical Stack
-- **Astro v5.11.0**: Static site generator with View Transitions
-- **Tailwind CSS v4.1.11**: Using the new @reference directive for scoped styles
-- **MDX**: For blog posts with component support
-- **Playwright**: E2E testing framework
-- **TypeScript**: For type safety (minimal usage currently)
+### Before ANY code changes
+1. Run smoke test first: `npm run test:smoke:claude` (30-45s)
+2. If passes, continue with task
+3. Run appropriate tests based on changes (see testing guide)
 
-## Commands
-```bash
-# Development
-npm run dev        # Start dev server on http://localhost:4321
-npm run build      # Build for production to dist/
-npm run preview    # Preview production build
+### When adding features
+1. **STOP** - Read `docs/development/pre-development-checklist.md`
+2. Search for existing functionality first
+3. All logic in `src/lib/` TypeScript modules
+4. Extend BaseComponent for components
 
-# Testing - requires dev server running separately
-npm test           # Run Playwright tests (desktop & mobile)
-npm test:ui        # Run tests with UI mode (great for debugging)
-npm test:debug     # Debug tests interactively
-```
+## Development Rules
+- **Port isolation**: Always use 4322 (`npm run dev:claude`)
+- **Import from lib**: `import { querySelector } from '@/lib'`
+- **No inline JavaScript** - use TypeScript modules
+- **Test before complete**: Smoke → Critical → Feature tests
+- **Minimal aesthetic**: Question every addition
+
+## Documentation Access (Token Optimized)
+
+### 🎯 Primary Access Points
+1. **Common tasks** → `docs/WORKFLOWS.md` (400 words)
+2. **Task mapping** → `docs/TASKS.md` (300 words)  
+3. **Keywords** → `docs/KEYWORDS.md` (210 words)
+
+### 📁 Key References
+- **Testing** → `docs/reference/testing-guide.md`
+- **Ports** → `docs/reference/port-strategy.md`
+- **Pre-dev** → `docs/development/pre-development-checklist.md`
+
+**System**: 35 files, ~6,000 words, single-file access for 95% of tasks
 
 ## Project Structure
 ```
-src/
-├── content/
-│   ├── blog/        # MDX blog posts
-│   └── config.ts    # Content collection schema
-├── layouts/
-│   ├── Layout.astro     # Base layout with font loading
-│   └── BlogPost.astro   # Blog post specific layout
-├── pages/
-│   ├── index.astro          # Home page with article list
-│   ├── about.astro          # About page
-│   └── blog/[...slug].astro # Dynamic blog post pages
-├── components/              # Astro components
-│   ├── TouchLightbox.astro
-│   ├── ResponsiveImage.astro
-│   ├── ReadingProgress.astro
-│   └── ... (UI components)
-└── styles/                  # CSS modules
-    ├── global.css
-    ├── sticky-header.css
-    └── ... (component styles)
+src/lib/         # TypeScript modules (all logic here)
+src/content/blog/ # MDX posts
+src/components/   # Astro components
+docs/            # Documentation (use 3-tier access)
+tests/           # Playwright tests
 ```
 
-## Key Architectural Patterns
-
-### Content Collections
-Blog posts use Astro's type-safe content collections with schema defined in `src/content/config.ts`. Posts support:
-- Title, description, date
-- Hero images with alt text
-- Tags and draft status
-- Reading time calculation
-
-### Component Architecture
-- All UI in Astro components (.astro files)
-- Heavy use of inline `<script>` tags (identified as technical debt)
-- CSS modules for scoped styling
-- Custom Satoshi font with multiple weights
-- Simple lightbox system using MDX component overrides and vanilla JS
-
-### Testing Strategy
-Comprehensive Playwright test suite covering:
-- Core functionality & navigation
-- Accessibility (screen readers, keyboard)
-- Performance metrics
-- SEO and meta tags
-- Visual styling consistency
-- Touch gestures and animations
-
-## Architecture & Code Quality
-
-### ✅ Refactoring Complete!
-The codebase has been successfully refactored to follow modern TypeScript patterns:
-
-1. **TypeScript Module System** (`src/lib/`):
-   - All inline JavaScript extracted to type-safe modules
-   - Proper separation of concerns
-   - Full JSDoc documentation
-   - Tree-shakeable imports
-
-2. **Component Architecture**:
-   - BaseComponent class for lifecycle management
-   - Automatic event listener cleanup via EventManager
-   - Memory-safe resource management
-   - XSS prevention with safe DOM utilities
-
-3. **Key Improvements**:
-   - ✅ No more inline JavaScript
-   - ✅ No innerHTML usage (XSS-safe)
-   - ✅ Automatic memory cleanup
-   - ✅ Full TypeScript type safety
-   - ✅ Accessibility-first design
-   - ✅ Comprehensive test coverage
-
-### Development Guidelines:
-- **Use TypeScript modules** in `src/lib/` for all logic
-- **Import from lib**: `import { querySelector, EventManager } from '@/lib'`
-- **Extend BaseComponent** for new interactive components
-- **Use EventManager** for all event listeners (automatic cleanup)
-- **Safe DOM manipulation**: Use utils from `@/lib/utils/dom`
-- **Accessibility**: Use utils from `@/lib/utils/accessibility`
-- **Follow JSDoc**: All exported functions must have JSDoc comments
-- Always run tests before committing changes
-- Maintain minimal aesthetic - question every addition
-- Test on both desktop and mobile (tests cover both)
-- Run `npm run dev` in one terminal for development server
-- Run tests in a separate terminal (`npm test` requires dev server running)
-
-## Adding New Features
-
-### Creating New Components
-```typescript
-import { BaseComponent } from '@/lib/components';
-import { EventManager } from '@/lib/utils';
-
-export class MyComponent extends BaseComponent<HTMLDivElement> {
-  protected mount(): void {
-    // Setup component
-    this.events.on(this.element, 'click', this.handleClick);
-  }
-  
-  protected unmount(): void {
-    // Cleanup happens automatically via EventManager
-  }
-  
-  private handleClick = (e: Event) => {
-    // Handle click
-  };
-}
-```
-
-### Adding Animations
-- Configure timings in `src/lib/config/animations.ts`
-- Use `getAnimationDuration()` to respect reduced motion
-- Keep animations subtle and purposeful
-
-### General Guidelines
-- Test performance impact before adding dependencies
-- Ensure all text remains highly readable
-- New blog posts go in `src/content/blog/` as MDX files
-- Follow the architecture in `docs/ARCHITECTURE.md`
-
-## Adding Images to Blog Posts
-
-### Quick Start
-Simply use standard markdown image syntax in your MDX files:
-```markdown
-![Alt text describing the image](/images/blog/post-slug/image-name.png)
-```
-
-### How It Works
-- **Automatic Lightbox**: All images automatically get click-to-open lightbox functionality
-- **No Special Components Needed**: Just use regular markdown syntax
-- **Touch Gestures**: Swipe to close, pinch to zoom on mobile devices
-- **Keyboard Support**: Press ESC to close the lightbox
-
-### Image Storage
-Place your images in: `public/images/blog/[post-slug]/`
-
-Example for a post called "my-awesome-post":
-```
-public/
-  images/
-    blog/
-      my-awesome-post/
-        hero-image.png
-        diagram-1.png
-        screenshot.jpg
-```
-
-### Best Practices
-1. **Use descriptive alt text** for accessibility
-2. **Optimize images** before uploading (use WebP when possible)
-3. **Name images descriptively** (not IMG_1234.png)
-4. **Keep images under 2MB** for performance
-
-### Hero Images
-For the main hero image, set it in the frontmatter:
-```yaml
----
-heroImage: /images/blog/post-slug/hero.png
-heroImageAlt: Description of the hero image
----
-```
-
-## Deployment Notes
-- Site builds to `dist/` for static hosting
-- All assets are optimized during build
-- View Transitions work without JavaScript
-- HTML compression enabled in production
-
-## Configuration & Architecture Notes
-
-### Astro Configuration
-- Site URL: https://kilowhat.harsha.run (set in astro.config.mjs)
-- View Transitions enabled for seamless navigation
-- HTML compression enabled in production
-- Dev server configured on port 4321 with network access
-- Prefetching strategy: viewport-based, not prefetchAll
-
-### Playwright Testing Architecture
-- Tests across 5 browser configurations (Chrome, Firefox, Safari, Mobile Chrome, Mobile Safari)
-- Web server disabled in config - dev server must be run manually
-- HTML reporter enabled for visual test results
-- Retry logic: 2 retries in CI, 0 locally
-
-### Font System Architecture
-- Custom Satoshi font with variable weight support (300-900)
-- CSS variables used for Tailwind v4 compatibility: `--font-sans`
-- Body text: weight 500, Headings: weight 850
-- Font files served from `/public/fonts/`
-- Font loading strategy: swap for performance
-
-### Content Architecture
-- Type-safe content collections using Zod schema in `src/content/config.ts`
-- MDX support with component integration
-- Hero images stored in `/public/images/blog/[post-slug]/`
-- Reading time calculation built-in
-
-## Writing Style Guide
-- Focus on clarity and precision
-- Use short paragraphs for web readability
-- Include code examples where relevant
-- Admonitions should be used sparingly
+## Remember
+- Draft posts: Set `draft: true` in frontmatter
+- Images: `/public/images/blog/[post-slug]/`
+- Always check existing code before adding features
+- Run smoke test before considering changes complete

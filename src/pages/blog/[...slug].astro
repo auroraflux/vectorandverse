@@ -5,7 +5,15 @@ import SwipeNavigation from '../../components/SwipeNavigation.astro';
 import { mdxComponents } from '../../components/mdx';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => {
+    // In production, filter out draft posts
+    if (import.meta.env.PROD) {
+      return data.draft !== true;
+    }
+    // In development, show all posts
+    return true;
+  });
+  
   const sortedPosts = posts.sort(
     (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
   );

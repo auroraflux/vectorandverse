@@ -30,7 +30,7 @@ test.describe('SEO and Meta Tags', () => {
     
     // Check canonical URL
     const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveAttribute('href', 'https://kilowhat.harsha.run/');
+    await expect(canonical).toHaveAttribute('href', 'https://kilowhat.buzz/');
   });
 
   test('Blog post has correct article SEO meta tags', async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe('SEO and Meta Tags', () => {
     
     // Check canonical URL for blog post
     const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveAttribute('href', 'https://kilowhat.harsha.run/blog/011-imposter');
+    await expect(canonical).toHaveAttribute('href', 'https://kilowhat.buzz/blog/011-imposter');
   });
 
   test('About page has correct meta tags', async ({ page }) => {
@@ -54,6 +54,6 @@ test.describe('SEO and Meta Tags', () => {
     await expect(page).toHaveTitle(/About.*kilowhat/);
     
     const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveAttribute('href', 'https://kilowhat.harsha.run/about');
+    await expect(canonical).toHaveAttribute('href', 'https://kilowhat.buzz/about');
   });
 });
