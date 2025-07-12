@@ -1,139 +1,103 @@
 # Adding Images to Articles
 
-This guide explains how to add images to your blog posts with automatic lightbox functionality.
+This document explains how to add images to blog articles in the Kilowhat project, ensuring they have automatic lightbox functionality.
 
 ## Overview
 
-All images in MDX blog posts automatically get lightbox functionality. When users click on an image, it opens in a fullscreen overlay with touch gestures support (pinch to zoom, swipe to close).
+All images in blog articles automatically get lightbox functionality - clicking on any image opens it in a full-screen overlay. The implementation is intentionally simple and lightweight.
 
-## How to Add Images
+## Adding Images in MDX Files
 
 ### Basic Markdown Syntax
 
-Simply use standard Markdown image syntax in your MDX files:
+In your MDX blog posts, use standard markdown image syntax:
 
 ```markdown
-![Alt text for the image](/images/blog/your-post/image-name.png)
+![Description of the image](/images/blog/your-article/image-name.png)
 ```
 
-### With Title (Tooltip)
+**Important conventions:**
+- Store images in `/public/images/blog/[article-slug]/`
+- Use descriptive alt text for accessibility
+- Images automatically get lightbox functionality
+
+### Example
 
 ```markdown
-![Alt text](/images/blog/your-post/image.png "Optional title tooltip")
+Here's a screenshot of the application:
+
+![Application dashboard showing user metrics](/images/blog/my-app-review/dashboard.png)
+
+The dashboard provides real-time insights...
 ```
 
-### Image Storage
+## How It Works
 
-Store your blog post images in the public folder following this convention:
+### Automatic MDX Component Override
+
+The project uses a custom MDX component that overrides the default `<img>` tag. Every image in MDX content is automatically:
+
+1. Wrapped in a clickable button element
+2. Given a zoom cursor on hover
+3. Made clickable to open in fullscreen
+
+### Implementation Details
+
+The system uses two components:
+
+1. **MDXImage Component** (`src/components/MDXImage.astro`)
+   - Automatically applied to all markdown images
+   - Wraps images in a button with `class="lightbox-trigger"`
+   - Adds `data-src` and `data-alt` attributes
+   - No complex state management
+
+2. **GlobalLightbox Component** (`src/components/GlobalLightbox.astro`)
+   - Single instance in the layout
+   - Uses vanilla JavaScript for simplicity
+   - Click overlay or press ESC to close
+   - No touch gestures, zoom, or other complex features
+
+## For Component-Based Images
+
+If you're using the `ResponsiveImage` component directly in Astro files:
+
+```astro
+<ResponsiveImage 
+  src={myImage}
+  alt="Description of the image"
+  type="inline"
+/>
 ```
-public/
-  images/
-    blog/
-      [post-slug]/
-        image1.png
-        image2.jpg
-        ...
-```
 
-For example, for a post with slug `011-imposter`, images go in:
-```
-public/images/blog/011-imposter/
-```
-
-## Features
-
-### Automatic Lightbox
-
-All images automatically get:
-- Click to open in fullscreen overlay
-- Touch gesture support (mobile):
-  - Swipe up/down to close
-  - Pinch to zoom
-- Keyboard support:
-  - ESC key to close
-- Visual indicators:
-  - Zoom cursor on hover
-  - Shadow effects
-
-### Lazy Loading
-
-Images are automatically lazy-loaded for better performance.
-
-### Styling
-
-Images receive these styles automatically:
-- Full width within article container
-- Rounded corners
-- Shadow effects
-- Hover animations
-
-## Technical Details
-
-The lightbox functionality is implemented through:
-
-1. **Custom MDX Component** (`src/components/mdx/Image.astro`):
-   - Overrides the default `img` element in MDX
-   - Adds `data-lightbox="true"` and `data-full-src` attributes
-   - Applies consistent styling
-
-2. **TouchLightbox Component** (`src/components/TouchLightbox.astro`):
-   - Provides the lightbox overlay UI
-   - Handles touch gestures and keyboard navigation
-   - Manages image loading states
-
-3. **TouchLightbox Class** (`src/lib/components/TouchLightbox.ts`):
-   - Implements the interaction logic
-   - Handles click events on images with `data-lightbox="true"`
-   - Manages touch gestures for mobile devices
+The `type="inline"` automatically enables lightbox functionality.
 
 ## Best Practices
 
-1. **Alt Text**: Always provide descriptive alt text for accessibility
-2. **File Names**: Use descriptive, SEO-friendly file names (e.g., `user-dashboard-overview.png` instead of `img1.png`)
-3. **Image Optimization**: Optimize images before uploading:
-   - Use appropriate formats (WebP, PNG for graphics, JPEG for photos)
-   - Compress images to reduce file size
-   - Consider providing multiple resolutions for responsive images
-
-4. **Relative Paths**: Always use absolute paths starting with `/` for images in the public folder
-
-## Example
-
-Here's a complete example from the "Imposter" article:
-
-```markdown
----
-title: 'Reality Check: Everyone''s Winging It'
-heroImage: /images/blog/011-imposter/life-is-diffusion.png
----
-
-## Two Ways to Create Meaning
-
-### autoregression
-
-![autoregress](/images/blog/011-imposter/autoregress.png)
-
-It's why you can sometimes predict the next word...
-```
-
-When users click on the `autoregress.png` image, it will open in the lightbox overlay.
+1. **Alt Text**: Always provide meaningful alt text for accessibility
+2. **File Organization**: Keep images organized in article-specific folders
+3. **File Names**: Use descriptive, kebab-case file names
+4. **Image Format**: Use appropriate formats (PNG for screenshots, JPG for photos)
+5. **Image Size**: Optimize images before adding them (aim for < 200KB for inline images)
 
 ## Troubleshooting
 
-### Image Not Showing Lightbox
+### Lightbox Not Working?
 
-1. Ensure the image is in an MDX file (not plain Markdown)
-2. Check that the image path starts with `/`
-3. Verify the image file exists in the public folder
+1. Ensure the image is inside an MDX file or using `ResponsiveImage` with `type="inline"`
+2. Check that the image path is correct and starts with `/`
+3. Verify the image file exists in the public directory
+4. Check browser console for any JavaScript errors
 
-### Image Not Loading
+### Images Not Displaying?
 
-1. Check the browser console for 404 errors
-2. Ensure the path matches the actual file location
-3. Verify file permissions on the image
+1. Check the file path - it should be relative to the public directory
+2. Ensure the image file name matches exactly (case-sensitive)
+3. Verify the image is in a web-friendly format (PNG, JPG, WebP)
 
-### Lightbox Not Closing
+## Technical Notes
 
-1. Try pressing ESC key
-2. Click outside the image or on the close button
-3. On mobile, swipe up or down
+- The lightbox uses event delegation on the document for performance
+- Images are lazy-loaded by default
+- The lightbox component is included once in the main layout
+- Extremely simple implementation - just click to open, click/ESC to close
+- No external dependencies or complex state management

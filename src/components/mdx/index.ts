@@ -3,8 +3,8 @@
  * These components replace the default HTML elements in MDX files
  */
 
-import Image from './Image.astro';
+import MDXImage from '../MDXImage.astro';
 
 export const mdxComponents = {
-  img: Image,
+  img: MDXImage,
 };

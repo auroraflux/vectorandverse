@@ -45,18 +45,35 @@ const fullRes = await getImage({
 ---
 
 <figure class={`responsive-image ${type} ${className}`.trim()}>
-  <Image
-    src={src}
-    alt={alt}
-    widths={widths}
-    sizes={sizes}
-    loading={loading}
-    format="webp"
-    quality={type === 'hero' ? 85 : 80}
-    class={`${type === 'inline' ? 'cursor-zoom-in' : ''}`}
-    data-lightbox={type === 'inline' ? 'true' : undefined}
-    data-full-src={type === 'inline' ? fullRes.src : undefined}
-  />
+  {type === 'inline' ? (
+    <button
+      type="button"
+      class="lightbox-trigger"
+      data-src={src.src}
+      data-alt={alt}
+      aria-label={`View image: ${alt || 'full size'}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        widths={widths}
+        sizes={sizes}
+        loading={loading}
+        format="webp"
+        quality={80}
+      />
+    </button>
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      widths={widths}
+      sizes={sizes}
+      loading={loading}
+      format="webp"
+      quality={85}
+    />
+  )}
   {caption && (
     <figcaption class="text-base text-gray-600 mt-2 text-center italic">
       {caption}
@@ -86,5 +103,19 @@ const fullRes = await getImage({
   
   figure.responsive-image.inline {
     @apply my-8 block;
+  }
+  
+  .lightbox-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: zoom-in;
+    display: block;
+    width: 100%;
+    line-height: 0;
+  }
+  
+  .lightbox-trigger img {
+    @apply rounded-lg shadow-lg mx-auto;
   }
 </style>

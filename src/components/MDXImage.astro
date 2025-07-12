@@ -1,0 +1,37 @@
+---
+const { src, alt, ...props } = Astro.props;
+---
+<button
+  type="button"
+  class="lightbox-trigger"
+  data-src={src}
+  data-alt={alt}
+  aria-label={`View image: ${alt || 'full size'}`}
+>
+  <img src={src} alt={alt} {...props} loading="lazy" />
+</button>
+
+<style>
+  /* Basic styling to make the button behave like an image wrapper */
+  .lightbox-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: zoom-in; /* Indicates it's clickable */
+    display: block;
+    width: 100%;
+    line-height: 0; /* Prevents extra space below image */
+  }
+  .lightbox-trigger img {
+    display: block; /* Remove extra space below image */
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .lightbox-trigger:hover img {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+</style>

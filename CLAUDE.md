@@ -73,6 +73,7 @@ Blog posts use Astro's type-safe content collections with schema defined in `src
 - Heavy use of inline `<script>` tags (identified as technical debt)
 - CSS modules for scoped styling
 - Custom Satoshi font with multiple weights
+- Simple lightbox system using MDX component overrides and vanilla JS
 
 ### Testing Strategy
 Comprehensive Playwright test suite covering:

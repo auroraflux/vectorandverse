@@ -3,4 +3,3 @@
  */
 
 export * from './BaseComponent';
-export * from './TouchLightbox';
