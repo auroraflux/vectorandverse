@@ -258,7 +258,8 @@ export class TouchLightbox extends BaseComponent<HTMLDivElement> {
    * Open lightbox with an image
    */
   open(img: HTMLElement): void {
-    const fullSrc = img.dataset.fullSrc;
+    // Handle both camelCase and hyphenated attribute names
+    const fullSrc = img.dataset.fullSrc || img.getAttribute('data-full-src');
     if (!fullSrc || !this.lightboxImage) return;
     
     this.currentImageElement = img;
