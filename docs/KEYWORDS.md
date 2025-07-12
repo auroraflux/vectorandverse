@@ -42,6 +42,8 @@
 - **font, typography, weight** → `reference/fonts.md`
 
 ### MCP Tool Keywords
+- **mcp servers, available tools, server list** → `reference/mcp-servers.md`
+- **mcp workflow, combine tools, task sequence** → `reference/mcp-workflows.md`
 - **debug complex, trace issue, root cause** → Use `mcp__zen__debug`
 - **review code, code quality, pre-commit** → Use `mcp__zen__codereview`
 - **plan feature, break down, complex task** → Use `mcp__zen__planner`

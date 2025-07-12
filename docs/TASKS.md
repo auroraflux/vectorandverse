@@ -53,4 +53,21 @@
 | "file structure" | `reference/file-structure.md` | 203 |
 | "commands" | `reference/commands.md` | 154 |
 
+## MCP Server Tasks
+
+| User Says | Use MCP | Why |
+|-----------|---------|-----|
+| "debug this issue" | `zen__debug` | Systematic root cause analysis |
+| "review my code" | `zen__codereview` | Comprehensive quality check |
+| "plan new feature" | `zen__planner` | Step-by-step breakdown |
+| "find symbol usage" | `serena` | Semantic code navigation |
+| "test across browsers" | `playwright` | Cross-browser validation |
+| "get framework docs" | `context7` | Latest documentation |
+| "search codebase" | `desktop-commander` | Advanced file operations |
+| "check TypeScript" | `ide` | Real-time diagnostics |
+| "analyze performance" | `sequential-thinking` | Systematic reasoning |
+| "security audit" | `zen__secaudit` | OWASP compliance |
+| "generate tests" | `zen__testgen` | Comprehensive test coverage |
+| "refactor code" | `zen__refactor` | Improvement identification |
+
 **Total Coverage**: 95% of common requests in <250 words per file

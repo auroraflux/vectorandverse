@@ -74,4 +74,13 @@
 3. Generates Playwright tests following project patterns
 4. Includes happy path and failure scenarios
 
+## Advanced MCP Workflows
+**For complex tasks** → See `docs/reference/mcp-workflows.md`
+
+**Quick MCP usage**:
+- Complex debugging → `zen__debug`
+- Code review → `zen__codereview` 
+- Feature planning → `zen__planner`
+- Visual testing → `playwright`
+
 **Remember**: Always use port 4322 for Claude Code operations
