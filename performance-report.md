@@ -1,22 +1,22 @@
 # Performance Analysis Report
-Generated: 2025-07-12T03:10:20.407Z
+Generated: 2025-07-12T03:45:53.208Z
 
 ## Executive Summary
 
-- **Average Load Time**: 871ms
+- **Average Load Time**: 973ms
 - **Pages Analyzed**: 4
 
 ## Detailed Analysis
 
 ### Homepage
 - **URL**: http://localhost:4321/
-- **Total Load Time**: 957ms
+- **Total Load Time**: 1144ms
 
 #### Performance Metrics:
-- **First Contentful Paint (FCP)**: 332ms ✅
+- **First Contentful Paint (FCP)**: 416ms ✅
 - **Largest Contentful Paint (LCP)**: 0ms ✅
-- **DOM Content Loaded**: 257ms
-- **Complete Load**: 307ms
+- **DOM Content Loaded**: 304ms
+- **Complete Load**: 383ms
 
 #### Network Performance:
 - **DNS Lookup**: 0ms
@@ -24,11 +24,11 @@ Generated: 2025-07-12T03:10:20.407Z
 - **Server Response**: 1ms
 
 #### Resource Breakdown:
-- **document**: 1 files, 0.0KB total, avg 7ms
-- **script**: 57 files, 2048.7KB total, avg 56ms
-- **image**: 6 files, 7269.9KB total, avg 62ms
-- **font**: 3 files, 88.2KB total, avg 14ms
-- **fetch**: 16 files, 6264.8KB total, avg 1ms
+- **document**: 1 files, 0.0KB total, avg 24ms
+- **script**: 57 files, 2055.2KB total, avg 29ms
+- **image**: 6 files, 7269.9KB total, avg 56ms
+- **font**: 5 files, 139.9KB total, avg 110ms
+- **fetch**: 16 files, 6264.8KB total, avg 8ms
 
 #### Optimization Opportunities:
 
@@ -40,10 +40,10 @@ Generated: 2025-07-12T03:10:20.407Z
 - Total Images: 18
 - Lazy Loaded: 16/18 ⚠️ Consider lazy loading
 - Oversized Images: 4 ⚠️
-- Missing Alt Text: 1 ⚠️
+- Missing Alt Text: 0 ✅
 
 **JavaScript Bundle:**
-- Total Size: 2065.4KB
+- Total Size: 2071.9KB
 - Number of Scripts: 57
 
 
@@ -58,32 +58,32 @@ Generated: 2025-07-12T03:10:20.407Z
   Natural: 2912x1632, Displayed: 1232x500
 
 **Memory Usage:**
-- JavaScript Heap: 9.5MB / 10.1MB
+- JavaScript Heap: 9.5MB / 9.5MB
 
 ---
 
 ### Blog Post (with images)
 - **URL**: http://localhost:4321/blog/011-imposter
-- **Total Load Time**: 893ms
+- **Total Load Time**: 1016ms
 
 #### Performance Metrics:
-- **First Contentful Paint (FCP)**: 272ms ✅
+- **First Contentful Paint (FCP)**: 448ms ✅
 - **Largest Contentful Paint (LCP)**: 0ms ✅
-- **DOM Content Loaded**: 332ms
-- **Complete Load**: 336ms
+- **DOM Content Loaded**: 278ms
+- **Complete Load**: 298ms
 
 #### Network Performance:
 - **DNS Lookup**: 0ms
-- **TCP Connection**: 1ms
+- **TCP Connection**: 0ms
 - **Server Response**: 0ms
 
 #### Resource Breakdown:
-- **document**: 1 files, 0.0KB total, avg 7ms
-- **script**: 61 files, 2090.5KB total, avg 36ms
-- **image**: 3 files, 2030.1KB total, avg 243ms
-- **media**: 1 files, 3605.4KB total, avg 241ms
-- **font**: 3 files, 88.2KB total, avg 14ms
-- **fetch**: 2 files, 1241.4KB total, avg 2ms
+- **document**: 1 files, 0.0KB total, avg 9ms
+- **script**: 61 files, 2100.0KB total, avg 47ms
+- **image**: 3 files, 2030.1KB total, avg 98ms
+- **media**: 1 files, 3605.4KB total, avg 256ms
+- **font**: 3 files, 91.4KB total, avg 190ms
+- **fetch**: 2 files, 1241.4KB total, avg 9ms
 
 #### Optimization Opportunities:
 
@@ -93,12 +93,12 @@ Generated: 2025-07-12T03:10:20.407Z
 
 **Images:**
 - Total Images: 4
-- Lazy Loaded: 0/4 ⚠️ Consider lazy loading
+- Lazy Loaded: 2/4 ⚠️ Consider lazy loading
 - Oversized Images: 1 ⚠️
-- Missing Alt Text: 1 ⚠️
+- Missing Alt Text: 0 ✅
 
 **JavaScript Bundle:**
-- Total Size: 2108.4KB
+- Total Size: 2117.8KB
 - Number of Scripts: 61
 
 
@@ -113,13 +113,13 @@ Generated: 2025-07-12T03:10:20.407Z
 
 ### Blog Post (text heavy)
 - **URL**: http://localhost:4321/blog/012-the-beautiful-problem
-- **Total Load Time**: 861ms
+- **Total Load Time**: 948ms
 
 #### Performance Metrics:
-- **First Contentful Paint (FCP)**: 256ms ✅
+- **First Contentful Paint (FCP)**: 336ms ✅
 - **Largest Contentful Paint (LCP)**: 0ms ✅
-- **DOM Content Loaded**: 243ms
-- **Complete Load**: 259ms
+- **DOM Content Loaded**: 296ms
+- **Complete Load**: 395ms
 
 #### Network Performance:
 - **DNS Lookup**: 0ms
@@ -127,10 +127,10 @@ Generated: 2025-07-12T03:10:20.407Z
 - **Server Response**: 1ms
 
 #### Resource Breakdown:
-- **document**: 1 files, 0.0KB total, avg 7ms
-- **script**: 61 files, 2090.5KB total, avg 44ms
-- **image**: 1 files, 3897.2KB total, avg 226ms
-- **font**: 3 files, 88.2KB total, avg 8ms
+- **document**: 1 files, 0.0KB total, avg 11ms
+- **script**: 61 files, 2100.0KB total, avg 34ms
+- **image**: 1 files, 3897.2KB total, avg 79ms
+- **font**: 3 files, 91.4KB total, avg 229ms
 
 #### Optimization Opportunities:
 
@@ -142,27 +142,27 @@ Generated: 2025-07-12T03:10:20.407Z
 - Total Images: 2
 - Lazy Loaded: 0/2 ⚠️ Consider lazy loading
 - Oversized Images: 0 ✅
-- Missing Alt Text: 1 ⚠️
+- Missing Alt Text: 0 ✅
 
 **JavaScript Bundle:**
-- Total Size: 2108.4KB
+- Total Size: 2117.8KB
 - Number of Scripts: 61
 
 
 **Memory Usage:**
-- JavaScript Heap: 9.5MB / 10.7MB
+- JavaScript Heap: 9.5MB / 10.1MB
 
 ---
 
 ### About Page
 - **URL**: http://localhost:4321/about
-- **Total Load Time**: 772ms
+- **Total Load Time**: 782ms
 
 #### Performance Metrics:
-- **First Contentful Paint (FCP)**: 232ms ✅
+- **First Contentful Paint (FCP)**: 252ms ✅
 - **Largest Contentful Paint (LCP)**: 0ms ✅
 - **DOM Content Loaded**: 233ms
-- **Complete Load**: 233ms
+- **Complete Load**: 234ms
 
 #### Network Performance:
 - **DNS Lookup**: 0ms
@@ -170,9 +170,9 @@ Generated: 2025-07-12T03:10:20.407Z
 - **Server Response**: 1ms
 
 #### Resource Breakdown:
-- **document**: 1 files, 0.0KB total, avg 5ms
-- **script**: 58 files, 2062.9KB total, avg 43ms
-- **font**: 2 files, 65.3KB total, avg 12ms
+- **document**: 1 files, 0.0KB total, avg 12ms
+- **script**: 58 files, 2072.2KB total, avg 10ms
+- **font**: 2 files, 65.3KB total, avg 220ms
 
 #### Optimization Opportunities:
 
@@ -184,15 +184,15 @@ Generated: 2025-07-12T03:10:20.407Z
 - Total Images: 1
 - Lazy Loaded: 0/1 ⚠️ Consider lazy loading
 - Oversized Images: 0 ✅
-- Missing Alt Text: 1 ⚠️
+- Missing Alt Text: 0 ✅
 
 **JavaScript Bundle:**
-- Total Size: 2079.9KB
+- Total Size: 2089.1KB
 - Number of Scripts: 58
 
 
 **Memory Usage:**
-- JavaScript Heap: 9.5MB / 10.1MB
+- JavaScript Heap: 9.5MB / 9.5MB
 
 ---
 
