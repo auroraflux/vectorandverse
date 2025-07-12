@@ -109,6 +109,22 @@ tests/           # Playwright tests
 
 **Already active**: Automatically provides diagnostics
 
+### 🔬 Serena MCP (Semantic Code Analysis)
+**When to use**:
+- **Symbol navigation**: Find definitions, references, implementations
+- **Semantic search**: Search by meaning, not just text
+- **Refactoring**: Rename symbols across entire codebase
+- **Dependency analysis**: Understand code relationships
+- **Cross-project insights**: Learn from other projects in ~/Git
+
+**Example triggers**:
+- "Find all uses of BaseComponent"
+- "Show dependencies of TouchLightbox"
+- "Rename querySelector to selectElement everywhere"
+- "Find similar patterns in my other projects"
+
+**Note**: Currently experiencing integration issues - tools may not be directly accessible
+
 ### 🖥️ Desktop Commander MCP
 **When to use**:
 - Opening files in external editors
@@ -124,7 +140,8 @@ tests/           # Playwright tests
 1. **Use Zen for complex tasks** - Don't manually debug when `zen__debug` can trace systematically
 2. **Leverage Playwright for visual testing** - Better than manual browser checks
 3. **Context7 for pattern discovery** - Find code examples before implementing
-4. **Combine MCPs** - Use Zen to plan, then Playwright to test
+4. **Serena for navigation** - Symbol-aware code exploration (when available)
+5. **Combine MCPs** - Use Serena to find code, Zen to analyze, then test
 
 ## Quick MCP Reference
 
