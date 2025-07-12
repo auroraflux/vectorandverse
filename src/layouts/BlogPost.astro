@@ -4,7 +4,6 @@ import Header from '../components/Header.astro';
 import ResponsiveImage from '../components/ResponsiveImage.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import ScrollTextReveal from '../components/ScrollTextReveal.astro';
-import ReadingFocus from '../components/ReadingFocus.astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -44,7 +43,6 @@ const day = new Intl.DateTimeFormat('en-US', {
   <Header variant="article" />
   <ReadingProgress />
   <ScrollTextReveal />
-  {/* <ReadingFocus /> - Temporarily disabled */}
   <div class="fade-in relative">
     {/* Animated grid background that matches the homepage */}
     <div class="fixed inset-0 -z-10">
