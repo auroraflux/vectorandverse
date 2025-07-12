@@ -176,6 +176,12 @@ export default {
             'tbody td:first-child': {
               fontWeight: '500',
             },
+            'img': {
+              borderRadius: '0.5rem',
+              marginTop: '2rem',
+              marginBottom: '2rem',
+              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+            },
           },
         },
       },
