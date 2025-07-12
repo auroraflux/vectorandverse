@@ -5,7 +5,6 @@ import ResponsiveImage from '../components/ResponsiveImage.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import ScrollTextReveal from '../components/ScrollTextReveal.astro';
 import ReadingFocus from '../components/ReadingFocus.astro';
-import Lightbox from '../components/Lightbox.astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -41,7 +40,6 @@ const day = new Intl.DateTimeFormat('en-US', {
   <ReadingProgress />
   <ScrollTextReveal />
   {/* <ReadingFocus /> - Temporarily disabled */}
-  <Lightbox />
   <div class="fade-in relative">
     {/* Animated grid background that matches the homepage */}
     <div class="fixed inset-0 -z-10">
@@ -61,6 +59,7 @@ const day = new Intl.DateTimeFormat('en-US', {
             src={heroImage} 
             alt={heroImageAlt || title}
             loading="eager"
+            fetchpriority="high"
             class="absolute inset-0 w-full h-full object-cover"
           />
           {/* Gradient Overlay - connects with header vignette */}
@@ -311,6 +310,9 @@ const day = new Intl.DateTimeFormat('en-US', {
       // Add lightbox attributes
       img.dataset.lightbox = 'true';
       img.dataset.fullSrc = img.src;
+      
+      // Add lazy loading
+      img.loading = 'lazy';
       
       // Ensure proper styling
       img.classList.add('w-full', 'rounded-lg', 'shadow-lg', 'cursor-zoom-in', 'hover:shadow-xl', 'transition-shadow', 'duration-300');

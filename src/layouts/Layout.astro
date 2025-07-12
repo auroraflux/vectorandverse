@@ -20,6 +20,8 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} - kilowhat!?</title>
+    <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Satoshi-BlackItalic.woff2" as="font" type="font/woff2" crossorigin>
     <ViewTransitions />
     <style>
       /* Satoshi Variable Font */
@@ -52,7 +54,17 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
         font-display: swap;
       }
       
-      /* Medium Italic for intro text */
+      /* Regular Italic */
+      @font-face {
+        font-family: 'Satoshi';
+        src: url('/fonts/Satoshi-Italic.woff2') format('woff2'),
+             url('/fonts/Satoshi-Italic.woff') format('woff');
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      
+      /* Medium Italic */
       @font-face {
         font-family: 'Satoshi';
         src: url('/fonts/Satoshi-MediumItalic.woff2') format('woff2'),
@@ -62,7 +74,7 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
         font-display: swap;
       }
       
-      /* Bold Italic for body text emphasis */
+      /* Bold Italic */
       @font-face {
         font-family: 'Satoshi';
         src: url('/fonts/Satoshi-BoldItalic.woff2') format('woff2'),
