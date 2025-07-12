@@ -72,16 +72,26 @@ const postsWithImages = posts.map(post => ({
           {/* Profile Image */}
           <div class="mb-8 flex justify-center">
             <div class="relative group">
-              <img 
-                src="/images/hk.png" 
-                alt="Harsha - Digital native, analog soul"
-                class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover transition-all duration-300 group-hover:scale-105"
-                style="filter: grayscale(20%); 
-                       box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 
-                                   inset 0 -2px 4px rgba(255,255,255,0.5),
-                                   0 1px 2px rgba(255,255,255,0.7);
-                       border: 2px solid rgba(255,255,255,0.3);"
-              />
+              <picture>
+                <source 
+                  type="image/webp" 
+                  srcset="/images/hk.webp"
+                />
+                <img
+                  src="/images/hk.png"
+                  alt="Harsha - Digital native, analog soul"
+                  width="160"
+                  height="160"
+                  loading="eager"
+                  class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover transition-all duration-300 group-hover:scale-105"
+                  style="filter: grayscale(20%); 
+                         box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 
+                                     inset 0 -2px 4px rgba(255,255,255,0.5),
+                                     0 1px 2px rgba(255,255,255,0.7);
+                         border: 2px solid rgba(255,255,255,0.3);"
+                  decoding="async"
+                />
+              </picture>
               <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           </div>
@@ -148,12 +158,23 @@ const postsWithImages = posts.map(post => ({
               <a href={`/blog/${post.slug}`} class="block relative overflow-hidden h-[400px] md:h-[500px] no-underline rounded-[8px] touch-ripple touch-no-select" data-has-image={post.heroImageUrl ? "true" : "false"}>
                 {/* Background Image or Gradient */}
                 {post.heroImageUrl ? (
-                  <img 
-                    src={post.heroImageUrl} 
-                    alt={post.data.heroImageAlt || post.data.title}
-                    class="absolute inset-0 w-full h-full object-cover hero-image-transition"
-                    loading="lazy"
-                  />
+                  <picture class="absolute inset-0 w-full h-full">
+                    {/* Try WebP version if it exists */}
+                    <source 
+                      type="image/webp" 
+                      srcset={post.heroImageUrl.replace(/\.(jpg|jpeg|png)$/i, '.webp')}
+                    />
+                    {/* Fallback to original format */}
+                    <img 
+                      src={post.heroImageUrl} 
+                      alt={post.data.heroImageAlt || post.data.title}
+                      width="1536"
+                      height="500"
+                      class="w-full h-full object-cover hero-image-transition"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 ) : (
                   <div class="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800"></div>
                 )}
