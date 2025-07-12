@@ -36,18 +36,18 @@ const { variant = 'home' } = Astro.props;
       <a href="/" class="group no-underline">
         <h1 class={`text-3xl md:text-4xl tracking-tight transition-all duration-300 group-hover:translate-x-1 hero-logo-transition ${variant === 'article' ? 'text-white' : 'text-gray-900'}`} 
             style={`${variant === 'article' ? 'text-shadow: 0 2px 20px rgba(0,0,0,0.5);' : ''}`}>
-          <span style="font-weight: 900;">kilo</span><span style="font-weight: 900; font-style: italic;">what!?</span>
+          <span class="font-weight-900">kilo</span><span class="font-weight-900-italic">what!?</span>
         </h1>
       </a>
       
       <div class="flex items-center gap-8">
         {variant === 'home' && (
-          <p class="hidden lg:block text-sm text-gray-600" style="font-weight: 500;">
+          <p class="hidden lg:block text-sm text-gray-600 font-weight-500">
             A minimal space for thoughtful writing
           </p>
         )}
-        <a href="/about" class={`text-sm transition-all duration-300 hover:translate-x-1 ${variant === 'article' ? 'text-white/80 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`} 
-           style={`font-weight: 500; ${variant === 'article' ? 'text-shadow: 0 2px 10px rgba(0,0,0,0.5);' : ''}`}>
+        <a href="/about" class={`text-sm transition-all duration-300 hover:translate-x-1 font-weight-500 ${variant === 'article' ? 'text-white/80 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`} 
+           style={`${variant === 'article' ? 'text-shadow: 0 2px 10px rgba(0,0,0,0.5);' : ''}`}>
           About
         </a>
       </div>

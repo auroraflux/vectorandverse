@@ -59,12 +59,12 @@ const postsWithImages = posts.map(post => ({
         {/* Large static logo */}
         <h1 class="text-[4.5rem] sm:text-[6rem] md:text-[12rem] lg:text-[13.5rem] mb-4 color-morph hero-logo-transition" 
             style="letter-spacing: -0.04em; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3); line-height: 0.9;">
-          <span style="font-weight: 600;">kilo</span><span style="font-weight: 900; font-style: italic;">what!?</span>
+          <span class="font-weight-600">kilo</span><span class="font-weight-900-italic">what!?</span>
         </h1>
         
         {/* Rotating taglines container */}
         <div class="relative h-12 sm:h-14 md:h-16 overflow-visible flex items-center justify-center">
-          <div id="tagline-container" class="relative text-2xl sm:text-3xl md:text-6xl text-gray-400" style="font-weight: 300; font-variation-settings: 'wght' 300; font-style: italic; text-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);">
+          <div id="tagline-container" class="relative text-2xl sm:text-3xl md:text-6xl text-gray-400 font-weight-300 italic text-shadow-tagline">
             <!-- Content dynamically inserted by JavaScript -->
           </div>
         </div>
@@ -88,17 +88,17 @@ const postsWithImages = posts.map(post => ({
             </div>
           </div>
 
-          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed" style="font-weight: 500;">
+          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed font-weight-500">
             Digital <span class="native-emphasis">native</span>. Analog <span class="soul-emphasis">soul</span>.
           </p>
           
           {/* Snarky intro paragraph */}
-          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mt-6 mb-4" style="font-weight: 500; font-style: italic; font-variation-settings: 'wght' 500;">
+          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mt-6 mb-4 font-weight-500-italic">
             I'm Harsha. I spend my days making sure AI clusters don't catch fire while simultaneously feeding them enough data to ensure they eventually will. 
             It's like being a zookeeper, but the animals are smarter than you and they know it.
           </p>
           
-          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mt-4" style="font-weight: 500; font-style: italic;">
+          <p class="text-lg sm:text-xl text-gray-600 leading-relaxed mt-4 font-weight-500-italic">
             My hobby is writing about tech with the enthusiasm of someone who's seen enough to know better, <strong>but hopes anyway</strong>.
           </p>
         </div>
@@ -106,8 +106,8 @@ const postsWithImages = posts.map(post => ({
         {/* About link - minimal style */}
         <div class="mt-6 md:mt-8 text-center">
           <a href="/about" 
-             class="about-button inline-block text-sm text-gray-500 hover:text-gray-700 transition-all duration-300 px-6 py-2 rounded-full"
-             style="font-weight: 500; letter-spacing: 0.05em;">
+             class="about-button inline-block text-sm text-gray-500 hover:text-gray-700 transition-all duration-300 px-6 py-2 rounded-full font-weight-500" 
+             style="letter-spacing: 0.05em;">
             <span>More About This Place</span>
           </a>
         </div>
