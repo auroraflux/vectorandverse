@@ -96,6 +96,38 @@
     @apply text-gray-100 bg-gray-900;
   }
   
+  /* Ensure screen reader text is properly hidden */
+  .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  
+  /* Hide any potential landmark labels */
+  [role="main"]::before,
+  main::before,
+  article::before {
+    content: none !important;
+    display: none !important;
+  }
+  
+  /* Additional defensive CSS for stray text at top */
+  body > :first-child:not(script):not(style):not(a) {
+    font-size: inherit;
+  }
+  
+  /* Ensure no text nodes appear before skip link */
+  body::before {
+    content: none !important;
+    display: none !important;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply lowercase font-sans;
     letter-spacing: -0.03em;
