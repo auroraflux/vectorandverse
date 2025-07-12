@@ -37,11 +37,11 @@
   transform: translateX(4px);
 }
 
-/* Hero logo fade effect */
-.hero-section {
+/* Hero logo fade effect - only fade the logo, not the entire section */
+.hero-section .hero-logo-transition {
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.hero-section.scrolled {
+.hero-section.scrolled .hero-logo-transition {
   opacity: 0.3;
 }
