@@ -4,6 +4,9 @@
 
 This guide provides concrete steps to refactor the 1000+ lines of inline JavaScript identified in the code quality plan. We'll start with the highest-impact changes that will immediately improve testability and maintainability.
 
+**Last Updated**: 2025-07-12  
+**Validation Status**: ✅ Enhanced with deep analysis findings
+
 ## Phase 1: Extract Core Animation Logic (Week 1)
 
 ### 1.1 Create TypeScript Module Structure
@@ -745,6 +748,66 @@ describe('TouchLightbox Integration', () => {
 });
 ```
 
+## Phase 3.5: Accessibility Enhancements (NEW)
+
+### 3.5.1 Add ARIA Live Regions
+
+```typescript
+// src/lib/utils/accessibility.ts
+export function createLiveRegion(
+  id: string,
+  politeness: 'polite' | 'assertive' = 'polite'
+): HTMLElement {
+  let region = document.getElementById(id);
+  
+  if (!region) {
+    region = document.createElement('div');
+    region.id = id;
+    region.setAttribute('aria-live', politeness);
+    region.setAttribute('aria-atomic', 'true');
+    region.className = 'sr-only'; // Visually hidden
+    document.body.appendChild(region);
+  }
+  
+  return region;
+}
+
+export function announceToScreenReader(
+  message: string,
+  politeness: 'polite' | 'assertive' = 'polite'
+): void {
+  const regionId = politeness === 'polite' ? 'aria-live-polite' : 'aria-live-assertive';
+  const region = createLiveRegion(regionId, politeness);
+  
+  // Clear and set message for proper announcement
+  region.textContent = '';
+  setTimeout(() => {
+    region.textContent = message;
+  }, 100);
+}
+```
+
+### 3.5.2 Update Typewriter for Accessibility
+
+```typescript
+// In typewriter.ts constructor
+constructor(config: TypewriterConfig) {
+  // ... existing code ...
+  
+  // Set up ARIA attributes
+  this.element.setAttribute('role', 'status');
+  this.element.setAttribute('aria-label', 'Rotating tagline');
+  
+  // Announce to screen readers when phrase completes
+  if (this.config.announceToScreenReader) {
+    this.config.onPhraseComplete = (phrase, index) => {
+      announceToScreenReader(`Tagline: ${phrase}`, 'polite');
+      config.onPhraseComplete?.(phrase, index);
+    };
+  }
+}
+```
+
 ## Phase 4: Migration Strategy
 
 ### 4.1 Gradual Migration Approach
@@ -790,6 +853,43 @@ During migration, use a shim pattern:
 </script>
 ```
 
+### 4.3 State Management Migration
+
+During refactoring, consider using Astro-compatible state management:
+
+```typescript
+// src/lib/stores/ui.ts
+import { atom } from 'nanostores';
+
+// Replace global window.taglineAnimation
+export const taglineState = atom<{
+  isPlaying: boolean;
+  currentPhrase: string;
+  currentIndex: number;
+}>({
+  isPlaying: false,
+  currentPhrase: '',
+  currentIndex: 0
+});
+
+// In components
+import { taglineState } from '../lib/stores/ui';
+
+// Read state
+const state = taglineState.get();
+
+// Update state
+taglineState.set({
+  ...taglineState.get(),
+  currentPhrase: 'New phrase'
+});
+
+// Subscribe to changes
+taglineState.subscribe(state => {
+  console.log('State changed:', state);
+});
+```
+
 ## Success Metrics
 
 ### Before
@@ -798,6 +898,9 @@ During migration, use a shim pattern:
 - Multiple memory leaks
 - XSS vulnerabilities
 - No type safety
+- **No accessibility announcements**
+- **Global state pollution**
+- **No performance metrics**
 
 ### After Phase 1
 - 60% of JavaScript in testable modules
@@ -805,6 +908,8 @@ During migration, use a shim pattern:
 - Memory leaks fixed for refactored components
 - XSS vulnerabilities patched
 - Full TypeScript coverage for new modules
+- **ARIA live regions implemented**
+- **State management via stores**
 
 ### After Complete Migration
 - 95% of JavaScript is testable
@@ -814,6 +919,9 @@ During migration, use a shim pattern:
 - Full type safety
 - 90%+ test coverage
 - New developer onboarding: <2 hours
+- **Full accessibility compliance**
+- **Bundle size reduced by 30%**
+- **Performance metrics tracked**
 
 ## Next Steps
 
