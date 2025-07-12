@@ -17,5 +17,9 @@ export default defineConfig({
   prefetch: {
     prefetchAll: false,
     defaultStrategy: 'viewport'
+  },
+  server: {
+    host: true,  // Listen on all network interfaces
+    port: 4321
   }
 });
