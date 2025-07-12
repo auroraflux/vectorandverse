@@ -38,6 +38,15 @@ Write "The cat sat on the..." and the next token is probably "mat" or "chair" or
 
 *Diffusion* is how image generation works. It's how Midjourney, Ideogram, Flux, and DALL-E create images. You start with pure noise, random static across your entire canvas. Then through repeated rounds of refinement, you gradually denoise the whole thing simultaneously. These models learned by watching millions of images dissolve into static, memorizing each stage of decay. Now they run the process backwards, asking thousands of times: "What would this look like with slightly less chaos?"
 
+<video 
+  src="https://res.cloudinary.com/dyjr1fivj/video/upload/v1752285834/frewtloops_a_representation_of_image_diffusion_--ar_9151_--mo_9bde83a1-120c-4dee-994f-d068ecbbaeca_0_bpo9pz.mp4"
+  autoPlay
+  loop
+  muted
+  className="w-full my-8 rounded-lg shadow-lg"
+  playsInline
+/>
+
 You know when you start streaming a video on terrible Wi-Fi? First few seconds are just chunky pixels, like someone smeared vaseline on your screen. Then it jumps to 480p and you can tell there are people, but their faces are still blobs. By 720p, you recognize who's who, but the details are soft.
 
 Diffusion works the same way, except instead of buffering quality, you're watching iterations tick by. At iteration 20 of 100, you're stuck at potato quality, mostly static with hints of something. By iteration 50, you've hit that 480p moment where you can make out basic shapes. Is that a face? A landscape? Your ex's new partner who somehow looks like a better version of you? You see structure forming but can't tell what it'll become. By iteration 70, you're at 720p confidence. That's definitely a person, but who? What are they doing?
