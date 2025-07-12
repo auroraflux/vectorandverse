@@ -2,8 +2,7 @@
 
 **For Claude Code: Instant file targeting by user intent**
 
-## 🎯 Common Workflows → [WORKFLOWS.md](./WORKFLOWS.md)
-**Start here for:** Step-by-step instructions with explicit triggers
+## 🎯 [WORKFLOWS.md](./WORKFLOWS.md) - Step-by-step instructions
 
 ## Content Creation Tasks
 
@@ -57,6 +56,9 @@
 
 | User Says | Use MCP | Why |
 |-----------|---------|-----|
+| **"project overview"** | `smart-tree` | **Lightning-fast directory analysis** |
+| **"find files"** | `smart-tree` | **Discover tests, configs, docs, code** |
+| **"file statistics"** | `smart-tree` | **Project composition analysis** |
 | "debug this issue" | `zen__debug` | Systematic root cause analysis |
 | "review my code" | `zen__codereview` | Comprehensive quality check |
 | "plan new feature" | `zen__planner` | Step-by-step breakdown |

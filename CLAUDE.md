@@ -79,6 +79,7 @@ tests/           # Playwright tests
 | Test UI | `playwright` | Cross-browser testing |
 | Get docs | `context7` | Framework guidance |
 | System ops | `desktop-commander` | File operations |
+| **Directory analysis** | `smart-tree` | **Project overview, file discovery** |
 
 ### 💡 Integration Philosophy
 - **Use systematic tools** over manual debugging

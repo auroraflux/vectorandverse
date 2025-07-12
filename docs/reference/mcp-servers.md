@@ -51,3 +51,17 @@
 - Step-by-step problem solving
 - Hypothesis testing
 - Decision analysis
+
+## 🌳 Smart Tree MCP (v3.3.0)
+**Intelligent directory analysis and project overview**
+- `quick_tree` - Lightning-fast 3-level overview (START HERE!)
+- `project_overview` - Comprehensive project analysis  
+- `analyze_directory` - Deep structure analysis with 10+ output modes
+- `search_in_files` - Content search across codebase
+- `find_code_files` - Locate source files by language
+- `find_config_files` - Find all configuration files
+- `find_documentation` - Locate README, docs, guides
+- `find_tests` - Discover all test files
+- `get_statistics` - File counts, sizes, distribution
+- `semantic_analysis` - Group files by conceptual purpose
+- **20+ specialized tools** with 99% compression for token efficiency

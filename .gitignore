@@ -29,3 +29,6 @@ playwright-report/
 playwright/.cache/
 # Playwright traces
 *.trace.zip
+
+# MCP Server data
+.serena/

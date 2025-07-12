@@ -78,6 +78,7 @@
 **For complex tasks** → See `docs/reference/mcp-workflows.md`
 
 **Quick MCP usage**:
+- **Project overview** → `smart-tree`
 - Complex debugging → `zen__debug`
 - Code review → `zen__codereview` 
 - Feature planning → `zen__planner`
