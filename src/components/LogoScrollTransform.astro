@@ -1,9 +1,16 @@
 ---
+import { DIMENSION_CONFIG, ANIMATION_CONFIG } from '../lib/config';
+
 // Component for logo transformation on scroll
+// Configuration values passed to client-side script
+const scrollThreshold = DIMENSION_CONFIG.animation.scrollThreshold;
+const transitionDuration = ANIMATION_CONFIG.durations.normal;
 ---
 
 <!-- Empty element to ensure component is rendered -->
-<div data-logo-scroll-transform></div>
+<div data-logo-scroll-transform 
+     data-scroll-threshold={scrollThreshold}
+     data-transition-duration={transitionDuration}></div>
 
 <script>
   function initLogoTransform() {
@@ -40,7 +47,10 @@
     // Create about link
     const aboutLink = document.createElement('a');
     aboutLink.href = '/about';
-    aboutLink.className = 'text-sm text-gray-600 hover:text-gray-900 transition-all duration-300 hover:translate-x-1';
+    const configElement = document.querySelector('[data-logo-scroll-transform]');
+    const duration = configElement?.dataset.transitionDuration || '300';
+    aboutLink.className = `text-sm text-gray-600 hover:text-gray-900 transition-all hover:translate-x-1`;
+    aboutLink.style.transitionDuration = `${duration}ms`;
     aboutLink.style.fontWeight = '500';
     aboutLink.textContent = 'About';
     
@@ -57,7 +67,9 @@
     function updateHeader() {
       const scrollY = window.scrollY;
       const heroHeight = heroSection.offsetHeight;
-      const threshold = 200; // Show sticky header after scrolling 200px
+      const configElement = document.querySelector('[data-logo-scroll-transform]');
+      const threshold = configElement ? 
+        parseInt(configElement.dataset.scrollThreshold) : 100; // Use config or fallback
 
       if (scrollY > threshold) {
         stickyHeader.classList.add('visible');

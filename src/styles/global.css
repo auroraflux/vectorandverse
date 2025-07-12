@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./design-tokens.css";
 @import "./variable-font-effects.css";
 @import "./link-animations.css";
 @import "./typewriter-cursor.css";

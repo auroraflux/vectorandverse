@@ -1,0 +1,119 @@
+/**
+ * Design Tokens as CSS Custom Properties
+ * Generated from configuration constants
+ */
+
+:root {
+  /* Animation Durations */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-medium: 400ms;
+  --duration-slow: 600ms;
+  --duration-slower: 800ms;
+  --duration-slowest: 1s;
+  --duration-extended: 1.2s;
+  --duration-long: 1.5s;
+  --duration-very-long: 2s;
+
+  /* Easing Functions */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-material: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Header Dimensions */
+  --header-height: 80px;
+  --header-spacer-home: 96px;
+  --header-spacer-article: 0px;
+  --header-max-width: 80rem;
+  --header-padding-x: 1.5rem;
+  --header-padding-y: 1.5rem;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+
+  /* Border Widths */
+  --border-thin: 1px;
+  --border-medium: 2px;
+  --border-thick: 3px;
+  --border-focus: 2px;
+
+  /* Border Radius */
+  --radius-sm: 0.125rem;
+  --radius-default: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+  --radius-card: 8px;
+
+  /* Z-index Layers */
+  --z-behind: -10;
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-popover: 60;
+  --z-tooltip: 70;
+
+  /* Touch Targets */
+  --touch-min-size: 44px;
+  --touch-expanded-area: 4px;
+
+  /* Text Shadows */
+  --shadow-text-subtle: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-text-default: 0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-text-strong: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3);
+  --shadow-text-heavy: 0 4px 30px rgba(0,0,0,0.7);
+
+  /* Box Shadows */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-default: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.12);
+
+  /* Effects */
+  --blur-sm: 4px;
+  --blur-default: 8px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+
+  /* Letter Spacing */
+  --letter-spacing-tighter: -0.04em;
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-snug: -0.02em;
+  --letter-spacing-normal: -0.01em;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
+  --letter-spacing-widest: 0.3em;
+
+  /* Animation Thresholds */
+  --scroll-threshold: 100px;
+  --swipe-threshold: 0.15;
+  --velocity-threshold: 0.5;
+  --max-zoom: 3;
+  --min-zoom: 0.5;
+
+  /* Specific Component Values */
+  --typewriter-cursor-blink: 1s;
+  --typewriter-reveal: 2s;
+  --typewriter-reveal-steps: 30;
+  --typewriter-rotate: 25s;
+  --hero-gentle-drift: 25s;
+  --hero-gentle-drift-reverse: 30s;
+  --hero-gradient-move: 30s;
+  --hero-gradient-move-slow: 60s;
+  --hero-color-morph: 16.8s;
+  --shimmer-duration: 3s;
+  --shimmer-delay: 1.5s;
+
+  /* Grid Pattern */
+  --grid-pattern-size: 40px;
+  --grid-line-width: 1px;
+}

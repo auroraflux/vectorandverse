@@ -1,4 +1,6 @@
 ---
+import { DIMENSION_CONFIG, COLOR_CONFIG } from '../lib/config';
+
 export interface Props {
   variant?: 'home' | 'article' | 'minimal';
 }
@@ -16,19 +18,9 @@ const { variant = 'home' } = Astro.props;
   {/* Gradient vignette for article pages */}
   {variant === 'article' && (
     <div class="absolute inset-0 h-48 pointer-events-none" 
-         style="background: linear-gradient(to bottom, 
-                rgba(0,0,0,0.9) 0%, 
-                rgba(0,0,0,0.85) 5%, 
-                rgba(0,0,0,0.8) 10%, 
-                rgba(0,0,0,0.7) 20%, 
-                rgba(0,0,0,0.6) 30%, 
-                rgba(0,0,0,0.5) 40%, 
-                rgba(0,0,0,0.4) 50%, 
-                rgba(0,0,0,0.3) 60%, 
-                rgba(0,0,0,0.2) 70%, 
-                rgba(0,0,0,0.1) 80%, 
-                rgba(0,0,0,0.05) 90%, 
-                transparent 100%);"></div>
+         style={`background: linear-gradient(to bottom, ${COLOR_CONFIG.gradientStops.vignette.map(stop => 
+           `rgba(0,0,0,${stop.opacity}) ${stop.position}`
+         ).join(', ')});`}></div>
   )}
   
   <div class="relative max-w-7xl mx-auto px-6 py-6">
@@ -56,4 +48,4 @@ const { variant = 'home' } = Astro.props;
 </header>
 
 <!-- Spacer to account for fixed header -->
-<div class={variant === 'home' ? 'h-24' : 'h-0'}></div>
+<div style={variant === 'home' ? `height: ${DIMENSION_CONFIG.header.spacerHomeHeight}px` : `height: ${DIMENSION_CONFIG.header.spacerArticleHeight}px`}></div>
