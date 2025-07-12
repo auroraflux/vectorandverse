@@ -16,7 +16,7 @@ test.describe('SEO and Meta Tags', () => {
     await expect(ogTitle).toHaveAttribute('content', 'kilowhat!? - kilowhat!?');
     
     const ogDescription = page.locator('meta[property="og:description"]');
-    await expect(ogDescription).toHaveAttribute('content', 'A minimal typography-focused blog');
+    await expect(ogDescription).toHaveAttribute('content', 'A minimal typography-focused blog exploring tech, life, and the absurdities in between.');
     
     const ogSiteName = page.locator('meta[property="og:site_name"]');
     await expect(ogSiteName).toHaveAttribute('content', 'kilowhat!?');
