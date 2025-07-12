@@ -5,6 +5,7 @@ import ResponsiveImage from '../components/ResponsiveImage.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import ScrollTextReveal from '../components/ScrollTextReveal.astro';
 import ReadingFocus from '../components/ReadingFocus.astro';
+import Lightbox from '../components/Lightbox.astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -40,6 +41,7 @@ const day = new Intl.DateTimeFormat('en-US', {
   <ReadingProgress />
   <ScrollTextReveal />
   {/* <ReadingFocus /> - Temporarily disabled */}
+  <Lightbox />
   <div class="fade-in relative">
     {/* Animated grid background that matches the homepage */}
     <div class="fixed inset-0 -z-10">
@@ -248,6 +250,20 @@ const day = new Intl.DateTimeFormat('en-US', {
     @apply font-medium;
   }
   
+  /* Custom image styling with rounded corners and lightbox cursor */
+  article :global(img) {
+    @apply rounded-lg shadow-lg cursor-zoom-in transition-shadow duration-300;
+  }
+  
+  article :global(img:hover) {
+    @apply shadow-xl;
+  }
+  
+  /* Video styling to match images */
+  article :global(video) {
+    @apply w-full my-8 rounded-lg shadow-lg;
+  }
+  
   /* Bold italic text in prose */
   article :global(em strong),
   article :global(strong em),
@@ -278,3 +294,26 @@ const day = new Intl.DateTimeFormat('en-US', {
     color: rgb(17, 24, 39) !important;
   }
 </style>
+
+<script>
+  // Add lightbox functionality to all images in the article
+  document.addEventListener('astro:page-load', () => {
+    const article = document.querySelector('article');
+    if (!article) return;
+    
+    // Find all images in the article
+    const images = article.querySelectorAll('img');
+    
+    images.forEach((img) => {
+      // Skip if already processed
+      if (img.dataset.lightbox === 'true') return;
+      
+      // Add lightbox attributes
+      img.dataset.lightbox = 'true';
+      img.dataset.fullSrc = img.src;
+      
+      // Ensure proper styling
+      img.classList.add('w-full', 'rounded-lg', 'shadow-lg', 'cursor-zoom-in', 'hover:shadow-xl', 'transition-shadow', 'duration-300');
+    });
+  });
+</script>
