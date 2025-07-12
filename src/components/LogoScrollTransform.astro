@@ -11,19 +11,44 @@
     const heroSection = document.querySelector('.hero-section');
     if (!heroSection) return;
 
-    // Create sticky header
+    // Create sticky header using safe DOM manipulation
     const stickyHeader = document.createElement('div');
     stickyHeader.className = 'sticky-header';
-    stickyHeader.innerHTML = `
-      <div class="sticky-header-content">
-        <a href="/" class="sticky-logo group no-underline">
-          <span style="font-weight: 900;">kilo</span><span style="font-weight: 900; font-style: italic;">what!?</span>
-        </a>
-        <a href="/about" class="text-sm text-gray-600 hover:text-gray-900 transition-all duration-300 hover:translate-x-1" style="font-weight: 500;">
-          About
-        </a>
-      </div>
-    `;
+    
+    // Create sticky header content container
+    const stickyHeaderContent = document.createElement('div');
+    stickyHeaderContent.className = 'sticky-header-content';
+    
+    // Create logo link
+    const logoLink = document.createElement('a');
+    logoLink.href = '/';
+    logoLink.className = 'sticky-logo group no-underline';
+    
+    // Create logo text spans
+    const kiloSpan = document.createElement('span');
+    kiloSpan.style.fontWeight = '900';
+    kiloSpan.textContent = 'kilo';
+    
+    const whatSpan = document.createElement('span');
+    whatSpan.style.fontWeight = '900';
+    whatSpan.style.fontStyle = 'italic';
+    whatSpan.textContent = 'what!?';
+    
+    logoLink.appendChild(kiloSpan);
+    logoLink.appendChild(whatSpan);
+    
+    // Create about link
+    const aboutLink = document.createElement('a');
+    aboutLink.href = '/about';
+    aboutLink.className = 'text-sm text-gray-600 hover:text-gray-900 transition-all duration-300 hover:translate-x-1';
+    aboutLink.style.fontWeight = '500';
+    aboutLink.textContent = 'About';
+    
+    // Assemble the header
+    stickyHeaderContent.appendChild(logoLink);
+    stickyHeaderContent.appendChild(aboutLink);
+    stickyHeader.appendChild(stickyHeaderContent);
+    
     document.body.appendChild(stickyHeader);
 
     let lastScrollY = 0;

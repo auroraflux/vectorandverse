@@ -146,3 +146,46 @@ export function raf(callback: FrameRequestCallback): number {
 export function cancelRaf(id: number): void {
   window.cancelAnimationFrame(id);
 }
+
+/**
+ * Create typewriter display with optional cursor
+ */
+export function createTypewriterDisplay(text: string, showCursor = true): DocumentFragment {
+  const fragment = document.createDocumentFragment();
+  
+  const textSpan = createElement('span', {}, [text]);
+  fragment.appendChild(textSpan);
+  
+  if (showCursor) {
+    const cursorSpan = createElement('span', {
+      class: 'tagline-cursor text-gray-400'
+    }, ['│']);
+    fragment.appendChild(cursorSpan);
+  }
+  
+  return fragment;
+}
+
+/**
+ * Clear all child nodes from element
+ */
+export function clearElement(element: Element): void {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild);
+  }
+}
+
+/**
+ * Safely replace element's children (alternative to innerHTML)
+ * This prevents XSS attacks by ensuring all content is properly escaped
+ */
+export function setChildren(element: Element, children: (Node | string)[]): void {
+  clearElement(element);
+  children.forEach(child => {
+    if (typeof child === 'string') {
+      element.appendChild(document.createTextNode(child));
+    } else {
+      element.appendChild(child);
+    }
+  });
+}
