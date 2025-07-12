@@ -24,7 +24,7 @@
  * ```
  */
 
-import { Page } from '@playwright/test';
+import type { Page } from '@playwright/test';
 
 /**
  * Wait for Astro page transition to complete
