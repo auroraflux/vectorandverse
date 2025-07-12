@@ -35,7 +35,12 @@ const day = new Intl.DateTimeFormat('en-US', {
 }).format(date);
 ---
 
-<Layout title={title} description={description}>
+<Layout 
+  title={title} 
+  description={description}
+  image={heroImage}
+  type="article"
+>
   <Header variant="article" />
   <ReadingProgress />
   <ScrollTextReveal />

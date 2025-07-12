@@ -6,9 +6,18 @@ import '../styles/global.css';
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
 }
 
-const { title, description = 'A minimal typography-focused blog' } = Astro.props;
+const { 
+  title, 
+  description = 'A minimal typography-focused blog',
+  image = '/images/og-default.png',
+  type = 'website'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -19,7 +28,26 @@ const { title, description = 'A minimal typography-focused blog' } = Astro.props
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Basic meta tags -->
     <title>{title} - kilowhat!?</title>
+    
+    <!-- Open Graph meta tags -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={`${title} - kilowhat!?`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="kilowhat!?" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} - kilowhat!?`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
     <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/Satoshi-BlackItalic.woff2" as="font" type="font/woff2" crossorigin>
     <ViewTransitions />
