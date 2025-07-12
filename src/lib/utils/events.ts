@@ -1,9 +1,14 @@
 /**
- * Event handling utilities with automatic cleanup
+ * @module kilowhat/lib/utils/events
+ * @description Event handling utilities with automatic cleanup.
+ * 
+ * This module provides utilities for managing DOM events with automatic cleanup,
+ * preventing memory leaks and ensuring proper resource management.
  */
 
 /**
- * Event listener options with cleanup
+ * Event listener options with cleanup.
+ * @internal
  */
 interface EventListenerWithCleanup {
   element: EventTarget;
@@ -13,13 +18,38 @@ interface EventListenerWithCleanup {
 }
 
 /**
- * Managed event listeners for automatic cleanup
+ * Managed event listeners for automatic cleanup.
+ * 
+ * EventManager tracks all event listeners and provides automatic cleanup
+ * to prevent memory leaks. Use this for components that add multiple listeners.
+ * 
+ * @example
+ * ```typescript
+ * class MyComponent {
+ *   private events = new EventManager();
+ *   
+ *   mount() {
+ *     this.events.on(window, 'resize', this.handleResize);
+ *     this.events.on(button, 'click', this.handleClick);
+ *   }
+ *   
+ *   destroy() {
+ *     this.events.cleanup(); // Removes all listeners
+ *   }
+ * }
+ * ```
  */
 export class EventManager {
   private listeners: EventListenerWithCleanup[] = [];
 
   /**
-   * Add event listener with automatic cleanup tracking
+   * Add event listener with automatic cleanup tracking.
+   * 
+   * @param {EventTarget} element - Target element
+   * @param {string} event - Event name
+   * @param {EventListener} handler - Event handler function
+   * @param {AddEventListenerOptions} [options] - Event listener options
+   * @returns {() => void} Cleanup function to remove this specific listener
    */
   on<K extends keyof HTMLElementEventMap>(
     element: HTMLElement,
@@ -49,7 +79,12 @@ export class EventManager {
   }
 
   /**
-   * Remove specific event listener
+   * Remove specific event listener.
+   * 
+   * @param {EventTarget} element - Target element
+   * @param {string} event - Event name
+   * @param {EventListener} handler - Event handler function
+   * @param {AddEventListenerOptions} [options] - Event listener options
    */
   off(
     element: EventTarget,
@@ -66,7 +101,9 @@ export class EventManager {
   }
 
   /**
-   * Remove all tracked event listeners
+   * Remove all tracked event listeners.
+   * 
+   * Call this in component cleanup/destroy methods to prevent memory leaks.
    */
   cleanup(): void {
     this.listeners.forEach(({ element, event, handler, options }) => {
@@ -76,7 +113,11 @@ export class EventManager {
   }
 
   /**
-   * Get count of active listeners
+   * Get count of active listeners.
+   * 
+   * Useful for debugging and testing cleanup.
+   * 
+   * @returns {number} Number of active event listeners
    */
   get activeListeners(): number {
     return this.listeners.length;
@@ -84,7 +125,21 @@ export class EventManager {
 }
 
 /**
- * Debounce function execution
+ * Debounce function execution.
+ * 
+ * Delays function execution until after wait milliseconds have elapsed
+ * since the last time the debounced function was invoked.
+ * 
+ * @template T - Function type
+ * @param {T} func - Function to debounce
+ * @param {number} delay - Delay in milliseconds
+ * @returns {(...args: Parameters<T>) => void} Debounced function
+ * 
+ * @example
+ * ```typescript
+ * const debouncedSave = debounce(saveData, 500);
+ * input.addEventListener('input', debouncedSave);
+ * ```
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
@@ -105,7 +160,21 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 /**
- * Throttle function execution
+ * Throttle function execution.
+ * 
+ * Ensures function is called at most once per specified time period.
+ * Useful for scroll and resize handlers.
+ * 
+ * @template T - Function type
+ * @param {T} func - Function to throttle
+ * @param {number} limit - Minimum time between calls in milliseconds
+ * @returns {(...args: Parameters<T>) => void} Throttled function
+ * 
+ * @example
+ * ```typescript
+ * const throttledScroll = throttle(handleScroll, 100);
+ * window.addEventListener('scroll', throttledScroll);
+ * ```
  */
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
@@ -133,7 +202,21 @@ export function throttle<T extends (...args: any[]) => any>(
 }
 
 /**
- * Create a one-time event listener
+ * Create a one-time event listener.
+ * 
+ * Automatically removes the listener after first invocation.
+ * 
+ * @param {EventTarget} element - Target element
+ * @param {string} event - Event name
+ * @param {EventListener} handler - Event handler
+ * @returns {() => void} Cleanup function
+ * 
+ * @example
+ * ```typescript
+ * once(video, 'loadeddata', () => {
+ *   console.log('Video loaded');
+ * });
+ * ```
  */
 export function once<K extends keyof HTMLElementEventMap>(
   element: HTMLElement,
@@ -162,7 +245,22 @@ export function once(
 }
 
 /**
- * Delegate event handling to a parent element
+ * Delegate event handling to a parent element.
+ * 
+ * Efficient event handling for dynamic elements using event delegation.
+ * 
+ * @param {HTMLElement} parent - Parent element
+ * @param {string} selector - CSS selector for target elements
+ * @param {string} event - Event name
+ * @param {Function} handler - Event handler
+ * @returns {() => void} Cleanup function
+ * 
+ * @example
+ * ```typescript
+ * delegate(document.body, '.btn', 'click', (e, target) => {
+ *   console.log('Button clicked:', target.textContent);
+ * });
+ * ```
  */
 export function delegate<K extends keyof HTMLElementEventMap>(
   parent: HTMLElement,
@@ -198,7 +296,19 @@ export function delegate(
 }
 
 /**
- * Create custom event with data
+ * Create and dispatch custom event with data.
+ * 
+ * @template T - Type of event detail
+ * @param {EventTarget} element - Target element
+ * @param {string} eventName - Custom event name
+ * @param {T} [detail] - Event detail data
+ * @param {EventInit} [options] - Additional event options
+ * @returns {boolean} False if event was cancelled
+ * 
+ * @example
+ * ```typescript
+ * emit(element, 'user-login', { userId: 123 });
+ * ```
  */
 export function emit<T = any>(
   element: EventTarget,
@@ -217,7 +327,25 @@ export function emit<T = any>(
 }
 
 /**
- * Wait for event to occur
+ * Wait for event to occur.
+ * 
+ * Returns a promise that resolves when the specified event fires.
+ * 
+ * @param {EventTarget} element - Target element
+ * @param {string} event - Event name
+ * @param {number} [timeout] - Optional timeout in milliseconds
+ * @returns {Promise<Event>} Promise that resolves with the event
+ * @throws {Error} If timeout is specified and exceeded
+ * 
+ * @example
+ * ```typescript
+ * try {
+ *   const event = await waitForEvent(img, 'load', 5000);
+ *   console.log('Image loaded');
+ * } catch (e) {
+ *   console.error('Image load timeout');
+ * }
+ * ```
  */
 export function waitForEvent<K extends keyof HTMLElementEventMap>(
   element: HTMLElement,

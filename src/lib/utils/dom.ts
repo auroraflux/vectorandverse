@@ -1,9 +1,26 @@
 /**
- * DOM utility functions for safe and efficient DOM manipulation
+ * @module kilowhat/lib/utils/dom
+ * @description DOM utility functions for safe and efficient DOM manipulation.
+ * 
+ * This module provides type-safe wrappers around common DOM operations,
+ * with built-in XSS prevention and performance optimizations.
  */
 
 /**
- * Safely query a single element with type narrowing
+ * Safely query a single element with type narrowing.
+ * 
+ * @template T - The expected element type
+ * @param {string} selector - CSS selector
+ * @param {ParentNode} [parent=document] - Parent node to search within
+ * @returns {T | null} The found element or null
+ * 
+ * @example
+ * ```typescript
+ * const button = querySelector<HTMLButtonElement>('.submit-btn');
+ * if (button) {
+ *   button.disabled = false;
+ * }
+ * ```
  */
 export function querySelector<T extends Element>(
   selector: string,
@@ -13,7 +30,18 @@ export function querySelector<T extends Element>(
 }
 
 /**
- * Safely query all elements with type narrowing
+ * Safely query all elements with type narrowing.
+ * 
+ * @template T - The expected element type
+ * @param {string} selector - CSS selector
+ * @param {ParentNode} [parent=document] - Parent node to search within
+ * @returns {T[]} Array of found elements (never null)
+ * 
+ * @example
+ * ```typescript
+ * const images = querySelectorAll<HTMLImageElement>('img[data-lightbox]');
+ * images.forEach(img => console.log(img.src));
+ * ```
  */
 export function querySelectorAll<T extends Element>(
   selector: string,
@@ -23,14 +51,35 @@ export function querySelectorAll<T extends Element>(
 }
 
 /**
- * Get element by ID with type narrowing
+ * Get element by ID with type narrowing.
+ * 
+ * @template T - The expected element type
+ * @param {string} id - Element ID (without #)
+ * @returns {T | null} The found element or null
+ * 
+ * @example
+ * ```typescript
+ * const canvas = getElementById<HTMLCanvasElement>('myCanvas');
+ * ```
  */
 export function getElementById<T extends HTMLElement>(id: string): T | null {
   return document.getElementById(id) as T | null;
 }
 
 /**
- * Check if element exists and is visible
+ * Check if element exists and is visible.
+ * 
+ * Checks multiple visibility factors including dimensions, display, visibility, and opacity.
+ * 
+ * @param {Element | null} element - Element to check
+ * @returns {boolean} True if element exists and is visible
+ * 
+ * @example
+ * ```typescript
+ * if (isVisible(modal)) {
+ *   // Modal is visible, handle accordingly
+ * }
+ * ```
  */
 export function isVisible(element: Element | null): boolean {
   if (!element) return false;
@@ -48,7 +97,21 @@ export function isVisible(element: Element | null): boolean {
 }
 
 /**
- * Create element with attributes and optional children
+ * Create element with attributes and optional children.
+ * 
+ * @template K - HTML tag name
+ * @param {K} tag - HTML tag name
+ * @param {Record<string, string>} [attributes] - Element attributes
+ * @param {(Node | string)[]} [children] - Child nodes or text content
+ * @returns {HTMLElementTagNameMap[K]} The created element
+ * 
+ * @example
+ * ```typescript
+ * const button = createElement('button', 
+ *   { class: 'btn btn-primary', type: 'submit' },
+ *   ['Click me']
+ * );
+ * ```
  */
 export function createElement<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -77,7 +140,17 @@ export function createElement<K extends keyof HTMLElementTagNameMap>(
 }
 
 /**
- * Safely set text content (prevents XSS)
+ * Safely set text content (prevents XSS).
+ * 
+ * Always use this instead of innerHTML when setting text to prevent XSS attacks.
+ * 
+ * @param {Element} element - Target element
+ * @param {string} text - Text content to set
+ * 
+ * @example
+ * ```typescript
+ * setTextContent(titleElement, userInput); // Safe from XSS
+ * ```
  */
 export function setTextContent(element: Element, text: string): void {
   element.textContent = text;
@@ -148,7 +221,20 @@ export function cancelRaf(id: number): void {
 }
 
 /**
- * Create typewriter display with optional cursor
+ * Create typewriter display with optional cursor.
+ * 
+ * Creates a document fragment with text and an optional cursor element.
+ * Used by the Typewriter animation component.
+ * 
+ * @param {string} text - Text to display
+ * @param {boolean} [showCursor=true] - Whether to show cursor
+ * @returns {DocumentFragment} Fragment containing text and cursor spans
+ * 
+ * @example
+ * ```typescript
+ * const display = createTypewriterDisplay('Hello World', true);
+ * element.appendChild(display);
+ * ```
  */
 export function createTypewriterDisplay(text: string, showCursor = true): DocumentFragment {
   const fragment = document.createDocumentFragment();
@@ -176,8 +262,22 @@ export function clearElement(element: Element): void {
 }
 
 /**
- * Safely replace element's children (alternative to innerHTML)
- * This prevents XSS attacks by ensuring all content is properly escaped
+ * Safely replace element's children (alternative to innerHTML).
+ * 
+ * This prevents XSS attacks by ensuring all content is properly escaped.
+ * Use this instead of innerHTML when you need to replace all children.
+ * 
+ * @param {Element} element - Parent element
+ * @param {(Node | string)[]} children - New children (nodes or text)
+ * 
+ * @example
+ * ```typescript
+ * // Safe from XSS even with user input
+ * setChildren(container, [
+ *   createElement('h2', {}, [userTitle]),
+ *   userContent // Will be escaped as text
+ * ]);
+ * ```
  */
 export function setChildren(element: Element, children: (Node | string)[]): void {
   clearElement(element);
