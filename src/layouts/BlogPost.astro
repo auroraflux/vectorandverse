@@ -58,24 +58,16 @@ const day = new Intl.DateTimeFormat('en-US', {
       {/* Background Image or Gradient */}
       {heroImage ? (
         <>
-          <picture class="absolute inset-0 w-full h-full">
-            {/* Try WebP version if it exists */}
-            <source 
-              type="image/webp" 
-              srcset={heroImage.replace(/\.(jpg|jpeg|png)$/i, '.webp')}
-            />
-            {/* Fallback to original format */}
-            <img 
-              src={heroImage} 
-              alt={heroImageAlt || title}
-              width="2048"
-              height="800"
-              loading="eager"
-              fetchpriority="high"
-              class="w-full h-full object-cover"
-              decoding="async"
-            />
-          </picture>
+          <img 
+            src={heroImage} 
+            alt={heroImageAlt || title}
+            width="2048"
+            height="800"
+            loading="eager"
+            fetchpriority="high"
+            class="absolute inset-0 w-full h-full object-cover"
+            decoding="async"
+          />
           {/* Gradient Overlay - connects with header vignette */}
           <div class="absolute inset-0" 
                style="background: linear-gradient(to top, 

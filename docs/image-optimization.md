@@ -7,9 +7,12 @@ Since images are stored in the `public` directory, Astro cannot optimize them du
 ### 1. Proper Width/Height Attributes
 All images now have explicit width and height attributes to prevent Cumulative Layout Shift (CLS).
 
-### 2. Picture Elements with WebP Support
-Images are wrapped in `<picture>` elements that attempt to load WebP versions if they exist:
+### 2. WebP Support (Future Enhancement)
+WebP versions need to be generated before using `<picture>` elements. Currently using standard `<img>` tags with optimization attributes.
 
+To enable WebP support in the future:
+1. Generate WebP versions of all images
+2. Re-enable the `<picture>` element pattern:
 ```html
 <picture>
   <source type="image/webp" srcset="image.webp" />
