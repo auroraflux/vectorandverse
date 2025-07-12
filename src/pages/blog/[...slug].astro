@@ -1,20 +1,40 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
+import SwipeNavigation from '../../components/SwipeNavigation.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post,
-  }));
+  const sortedPosts = posts.sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+  
+  return sortedPosts.map((post, index) => {
+    const prevPost = index < sortedPosts.length - 1 ? sortedPosts[index + 1] : null;
+    const nextPost = index > 0 ? sortedPosts[index - 1] : null;
+    
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+        prevPost: prevPost ? { slug: prevPost.slug, title: prevPost.data.title } : null,
+        nextPost: nextPost ? { slug: nextPost.slug, title: nextPost.data.title } : null,
+      },
+    };
+  });
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+interface Props {
+  post: CollectionEntry<'blog'>;
+  prevPost: { slug: string; title: string } | null;
+  nextPost: { slug: string; title: string } | null;
+}
+
+const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await post.render();
 ---
 
 <BlogPost {...post.data}>
   <Content />
+  <SwipeNavigation prevPost={prevPost} nextPost={nextPost} />
 </BlogPost>

@@ -1,0 +1,334 @@
+---
+// Enhanced lightbox component with touch support
+---
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close lightbox">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <div class="lightbox-container">
+    <img class="lightbox-image" src="" alt="Click to close enlarged image" />
+  </div>
+  <div class="lightbox-loading">
+    <div class="lightbox-spinner"></div>
+  </div>
+</div>
+
+<style>
+  @import "tailwindcss";
+  @reference;
+  
+  .lightbox {
+    @apply fixed inset-0 z-50 flex items-center justify-center bg-black/95 opacity-0 pointer-events-none;
+    transition: opacity 0.3s ease;
+    touch-action: none;
+  }
+  
+  .lightbox.active {
+    @apply opacity-100 pointer-events-auto;
+  }
+  
+  .lightbox-close {
+    @apply absolute top-4 right-4 text-white hover:text-gray-300 transition-colors p-3 rounded-full;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    /* Larger touch target for mobile */
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @media (hover: hover) {
+    .lightbox-close:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+  }
+  
+  .lightbox-container {
+    @apply relative w-full h-full flex items-center justify-center;
+    overflow: hidden;
+  }
+  
+  .lightbox-image {
+    @apply max-w-[90vw] max-h-[90vh] object-contain select-none;
+    transform-origin: center center;
+    transition: transform 0.2s ease;
+    will-change: transform;
+  }
+  
+  .lightbox-loading {
+    @apply absolute inset-0 flex items-center justify-center pointer-events-none opacity-0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .lightbox.loading .lightbox-loading {
+    @apply opacity-100;
+  }
+  
+  .lightbox-spinner {
+    @apply w-12 h-12 border-4 border-white/20 border-t-white rounded-full animate-spin;
+  }
+  
+  /* Prevent body scroll when lightbox is open */
+  body.lightbox-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+</style>
+
+<script>
+  interface TouchState {
+    startX: number;
+    startY: number;
+    startDistance?: number;
+    currentScale: number;
+    currentX: number;
+    currentY: number;
+    velocityY: number;
+    lastY: number;
+    lastTime: number;
+  }
+  
+  let lightboxInitialized = false;
+  let touchState: TouchState | null = null;
+  let animationFrame: number | null = null;
+  
+  function setupLightbox() {
+    if (lightboxInitialized) return;
+    lightboxInitialized = true;
+    
+    // Event listeners
+    document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleKeydown);
+    
+    // Touch event listeners with passive option for better performance
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+      lightbox.addEventListener('touchstart', handleTouchStart, { passive: false });
+      lightbox.addEventListener('touchmove', handleTouchMove, { passive: false });
+      lightbox.addEventListener('touchend', handleTouchEnd, { passive: true });
+      
+      // Prevent default zoom on double tap
+      lightbox.addEventListener('touchstart', (e) => {
+        if (e.touches.length > 1) {
+          e.preventDefault();
+        }
+      });
+    }
+  }
+  
+  function handleClick(e: MouseEvent) {
+    const target = e.target as HTMLElement;
+    
+    // Check if clicked element is an image with lightbox attribute
+    if (target.tagName === 'IMG' && target.dataset.lightbox === 'true') {
+      e.preventDefault();
+      openLightbox(target);
+      return;
+    }
+    
+    // Check if clicked element is the close button or its child
+    if (target.closest('.lightbox-close')) {
+      e.preventDefault();
+      closeLightbox();
+      return;
+    }
+    
+    // Check if clicked element is the lightbox backdrop
+    if (target.id === 'lightbox' || target.classList.contains('lightbox-container')) {
+      closeLightbox();
+      return;
+    }
+  }
+  
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox?.classList.contains('active')) {
+        closeLightbox();
+      }
+    }
+  }
+  
+  function handleTouchStart(e: TouchEvent) {
+    if (e.touches.length === 1) {
+      // Single touch - prepare for swipe
+      const touch = e.touches[0];
+      touchState = {
+        startX: touch.clientX,
+        startY: touch.clientY,
+        currentScale: 1,
+        currentX: 0,
+        currentY: 0,
+        velocityY: 0,
+        lastY: touch.clientY,
+        lastTime: Date.now()
+      };
+    } else if (e.touches.length === 2) {
+      // Two touches - prepare for pinch zoom
+      e.preventDefault();
+      const distance = getTouchDistance(e.touches[0], e.touches[1]);
+      if (touchState) {
+        touchState.startDistance = distance;
+      }
+    }
+  }
+  
+  function handleTouchMove(e: TouchEvent) {
+    if (!touchState) return;
+    
+    const lightboxImg = document.querySelector('.lightbox-image') as HTMLImageElement;
+    if (!lightboxImg) return;
+    
+    if (e.touches.length === 1 && touchState.currentScale === 1) {
+      // Single touch swipe when not zoomed
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - touchState.startX;
+      const deltaY = touch.clientY - touchState.startY;
+      
+      // Calculate velocity for momentum
+      const now = Date.now();
+      const timeDelta = now - touchState.lastTime;
+      if (timeDelta > 0) {
+        touchState.velocityY = (touch.clientY - touchState.lastY) / timeDelta;
+      }
+      touchState.lastY = touch.clientY;
+      touchState.lastTime = now;
+      
+      // Only allow vertical swipe when not zoomed
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        e.preventDefault();
+        touchState.currentY = deltaY;
+        
+        // Apply transform with resistance at edges
+        const resistance = Math.abs(deltaY) / window.innerHeight;
+        const scale = 1 - Math.min(resistance * 0.3, 0.3);
+        const opacity = 1 - Math.min(resistance * 0.5, 0.5);
+        
+        if (animationFrame) cancelAnimationFrame(animationFrame);
+        animationFrame = requestAnimationFrame(() => {
+          lightboxImg.style.transform = `translateY(${deltaY}px) scale(${scale})`;
+          const lightbox = document.getElementById('lightbox');
+          if (lightbox) {
+            lightbox.style.opacity = String(opacity);
+          }
+        });
+      }
+    } else if (e.touches.length === 2 && touchState.startDistance) {
+      // Pinch zoom
+      e.preventDefault();
+      const distance = getTouchDistance(e.touches[0], e.touches[1]);
+      const scale = distance / touchState.startDistance;
+      touchState.currentScale = Math.min(Math.max(scale, 0.5), 3);
+      
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(() => {
+        lightboxImg.style.transform = `scale(${touchState!.currentScale})`;
+      });
+    }
+  }
+  
+  function handleTouchEnd(e: TouchEvent) {
+    if (!touchState) return;
+    
+    const lightboxImg = document.querySelector('.lightbox-image') as HTMLImageElement;
+    const lightbox = document.getElementById('lightbox');
+    if (!lightboxImg || !lightbox) return;
+    
+    // Check if swipe to close
+    const threshold = window.innerHeight * 0.15; // 15% of screen height
+    const velocityThreshold = 0.5; // pixels per millisecond
+    
+    if (touchState.currentScale === 1 && 
+        (Math.abs(touchState.currentY) > threshold || 
+         Math.abs(touchState.velocityY) > velocityThreshold)) {
+      // Close lightbox with swipe
+      closeLightbox();
+    } else {
+      // Reset position
+      lightboxImg.style.transform = `scale(${touchState.currentScale})`;
+      lightbox.style.opacity = '1';
+    }
+    
+    touchState = null;
+  }
+  
+  function getTouchDistance(touch1: Touch, touch2: Touch): number {
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  
+  function openLightbox(img: HTMLElement) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox?.querySelector('.lightbox-image') as HTMLImageElement;
+    const fullSrc = img.dataset.fullSrc;
+    
+    if (!lightbox || !lightboxImg || !fullSrc) return;
+    
+    // Show loading state
+    lightbox.classList.add('loading');
+    
+    // Load image
+    const tempImg = new Image();
+    tempImg.onload = () => {
+      lightboxImg.src = fullSrc;
+      lightboxImg.alt = img.getAttribute('alt') || '';
+      lightbox.classList.remove('loading');
+    };
+    tempImg.src = fullSrc;
+    
+    // Show lightbox
+    requestAnimationFrame(() => {
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+      
+      // Focus close button for accessibility
+      const closeBtn = lightbox.querySelector('.lightbox-close') as HTMLButtonElement;
+      closeBtn?.focus();
+    });
+  }
+  
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox?.querySelector('.lightbox-image') as HTMLImageElement;
+    if (!lightbox) return;
+    
+    // Animate out
+    lightbox.style.transition = 'opacity 0.3s ease';
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+    
+    // Reset transforms
+    if (lightboxImg) {
+      lightboxImg.style.transform = '';
+    }
+    lightbox.style.opacity = '';
+    
+    // Clear image source after transition
+    setTimeout(() => {
+      if (lightboxImg) {
+        lightboxImg.src = '';
+      }
+      lightbox.classList.remove('loading');
+    }, 300);
+  }
+  
+  // Initialize
+  setupLightbox();
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLightbox);
+  }
+  
+  document.addEventListener('astro:page-load', setupLightbox);
+</script>

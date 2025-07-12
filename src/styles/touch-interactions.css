@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@layer utilities {
+  /* Touch ripple effect */
+  .touch-ripple {
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .touch-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    pointer-events: none;
+  }
+  
+  .touch-ripple:active::before {
+    width: 300%;
+    height: 300%;
+  }
+  
+  /* Dark mode ripple */
+  .touch-ripple-dark::before {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Touch-friendly active states */
+  .touch-active {
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  }
+  
+  .touch-active:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Disable hover effects on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .hover\:text-gray-700:hover,
+    .hover\:text-white:hover,
+    .hover\:text-gray-300:hover,
+    .hover\:translate-x-1:hover,
+    .hover\:opacity-100:hover,
+    .hover\:scale-105:hover {
+      /* Reset hover states on touch devices */
+      color: inherit;
+      transform: none;
+      opacity: inherit;
+    }
+    
+    /* Maintain focus states for accessibility */
+    .hover\:text-gray-700:focus-visible,
+    .hover\:text-white:focus-visible {
+      color: var(--tw-text-opacity);
+    }
+  }
+  
+  /* Touch-optimized link and button sizes */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Improved focus indicators for touch devices */
+  .touch-focus {
+    position: relative;
+  }
+  
+  .touch-focus:focus-visible {
+    outline: none;
+  }
+  
+  .touch-focus:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid rgb(99 102 241);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  
+  /* Smooth scrolling for touch */
+  .touch-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Prevent text selection on touch interaction elements */
+  .touch-no-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Touch-optimized card interactions */
+  .touch-card {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    will-change: transform;
+  }
+  
+  @media (hover: none) and (pointer: coarse) {
+    .touch-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+  }
+  
+  @media (hover: hover) and (pointer: fine) {
+    .touch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+  }
+  
+  /* Momentum scrolling for mobile */
+  .momentum-scroll {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+  
+  /* Disable pull-to-refresh on specific elements */
+  .no-pull-refresh {
+    overscroll-behavior-y: contain;
+  }
+  
+  /* Touch-friendly spacing */
+  @media (max-width: 768px) {
+    .touch-spacing > * + * {
+      margin-top: 1.5rem;
+    }
+    
+    .touch-padding {
+      padding: 1.5rem;
+    }
+    
+    .touch-padding-x {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    
+    .touch-padding-y {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  }
+}

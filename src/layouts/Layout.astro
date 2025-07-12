@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import Lightbox from '../components/Lightbox.astro';
+import TouchLightbox from '../components/TouchLightbox.astro';
 import '../styles/global.css';
 
 export interface Props {
@@ -142,6 +142,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body class="min-h-screen bg-white">
     <slot />
-    <Lightbox />
+    <TouchLightbox />
   </body>
 </html>

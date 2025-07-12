@@ -146,8 +146,8 @@ const postsWithImages = posts.map(post => ({
           }).format(post.data.date);
           
           return (
-            <article class="group relative">
-              <a href={`/blog/${post.slug}`} class="block relative overflow-hidden h-[400px] md:h-[500px] no-underline rounded-[8px]" data-has-image={post.heroImageUrl ? "true" : "false"}>
+            <article class="group relative touch-card">
+              <a href={`/blog/${post.slug}`} class="block relative overflow-hidden h-[400px] md:h-[500px] no-underline rounded-[8px] touch-ripple touch-no-select" data-has-image={post.heroImageUrl ? "true" : "false"}>
                 {/* Background Image or Gradient */}
                 {post.heroImageUrl ? (
                   <img 
