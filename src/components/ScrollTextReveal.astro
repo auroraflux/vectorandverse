@@ -34,7 +34,12 @@
 </style>
 
 <script>
+  let revealObserver;
+  
   function initTextReveal() {
+    // Clean up any existing observer
+    cleanupTextReveal();
+    
     // Only run on article pages
     const article = document.querySelector('article');
     if (!article) return;
@@ -52,13 +57,13 @@
     });
 
     // Create intersection observer
-    const observer = new IntersectionObserver(
+    revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
             // Once revealed, stop observing
-            observer.unobserve(entry.target);
+            revealObserver.unobserve(entry.target);
           }
         });
       },
@@ -71,9 +76,20 @@
 
     // Observe all reveal elements
     const revealElements = document.querySelectorAll('.reveal-text');
-    revealElements.forEach((el) => observer.observe(el));
+    revealElements.forEach((el) => revealObserver.observe(el));
+  }
+  
+  function cleanupTextReveal() {
+    // Disconnect observer if it exists
+    if (revealObserver) {
+      revealObserver.disconnect();
+      revealObserver = null;
+    }
   }
 
   // Initialize on page load
   document.addEventListener('astro:page-load', initTextReveal);
+  
+  // Clean up on page navigation
+  document.addEventListener('astro:before-swap', cleanupTextReveal);
 </script>

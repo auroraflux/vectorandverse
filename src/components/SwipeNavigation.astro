@@ -75,87 +75,114 @@ const { prevPost, nextPost } = Astro.props;
 </style>
 
 <script define:vars={{ prevPost, nextPost }}>
-  // Only run on touch devices
-  if ('ontouchstart' in window) {
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchEndX = 0;
-    let touchEndY = 0;
-    let isSwiping = false;
-    
-    const minSwipeDistance = 75; // Minimum distance for a swipe
-    const maxVerticalDistance = 100; // Maximum vertical movement allowed
-    
-    function handleTouchStart(e) {
-      touchStartX = e.changedTouches[0].screenX;
-      touchStartY = e.changedTouches[0].screenY;
-    }
-    
-    function handleTouchMove(e) {
-      if (!isSwiping) {
-        const currentX = e.changedTouches[0].screenX;
-        const currentY = e.changedTouches[0].screenY;
-        const deltaX = Math.abs(currentX - touchStartX);
-        const deltaY = Math.abs(currentY - touchStartY);
-        
-        // Check if horizontal swipe
-        if (deltaX > 30 && deltaX > deltaY) {
-          isSwiping = true;
-          document.body.classList.add('swiping');
+  function initSwipeNavigation() {
+    // Only run on touch devices
+    if ('ontouchstart' in window) {
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+      let isSwiping = false;
+      
+      const minSwipeDistance = 75; // Minimum distance for a swipe
+      const maxVerticalDistance = 100; // Maximum vertical movement allowed
+      
+      function handleTouchStart(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }
+      
+      function handleTouchMove(e) {
+        if (!isSwiping) {
+          const currentX = e.changedTouches[0].screenX;
+          const currentY = e.changedTouches[0].screenY;
+          const deltaX = Math.abs(currentX - touchStartX);
+          const deltaY = Math.abs(currentY - touchStartY);
           
-          // Show which direction user is swiping
-          const direction = currentX < touchStartX ? 'next' : 'prev';
-          const indicator = document.querySelector(`.swipe-indicator-${direction}`);
-          if (indicator && ((direction === 'next' && nextPost) || (direction === 'prev' && prevPost))) {
-            if (deltaX > minSwipeDistance) {
-              indicator.classList.add('ready');
-            } else {
-              indicator.classList.remove('ready');
+          // Check if horizontal swipe
+          if (deltaX > 30 && deltaX > deltaY) {
+            isSwiping = true;
+            document.body.classList.add('swiping');
+            
+            // Show which direction user is swiping
+            const direction = currentX < touchStartX ? 'next' : 'prev';
+            const indicator = document.querySelector(`.swipe-indicator-${direction}`);
+            if (indicator && ((direction === 'next' && nextPost) || (direction === 'prev' && prevPost))) {
+              if (deltaX > minSwipeDistance) {
+                indicator.classList.add('ready');
+              } else {
+                indicator.classList.remove('ready');
+              }
             }
           }
         }
+        
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
       }
       
-      touchEndX = e.changedTouches[0].screenX;
-      touchEndY = e.changedTouches[0].screenY;
-    }
-    
-    function handleTouchEnd() {
-      if (!isSwiping) {
-        document.body.classList.remove('swiping');
-        return;
-      }
-      
-      const deltaX = touchEndX - touchStartX;
-      const deltaY = Math.abs(touchEndY - touchStartY);
-      
-      // Check if swipe is mostly horizontal
-      if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalDistance) {
-        if (deltaX > 0 && prevPost) {
-          // Swipe right - go to previous post
-          window.location.href = `/blog/${prevPost.slug}`;
-        } else if (deltaX < 0 && nextPost) {
-          // Swipe left - go to next post
-          window.location.href = `/blog/${nextPost.slug}`;
+      function handleTouchEnd() {
+        if (!isSwiping) {
+          document.body.classList.remove('swiping');
+          return;
         }
+        
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // Check if swipe is mostly horizontal
+        if (Math.abs(deltaX) > minSwipeDistance && deltaY < maxVerticalDistance) {
+          if (deltaX > 0 && prevPost) {
+            // Swipe right - go to previous post
+            window.location.href = `/blog/${prevPost.slug}`;
+          } else if (deltaX < 0 && nextPost) {
+            // Swipe left - go to next post
+            window.location.href = `/blog/${nextPost.slug}`;
+          }
+        }
+        
+        // Reset
+        isSwiping = false;
+        document.body.classList.remove('swiping');
+        document.querySelectorAll('.swipe-indicator').forEach(el => {
+          el.classList.remove('ready');
+        });
       }
       
-      // Reset
-      isSwiping = false;
-      document.body.classList.remove('swiping');
-      document.querySelectorAll('.swipe-indicator').forEach(el => {
-        el.classList.remove('ready');
-      });
-    }
-    
-    // Add event listeners to article content area only
-    const articleContent = document.getElementById('main-content');
-    if (articleContent) {
-      articleContent.addEventListener('touchstart', handleTouchStart, { passive: true });
-      articleContent.addEventListener('touchmove', handleTouchMove, { passive: true });
-      articleContent.addEventListener('touchend', handleTouchEnd, { passive: true });
+      // Add event listeners to article content area only
+      const articleContent = document.getElementById('main-content');
+      if (articleContent) {
+        articleContent.addEventListener('touchstart', handleTouchStart, { passive: true });
+        articleContent.addEventListener('touchmove', handleTouchMove, { passive: true });
+        articleContent.addEventListener('touchend', handleTouchEnd, { passive: true });
+        
+        // Cleanup function
+        const cleanup = () => {
+          articleContent.removeEventListener('touchstart', handleTouchStart);
+          articleContent.removeEventListener('touchmove', handleTouchMove);
+          articleContent.removeEventListener('touchend', handleTouchEnd);
+          document.body.classList.remove('swiping');
+          document.querySelectorAll('.swipe-indicator').forEach(el => {
+            el.classList.remove('ready');
+          });
+        };
+        
+        // Store cleanup function for later use
+        window.__swipeNavigationCleanup = cleanup;
+      }
     }
   }
+  
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initSwipeNavigation);
+  
+  // Clean up on page navigation
+  document.addEventListener('astro:before-swap', () => {
+    if (window.__swipeNavigationCleanup) {
+      window.__swipeNavigationCleanup();
+      delete window.__swipeNavigationCleanup;
+    }
+  });
 </script>
 
 <!-- Traditional navigation links for desktop and accessibility -->

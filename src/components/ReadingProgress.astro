@@ -24,7 +24,14 @@
 </style>
 
 <script>
+  let scrollHandler;
+  let resizeHandler;
+  let animationFrameId;
+  
   function initProgressBar() {
+    // Clean up any existing handlers first
+    cleanupProgressBar();
+    
     // Only run on article pages
     const article = document.querySelector('article');
     if (!article) return;
@@ -54,9 +61,9 @@
     
     // Throttle scroll events for performance
     let ticking = false;
-    const handleScroll = () => {
+    scrollHandler = () => {
       if (!ticking) {
-        requestAnimationFrame(() => {
+        animationFrameId = requestAnimationFrame(() => {
           updateProgress();
           ticking = false;
         });
@@ -64,12 +71,36 @@
       }
     };
     
+    resizeHandler = updateProgress;
+    
     // Listen for scroll events
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', updateProgress);
+    window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('resize', resizeHandler);
     
     // Initial update
     updateProgress();
+  }
+  
+  function cleanupProgressBar() {
+    // Remove event listeners
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
+      scrollHandler = null;
+    }
+    if (resizeHandler) {
+      window.removeEventListener('resize', resizeHandler);
+      resizeHandler = null;
+    }
+    
+    // Cancel any pending animation frame
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = null;
+    }
+    
+    // Remove progress bar element
+    const progressBar = document.querySelector('.reading-progress-bar');
+    if (progressBar) progressBar.remove();
   }
 
   // Initialize on page load
@@ -77,4 +108,7 @@
   
   // Re-initialize on Astro page navigation
   document.addEventListener('astro:page-load', initProgressBar);
+  
+  // Clean up on page navigation
+  document.addEventListener('astro:before-swap', cleanupProgressBar);
 </script>
