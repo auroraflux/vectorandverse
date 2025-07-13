@@ -27,6 +27,12 @@
     visibility: visible;
   }
 
+  /* Prevent background scrolling when lightbox is open */
+  .lightbox-open {
+    overscroll-behavior-y: contain;
+    overflow: hidden;
+  }
+
   .lightbox-content {
     max-width: 90vw; /* Max width relative to viewport */
     max-height: 90vh; /* Max height relative to viewport */
@@ -43,57 +49,89 @@
 </style>
 
 <script is:inline>
-  const lightboxOverlay = document.getElementById('global-lightbox');
-  const lightboxImage = document.getElementById('lightbox-image');
-  let currentScrollPosition = 0; // To restore scroll position after closing
+  let lightboxOverlay;
+  let lightboxImage;
+  let overlayClickHandler;
+  let keydownHandler;
+  let documentClickHandler;
 
-  function openLightbox(src, alt) {
-    lightboxImage.src = src;
-    lightboxImage.alt = alt;
-    lightboxOverlay.setAttribute('aria-hidden', 'false');
-    // Prevent scrolling on the body when lightbox is open
-    currentScrollPosition = window.scrollY;
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${currentScrollPosition}px`;
-    document.body.style.width = '100%';
-  }
+  function initLightbox() {
+    lightboxOverlay = document.getElementById('global-lightbox');
+    lightboxImage = document.getElementById('lightbox-image');
+    
+    if (!lightboxOverlay || !lightboxImage) return;
 
-  function closeLightbox() {
-    lightboxOverlay.setAttribute('aria-hidden', 'true');
-    lightboxImage.src = ''; // Clear image src to free memory and prevent flickering
-    lightboxImage.alt = '';
-    // Restore scrolling on the body
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, currentScrollPosition);
-  }
+    // No need to track scroll position with overscroll-behavior approach
 
-  // Close on click anywhere on the overlay (but not the image itself)
-  lightboxOverlay.addEventListener('click', (event) => {
-    if (event.target === lightboxOverlay || event.target.parentElement === lightboxOverlay) {
-      closeLightbox();
+    function openLightbox(src, alt) {
+      lightboxImage.src = src;
+      lightboxImage.alt = alt;
+      lightboxOverlay.setAttribute('aria-hidden', 'false');
+      // Prevent scrolling on the body when lightbox is open
+      document.documentElement.classList.add('lightbox-open');
     }
-  });
 
-  // Close on ESC key press
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && lightboxOverlay.getAttribute('aria-hidden') === 'false') {
-      closeLightbox();
+    function closeLightbox() {
+      lightboxOverlay.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = ''; // Clear image src to free memory and prevent flickering
+      lightboxImage.alt = '';
+      // Restore scrolling on the body
+      document.documentElement.classList.remove('lightbox-open');
     }
-  });
 
-  // Attach click listeners to all image triggers using event delegation
-  document.addEventListener('click', (event) => {
-    const target = event.target.closest('.lightbox-trigger');
-    if (target) {
-      const src = target.dataset.src;
-      const alt = target.dataset.alt;
-      if (src) {
-        openLightbox(src, alt);
+    // Close on click anywhere on the overlay (but not the image itself)
+    overlayClickHandler = (event) => {
+      if (event.target === lightboxOverlay || event.target.parentElement === lightboxOverlay) {
+        closeLightbox();
       }
+    };
+
+    // Close on ESC key press
+    keydownHandler = (event) => {
+      if (event.key === 'Escape' && lightboxOverlay.getAttribute('aria-hidden') === 'false') {
+        closeLightbox();
+      }
+    };
+
+    // Attach click listeners to all image triggers using event delegation
+    documentClickHandler = (event) => {
+      const target = event.target.closest('.lightbox-trigger');
+      if (target) {
+        const src = target.dataset.src;
+        const alt = target.dataset.alt;
+        if (src) {
+          openLightbox(src, alt);
+        }
+      }
+    };
+
+    // Remove any existing listeners first
+    cleanupLightbox();
+
+    // Add event listeners
+    lightboxOverlay.addEventListener('click', overlayClickHandler);
+    document.addEventListener('keydown', keydownHandler);
+    document.addEventListener('click', documentClickHandler);
+  }
+
+  function cleanupLightbox() {
+    if (lightboxOverlay && overlayClickHandler) {
+      lightboxOverlay.removeEventListener('click', overlayClickHandler);
     }
-  });
+    if (keydownHandler) {
+      document.removeEventListener('keydown', keydownHandler);
+    }
+    if (documentClickHandler) {
+      document.removeEventListener('click', documentClickHandler);
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener('astro:page-load', initLightbox);
+  
+  // Clean up on page navigation
+  document.addEventListener('astro:before-swap', cleanupLightbox);
+
+  // Also initialize immediately for the first page load
+  initLightbox();
 </script>
