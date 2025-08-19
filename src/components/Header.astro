@@ -1,5 +1,5 @@
 ---
-import { DIMENSION_CONFIG, COLOR_CONFIG } from '../lib/config';
+import { DIMENSION_CONFIG, COLOR_CONFIG, BRAND_CONFIG } from '../lib/config';
 
 export interface Props {
   variant?: 'home' | 'article' | 'minimal';
@@ -28,14 +28,14 @@ const { variant = 'home' } = Astro.props;
       <a href="/" class="group no-underline touch-focus">
         <h1 class={`text-3xl md:text-4xl tracking-tight transition-all duration-300 group-hover:translate-x-1 hero-logo-transition ${variant === 'article' ? 'text-white' : 'text-gray-900'}`} 
             style={`${variant === 'article' ? 'text-shadow: 0 2px 20px rgba(0,0,0,0.5);' : ''}`}>
-          <span class="font-weight-900">kilo</span><span class="font-weight-900-italic">what!?</span>
+          <span class="font-weight-600">Vector</span><span class="font-weight-300">&</span><span class="font-weight-900-italic">Verse</span>
         </h1>
       </a>
       
       <div class="flex items-center gap-8">
         {variant === 'home' && (
           <p class="hidden lg:block text-sm text-gray-600 font-weight-500">
-            A minimal space for thoughtful writing
+            {BRAND_CONFIG.descriptions.navigation}
           </p>
         )}
         <a href="/about" class={`text-sm transition-all duration-300 hover:translate-x-1 font-weight-500 touch-target touch-focus ${variant === 'article' ? 'text-white/80 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`} 

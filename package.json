@@ -1,5 +1,5 @@
 {
-  "name": "kilowhat",
+  "name": "vector-and-verse",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -27,7 +27,7 @@
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@playwright/test": "^1.54.0",
+    "@playwright/test": "^1.54.2",
     "@types/node": "^24.0.13",
     "playwright": "^1.54.0",
     "typescript": "^5.8.3"

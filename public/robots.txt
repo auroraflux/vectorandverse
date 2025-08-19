@@ -1,8 +1,8 @@
-# https://kilowhat.buzz/robots.txt
+# https://vectorandverse.me/robots.txt
 
 # Allow all crawlers
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://kilowhat.buzz/sitemap-index.xml
+Sitemap: https://vectorandverse.me/sitemap-index.xml

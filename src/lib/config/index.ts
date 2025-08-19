@@ -19,11 +19,13 @@
 export * from './animations';
 export * from './dimensions';
 export * from './colors';
+export * from './brand';
 
 // Combined config object for convenience
 import { ANIMATION_CONFIG } from './animations';
 import { DIMENSION_CONFIG } from './dimensions';
 import { COLOR_CONFIG } from './colors';
+import { BRAND_CONFIG } from './brand';
 
 /**
  * Combined configuration object containing all config modules.
@@ -33,9 +35,11 @@ import { COLOR_CONFIG } from './colors';
  * @property {Object} animations - Animation timing and behavior settings
  * @property {Object} dimensions - Layout and spacing dimensions
  * @property {Object} colors - Color palette and theme colors
+ * @property {Object} brand - Brand identity and content configuration
  */
 export const CONFIG = {
   animations: ANIMATION_CONFIG,
   dimensions: DIMENSION_CONFIG,
   colors: COLOR_CONFIG,
+  brand: BRAND_CONFIG,
 } as const;

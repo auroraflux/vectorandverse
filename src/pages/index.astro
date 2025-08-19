@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import LogoScrollTransform from '../components/LogoScrollTransform.astro';
+import { BRAND_CONFIG } from '../lib/config';
 import '../styles/global.css';
 
 const posts = (await getCollection('blog', ({ data }) => {
@@ -22,7 +23,7 @@ const postsWithImages = posts.map(post => ({
 }));
 ---
 
-<Layout title="kilowhat!?" description="A minimal typography-focused blog exploring tech, life, and the absurdities in between.">
+<Layout title={BRAND_CONFIG.name} description={BRAND_CONFIG.descriptions.main}>
   <LogoScrollTransform />
   <div class="fade-in relative">
     {/* Animated grid background that spans the whole page */}
@@ -64,7 +65,7 @@ const postsWithImages = posts.map(post => ({
         {/* Large static logo */}
         <h1 class="text-[4.5rem] sm:text-[6rem] md:text-[12rem] lg:text-[13.5rem] mb-4 color-morph hero-logo-transition" 
             style="letter-spacing: -0.04em; text-shadow: 0 4px 30px rgba(0,0,0,0.15), 0 2px 10px rgba(0,0,0,0.3); line-height: 0.9;">
-          <span class="font-weight-600">kilo</span><span class="font-weight-900-italic">what!?</span>
+          <span class="font-weight-600">Vector</span><span class="font-weight-300">&</span><br class="xl:hidden"><span class="font-weight-900-italic">Verse</span>
         </h1>
         
         {/* Rotating taglines container */}

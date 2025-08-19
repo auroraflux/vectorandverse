@@ -1,5 +1,5 @@
 ---
-import { DIMENSION_CONFIG, ANIMATION_CONFIG } from '../lib/config';
+import { DIMENSION_CONFIG, ANIMATION_CONFIG, BRAND_CONFIG } from '../lib/config';
 
 // Component for logo transformation on scroll
 // Configuration values passed to client-side script
@@ -32,17 +32,22 @@ const transitionDuration = ANIMATION_CONFIG.durations.normal;
     logoLink.className = 'sticky-logo group no-underline';
     
     // Create logo text spans
-    const kiloSpan = document.createElement('span');
-    kiloSpan.style.fontWeight = '900';
-    kiloSpan.textContent = 'kilo';
+    const vectorSpan = document.createElement('span');
+    vectorSpan.style.fontWeight = '600';
+    vectorSpan.textContent = 'vector';
     
-    const whatSpan = document.createElement('span');
-    whatSpan.style.fontWeight = '900';
-    whatSpan.style.fontStyle = 'italic';
-    whatSpan.textContent = 'what!?';
+    const ampSpan = document.createElement('span');
+    ampSpan.style.fontWeight = '300';
+    ampSpan.textContent = '&';
     
-    logoLink.appendChild(kiloSpan);
-    logoLink.appendChild(whatSpan);
+    const verseSpan = document.createElement('span');
+    verseSpan.style.fontWeight = '900';
+    verseSpan.style.fontStyle = 'italic';
+    verseSpan.textContent = 'verse';
+    
+    logoLink.appendChild(vectorSpan);
+    logoLink.appendChild(ampSpan);
+    logoLink.appendChild(verseSpan);
     
     // Create about link
     const aboutLink = document.createElement('a');
