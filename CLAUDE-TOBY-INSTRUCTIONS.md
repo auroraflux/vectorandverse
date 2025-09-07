@@ -34,11 +34,11 @@ When asked to update the Toby status page (`/src/pages/toby.astro`), follow this
 **Template**:
 ```astro
 {/* [DAY], [DATE] - [STATUS DESCRIPTION] */}
-<div class="relative flex items-start">
-  <div class="flex-shrink-0 w-16 h-16 bg-[COLOR]-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+<div class="relative timeline-entry">
+  <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-[COLOR]-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
     <span class="text-sm font-weight-900 text-[COLOR]-700">[DAY]</span>
   </div>
-  <div class="ml-8 flex-1">
+  <div class="timeline-content ml-8 flex-1">
     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
       <h3 class="text-xl font-weight-850 text-gray-800 mb-2">[Full Date]</h3>
       
@@ -96,17 +96,28 @@ When asked to update the Toby status page (`/src/pages/toby.astro`), follow this
 <span class="ml-auto text-sm text-gray-500 font-weight-500">Sunday - Both Updates Complete</span>
 ```
 
-### 6. Important Guidelines
+### 6. Mobile Responsive Design
+
+The timeline uses responsive classes for optimal mobile viewing:
+- **`timeline-entry`**: Container with responsive flex behavior
+- **`timeline-day-circle`**: Day circle that stacks above content on mobile
+- **`timeline-content`**: Content area that adjusts to mobile layout
+
+**Mobile Behavior (≤640px)**: Day circles appear above content in vertical stack
+**Desktop Behavior (>640px)**: Side-by-side layout with day circles on left
+
+### 7. Important Guidelines
 
 - **Always** update Current Status section first
 - **Add new timeline entries at the TOP** (newest first)
+- **Use responsive classes**: `timeline-entry`, `timeline-day-circle`, `timeline-content`
 - **Use `flex-shrink-0`** on bullet point spans to prevent layout issues
 - **Keep bullet points concise** but informative
 - **Bold important medical terms** using `<strong class="font-weight-700">`
 - **Maintain personal, caring tone** throughout
 - **Be consistent with color patterns** established in existing entries
 
-### 7. Example Update Process
+### 8. Example Update Process
 
 If given: "Sunday evening update: Toby ate a small amount on his own, blood sugar is stable, still needs IV support"
 
@@ -115,7 +126,7 @@ If given: "Sunday evening update: Toby ate a small amount on his own, blood suga
 3. Either add to existing Sunday entry or create evening subsection
 4. Use green bullets for eating progress, orange for ongoing IV support
 
-### 8. Files to Reference
+### 9. Files to Reference
 - `/TOBY-UPDATE-GUIDE.md` - Detailed documentation
 - `/src/pages/toby.astro` - The actual page file
 - Look for comments marked `UPDATE INSTRUCTIONS` in the code
