@@ -109,13 +109,13 @@ const description = "Health updates for our little fighter";
         <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-400"></div>
         
         {/* Timeline entries - ADD NEW ENTRIES AT THE TOP */}
-        <div class="space-y-8">
+        <div class="space-y-8 timeline-entries">
           {/* SUNDAY, SEPTEMBER 7th - CURRENT DAY */}
-          <div class="relative flex items-start">
-            <div class="flex-shrink-0 w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+          <div class="relative timeline-entry">
+            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
               <span class="text-sm font-weight-900 text-yellow-700">SUN</span>
             </div>
-            <div class="ml-8 flex-1">
+            <div class="timeline-content ml-8 flex-1">
               <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Sunday, September 7th</h3>
                 <p class="text-gray-700 font-weight-500 mb-4">
@@ -144,11 +144,11 @@ const description = "Health updates for our little fighter";
           </div>
 
           {/* SATURDAY, SEPTEMBER 6th - IMPROVEMENT DAY */}
-          <div class="relative flex items-start">
-            <div class="flex-shrink-0 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+          <div class="relative timeline-entry">
+            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
               <span class="text-sm font-weight-900 text-green-700">SAT</span>
             </div>
-            <div class="ml-8 flex-1">
+            <div class="timeline-content ml-8 flex-1">
               <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Saturday, September 6th</h3>
                 <div class="mb-4 p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
@@ -183,11 +183,11 @@ const description = "Health updates for our little fighter";
           </div>
 
           {/* FRIDAY, SEPTEMBER 5th - CRISIS DAY */}
-          <div class="relative flex items-start">
-            <div class="flex-shrink-0 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+          <div class="relative timeline-entry">
+            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
               <span class="text-sm font-weight-900 text-red-700">FRI</span>
             </div>
-            <div class="ml-8 flex-1">
+            <div class="timeline-content ml-8 flex-1">
               <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Friday, September 5th</h3>
                 <div class="mb-4 p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
@@ -222,11 +222,11 @@ const description = "Health updates for our little fighter";
           </div>
 
           {/* WEDNESDAY, SEPTEMBER 3rd - BACKGROUND CONTEXT */}
-          <div class="relative flex items-start">
-            <div class="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+          <div class="relative timeline-entry">
+            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
               <span class="text-sm font-weight-900 text-gray-700">WED</span>
             </div>
-            <div class="ml-8 flex-1">
+            <div class="timeline-content ml-8 flex-1">
               <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                 <h3 class="text-xl font-weight-850 text-gray-800 mb-2">The Lead-Up</h3>
                 <p class="text-gray-700 font-weight-500">
@@ -277,6 +277,40 @@ const description = "Health updates for our little fighter";
   .header-visible {
     transform: translateY(0);
     transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Mobile timeline layout */
+  @media (max-width: 640px) {
+    .timeline-entry {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .timeline-day-circle {
+      align-self: center;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 10;
+    }
+    
+    .timeline-content {
+      margin-left: 0 !important;
+      width: 100%;
+    }
+    
+    /* Hide the timeline line on mobile */
+    .timeline-entries::before {
+      display: none;
+    }
+  }
+  
+  /* Desktop timeline layout */
+  @media (min-width: 641px) {
+    .timeline-entry {
+      display: flex;
+      align-items: flex-start;
+    }
   }
 </style>
 
