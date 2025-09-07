@@ -34,11 +34,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Basic meta tags -->
-    <title>{title} - {BRAND_CONFIG.name}</title>
+    <title>{title === BRAND_CONFIG.name ? title : `${title} - ${BRAND_CONFIG.name}`}</title>
     
     <!-- Open Graph meta tags -->
     <meta property="og:type" content={type} />
-    <meta property="og:title" content={`${title} - ${BRAND_CONFIG.name}`} />
+    <meta property="og:title" content={title === BRAND_CONFIG.name ? title : `${title} - ${BRAND_CONFIG.name}`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
     <meta property="og:url" content={canonicalURL} />
@@ -46,7 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     
     <!-- Twitter Card meta tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} - ${BRAND_CONFIG.name}`} />
+    <meta name="twitter:title" content={title === BRAND_CONFIG.name ? title : `${title} - ${BRAND_CONFIG.name}`} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.url)} />
     <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin>

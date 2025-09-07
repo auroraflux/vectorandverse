@@ -8,7 +8,7 @@
  */
 
 export const BRAND_CONFIG = {
-  name: "Vector&Verse",
+  name: "vector&verse",
   taglines: [
     "Where AI math meets human mess",
     "Technical concepts, emotional damage", 
