@@ -1,0 +1,309 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import GradientBorders from '../components/GradientBorders.astro';
+import { BRAND_CONFIG } from '../lib/config';
+
+const title = "Toby Updates";
+const description = "Health updates for our little fighter";
+---
+
+<Layout title={`${title} - ${BRAND_CONFIG.name}`} description={description}>
+  <Header variant="minimal" />
+  <GradientBorders />
+  <div class="fade-in relative">
+    {/* Animated grid background that matches the homepage */}
+    <div class="fixed inset-0 -z-10">
+      <div class="absolute inset-0 bg-gray-50"></div>
+      <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
+      {/* Moving gradient overlay - subtle variant for content pages */}
+      <div class="absolute inset-0">
+        <div class="absolute inset-0 bg-gradient-animated-subtle"></div>
+      </div>
+    </div>
+    <main id="main-content" class="max-w-4xl mx-auto px-6 pt-24 pb-24">
+      {/* Header */}
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl mb-4 font-weight-850">
+          {title}
+        </h1>
+        <p class="text-xl text-gray-600 font-weight-500">
+          {description}
+        </p>
+        
+        {/* Bookmark notice */}
+        <div class="mt-6 px-4 py-3 bg-gray-50 rounded-lg border border-gray-200 text-center">
+          <p class="text-gray-700 font-weight-500 mb-1 flex items-center justify-center">
+            <svg class="w-4 h-4 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"/>
+            </svg>
+            This is a direct status page, separate from my main blog.
+          </p>
+          <p class="text-gray-600 font-weight-400 text-sm">
+            Updates posted twice daily (morning and evening)
+          </p>
+        </div>
+        
+        <div class="mt-6 text-center">
+          <img src="/images/blog/013-toby/toby4.png" 
+               alt="Toby" 
+               class="w-64 h-64 rounded-full object-cover mx-auto mb-4 shadow-sm" 
+               loading="eager" />
+          <p class="text-gray-700 font-weight-500 mb-2 max-w-2xl mx-auto">
+            <strong class="font-weight-900">Thanks to everyone who's reached out.</strong> Because of the <strong class="font-weight-900">immense</strong> amount of support and desire for updates from many people asking how he's doing, I've set this page up both as a way to easily communicate his progress and to help me work through my own nerves as I wait for updates.
+          </p>
+          <p class="text-gray-600 text-sm mb-4">
+            <strong class="font-weight-900">Your support means everything right now.</strong>
+          </p>
+          <p class="text-gray-500 text-sm">
+            If you're curious about my messy thoughts on suddenly being responsible for another life, I wrote about 
+            <a href="/blog/013-toby" class="text-blue-600 hover:text-blue-800 transition-all duration-300 hover:translate-x-1 no-underline">the weight of being someone's everything</a> 
+            recently.
+          </p>
+        </div>
+      </div>
+
+      {/* 
+        CURRENT STATUS SECTION
+        This is the most prominent section showing the latest update.
+        UPDATE INSTRUCTIONS:
+        1. Replace the status text with the latest information
+        2. Update the day/time indicator on the right
+        3. Modify the update frequency note (1/2, 2/2, etc.)
+        4. Keep the pulsing yellow dot for visual attention
+      */}
+      <div class="mb-12 p-8 bg-white rounded-xl shadow-sm border border-gray-200">
+        <div class="flex items-center mb-4">
+          <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse-gentle"></div>
+          <h2 class="text-2xl font-weight-850 text-gray-800">Current Status</h2>
+          <div class="ml-auto text-right">
+            <span class="text-sm text-gray-500 font-weight-500">Sunday Morning</span>
+            <div class="text-xs text-gray-400 font-weight-400 mt-1">
+              Morning update • Evening update pending
+            </div>
+          </div>
+        </div>
+        <p class="text-lg text-gray-700 font-weight-500 leading-relaxed">
+          Toby is in what the vet calls a "holding pattern." There haven't been any major steps forward or backward, which is good news in a situation this serious. He's stable, but he still relies on the feeding tube for food and the IV for his blood sugar. We're waiting for more blood work this afternoon. The focus remains on getting him strong enough to eat and for his body to manage its own sugar levels.
+        </p>
+      </div>
+
+      {/* 
+        TIMELINE SECTION
+        Displays updates in reverse chronological order (newest first).
+        
+        UPDATE INSTRUCTIONS:
+        1. Add new timeline entries at the TOP of this section (after this comment)
+        2. Use the template structure from TOBY-UPDATE-GUIDE.md
+        3. Choose colors based on day status: green (good), yellow (stable), red (crisis)
+        4. Use bullet point colors: green (good news), orange (neutral), red (concerning)
+        5. Each entry should have: day circle, date header, optional status callout, bullet points
+        
+        COLOR REFERENCE:
+        - Day circles: bg-[color]-100, text-[color]-700
+        - Bullets: text-[color]-500 with flex-shrink-0
+        - Callouts: bg-[color]-50, border-[color]-400, text-[color]-800
+      */}
+      <div class="relative">
+        {/* Timeline line */}
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-400"></div>
+        
+        {/* Timeline entries - ADD NEW ENTRIES AT THE TOP */}
+        <div class="space-y-8">
+          {/* SUNDAY, SEPTEMBER 7th - CURRENT DAY */}
+          <div class="relative flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+              <span class="text-sm font-weight-900 text-yellow-700">SUN</span>
+            </div>
+            <div class="ml-8 flex-1">
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Sunday, September 7th</h3>
+                <p class="text-gray-700 font-weight-500 mb-4">
+                  The update this morning shows Toby is holding steady. It wasn't a day of big breakthroughs like yesterday, but the important thing is that he's stable and not getting worse.
+                </p>
+                <ul class="space-y-2 text-gray-700 font-weight-500">
+                  <li class="flex items-start">
+                    <span class="text-orange-500 mr-3 text-lg flex-shrink-0">•</span>
+                    He's still not interested in eating on his own, so he's getting all his nutrition through his feeding tube. The main goal right now is to get him to eat.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-orange-500 mr-3 text-lg flex-shrink-0">•</span>
+                    They tried to wean him off the dextrose (sugar) in his IV fluids overnight, but his blood sugar didn't stay stable on its own. It's a small setback. They've put him back on the sugar for now, and his levels are back to normal with that support.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    There's more good news from his blood work. His bilirubin, a key liver value, has improved a little more. They're waiting on more lab results later today.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    The vet says he's quiet but alert and seems comfortable. He's holding his own.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* SATURDAY, SEPTEMBER 6th - IMPROVEMENT DAY */}
+          <div class="relative flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+              <span class="text-sm font-weight-900 text-green-700">SAT</span>
+            </div>
+            <div class="ml-8 flex-1">
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Saturday, September 6th</h3>
+                <div class="mb-4 p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+                  <p class="text-green-800 font-weight-600">
+                    Today, things started to turn around. It's the first time I've felt any real hope.
+                  </p>
+                </div>
+                <ul class="space-y-2 text-gray-700 font-weight-500">
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    <span><strong class="font-weight-700">The biggest news is that they fixed the blood clotting problem.</strong> That was the most immediate danger, and it's now completely resolved. It's a huge relief.</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    He hasn't vomited at all today.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    They put in a feeding tube to get nutrition into him, and he's handling it well.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    He also ate a small amount of food on his own. The vets said this is a fantastic sign. It means his nausea is getting under control and he's starting to feel a little bit like himself again.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
+                    New blood work shows his organ values are finally starting to move in the right direction.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* FRIDAY, SEPTEMBER 5th - CRISIS DAY */}
+          <div class="relative flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+              <span class="text-sm font-weight-900 text-red-700">FRI</span>
+            </div>
+            <div class="ml-8 flex-1">
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Friday, September 5th</h3>
+                <div class="mb-4 p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
+                  <p class="text-red-800 font-weight-600">
+                    Friday was a nightmare. Toby's condition got so bad I had to rush him to the emergency vet.
+                  </p>
+                </div>
+                <ul class="space-y-2 text-gray-700 font-weight-500">
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
+                    The first blood tests showed he was in a full-blown crisis. His kidneys were failing. His liver was in serious trouble, which was causing his jaundice. He was fighting a major infection, and he was dangerously dehydrated.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
+                    The vets diagnosed him with severe pancreatitis. They think the inflammation from his pancreas triggered a chain reaction that started shutting down his other organs.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
+                    He was too sick for the regular vet, so they transferred him to Sage, a 24/7 critical care hospital.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
+                    Things got even worse at Sage. They found a life-threatening complication from his blood work. His platelet count was so low that his blood wasn't clotting properly.
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
+                    <strong class="font-weight-700">Given how many things were going wrong, the vets told me he had a 50/50 chance of making it.</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* WEDNESDAY, SEPTEMBER 3rd - BACKGROUND CONTEXT */}
+          <div class="relative flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+              <span class="text-sm font-weight-900 text-gray-700">WED</span>
+            </div>
+            <div class="ml-8 flex-1">
+              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">The Lead-Up</h3>
+                <p class="text-gray-700 font-weight-500">
+                  This all started around our trip to D.C. He was already showing some signs of being sick before or during the trip, mostly not eating and being really lethargic. When we got back home early on Wednesday, September 3rd, he got much, much worse.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  @import "tailwindcss";
+  @reference;
+  
+  @keyframes pulse-gentle {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.1);
+      box-shadow: 0 0 0 6px rgba(251, 191, 36, 0);
+    }
+  }
+  
+  .animate-pulse-gentle {
+    animation: pulse-gentle 2s ease-in-out infinite;
+  }
+  
+  
+  /* Header scroll behavior */
+  header {
+    backdrop-filter: blur(10px);
+    background-color: rgba(249, 250, 251, 0.9);
+  }
+  
+  .header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .header-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+</style>
+
+<script>
+  // Header hide on scroll functionality
+  let lastScrollTop = 0;
+  const header = document.querySelector('header');
+  
+  // Add backdrop blur to header for this page
+  if (header) {
+    header.style.backdropFilter = 'blur(10px)';
+    header.style.backgroundColor = 'rgba(249, 250, 251, 0.9)';
+  }
+  
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop && scrollTop > 150) {
+      // Scrolling down - hide header
+      header?.classList.add('header-hidden');
+      header?.classList.remove('header-visible');
+    } else if (scrollTop < lastScrollTop) {
+      // Scrolling up - show header
+      header?.classList.add('header-visible');
+      header?.classList.remove('header-hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+  });
+</script>
