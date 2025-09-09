@@ -77,172 +77,52 @@ const description = "Health updates for our little fighter";
           <div class="w-3 h-3 bg-yellow-400 rounded-full mr-3 animate-pulse-gentle"></div>
           <h2 class="text-2xl font-weight-850 text-gray-800">Current Status</h2>
           <div class="ml-auto text-right">
-            <span class="text-sm text-gray-500 font-weight-500">Sunday Evening</span>
+            <span class="text-sm text-gray-500 font-weight-500">Monday, September 8th</span>
             <div class="text-xs text-gray-400 font-weight-400 mt-1">
-              Both updates complete
+              Final update
             </div>
           </div>
         </div>
         <p class="text-lg text-gray-700 font-weight-500 leading-relaxed">
-          Toby is in a holding pattern. He's stable but remains very sick and fully dependent on the feeding tube for nutrition and IV fluids for his blood sugar. The mixed lab results show this is a day-by-day fight. The plan is to continue supportive care and see what the specialist recommends tomorrow.
+          After days of uncertainty, we finally have a definitive answer. <strong class="font-weight-700">Toby has been diagnosed with high-grade Lymphoma</strong> and started his first round of chemotherapy today. This will be the last update on this page as we shift our focus to the fight ahead.
         </p>
       </div>
 
       {/* 
-        TIMELINE SECTION
-        Displays updates in reverse chronological order (newest first).
-        
-        UPDATE INSTRUCTIONS:
-        1. Add new timeline entries at the TOP of this section (after this comment)
-        2. Use the template structure from TOBY-UPDATE-GUIDE.md
-        3. Choose colors based on day status: green (good), yellow (stable), red (crisis)
-        4. Use bullet point colors: green (good news), orange (neutral), red (concerning)
-        5. Each entry should have: day circle, date header, optional status callout, bullet points
-        
-        COLOR REFERENCE:
-        - Day circles: bg-[color]-100, text-[color]-700
-        - Bullets: text-[color]-500 with flex-shrink-0
-        - Callouts: bg-[color]-50, border-[color]-400, text-[color]-800
+        FINAL UPDATE SECTION
+        Lymphoma diagnosis and treatment decision
       */}
-      <div class="relative">
-        {/* Timeline line */}
-        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-400"></div>
-        
-        {/* Timeline entries - ADD NEW ENTRIES AT THE TOP */}
-        <div class="space-y-8 timeline-entries">
-          {/* SUNDAY, SEPTEMBER 7th - CURRENT DAY */}
-          <div class="relative timeline-entry">
-            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
-              <span class="text-sm font-weight-900 text-yellow-700">SUN</span>
-            </div>
-            <div class="timeline-content ml-8 flex-1">
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Sunday, September 7th</h3>
-                <div class="mb-4 p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
-                  <p class="text-yellow-800 font-weight-600">
-                    Today was just about holding steady. No big breakthroughs, but stable is still good news.
-                  </p>
-                </div>
-                <ul class="space-y-2 text-gray-700 font-weight-500">
-                  <li class="flex items-start">
-                    <span class="text-orange-500 mr-3 text-lg flex-shrink-0">•</span>
-                    They tried to wean him off the sugar in his IV fluids overnight, but his blood sugar couldn't stay stable on its own. He's back on it now with normal levels.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-orange-500 mr-3 text-lg flex-shrink-0">•</span>
-                    Afternoon blood work showed mixed results. Some liver values improved, but his protein and potassium levels dropped. The vet described his condition as "leveled off."
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-orange-500 mr-3 text-lg flex-shrink-0">•</span>
-                    He's still not interested in food and relies completely on the feeding tube for nutrition.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
-                    The vet was direct about pancreatitis being unpredictable. Dogs can seem stable and then decline suddenly without warning. It was hard to hear but important to understand the ongoing risks.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
-                    An internal medicine specialist takes over his case tomorrow morning. I'm visiting tonight with some of his favorite food to see if it might tempt him to eat.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      
+      <div class="space-y-8">
+        <h2 class="text-3xl font-weight-850 text-gray-800 mb-8 text-center">
+          Final Update
+        </h2>
 
-          {/* SATURDAY, SEPTEMBER 6th - IMPROVEMENT DAY */}
-          <div class="relative timeline-entry">
-            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
-              <span class="text-sm font-weight-900 text-green-700">SAT</span>
-            </div>
-            <div class="timeline-content ml-8 flex-1">
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Saturday, September 6th</h3>
-                <div class="mb-4 p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
-                  <p class="text-green-800 font-weight-600">
-                    Today, things started to turn around. It's the first time I've felt any real hope.
-                  </p>
-                </div>
-                <ul class="space-y-2 text-gray-700 font-weight-500">
-                  <li class="flex items-start">
-                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
-                    <span><strong class="font-weight-700">The biggest news is that they fixed the blood clotting problem.</strong> That was the most immediate danger, and it's now completely resolved. It's a huge relief.</span>
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
-                    He hasn't vomited at all today.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
-                    They put in a feeding tube to get nutrition into him, and he's handling it well.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
-                    He also ate a small amount of food on his own. The vets said this is a fantastic sign. It means his nausea is getting under control and he's starting to feel a little bit like himself again.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-green-500 mr-3 text-lg flex-shrink-0">•</span>
-                    New blood work shows his organ values are finally starting to move in the right direction.
-                  </li>
-                </ul>
-              </div>
-            </div>
+        <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+          <div class="mb-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+            <p class="text-blue-800 font-weight-600">
+              <strong class="font-weight-700">Monday, September 8th</strong> - We finally have answers, and we've made our choice.
+            </p>
           </div>
+          
+          <div class="prose prose-lg max-w-none text-gray-700 font-weight-500 leading-relaxed space-y-6">
+            <p>
+              Thank you all again for the incredible support you've shown Toby. After days of uncertainty, consultations with specialists, and a lot of difficult conversations, we finally have a definitive answer. <strong class="font-weight-700">Toby has been diagnosed with high-grade Lymphoma, a cancer of the blood.</strong> This diagnosis, while devastating, finally explains the cascade of issues he's been battling, from the liver failure to the pancreatitis.
+            </p>
 
-          {/* FRIDAY, SEPTEMBER 5th - CRISIS DAY */}
-          <div class="relative timeline-entry">
-            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-red-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
-              <span class="text-sm font-weight-900 text-red-700">FRI</span>
-            </div>
-            <div class="timeline-content ml-8 flex-1">
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">Friday, September 5th</h3>
-                <div class="mb-4 p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
-                  <p class="text-red-800 font-weight-600">
-                    Friday was a nightmare. Toby's condition got so bad I had to rush him to the emergency vet.
-                  </p>
-                </div>
-                <ul class="space-y-2 text-gray-700 font-weight-500">
-                  <li class="flex items-start">
-                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
-                    The first blood tests showed he was in a full-blown crisis. His kidneys were failing. His liver was in serious trouble, which was causing his jaundice. He was fighting a major infection, and he was dangerously dehydrated.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
-                    The vets diagnosed him with severe pancreatitis. They think the inflammation from his pancreas triggered a chain reaction that started shutting down his other organs.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
-                    He was too sick for the regular vet, so they transferred him to Sage, a 24/7 critical care hospital.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
-                    Things got even worse at Sage. They found a life-threatening complication from his blood work. His platelet count was so low that his blood wasn't clotting properly.
-                  </li>
-                  <li class="flex items-start">
-                    <span class="text-red-500 mr-3 text-lg flex-shrink-0">•</span>
-                    <strong class="font-weight-700">Given how many things were going wrong, the vets told me he had a 50/50 chance of making it.</strong>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <p>
+              This is not the end of his story. After a long and emotional discussion with the oncology team and my family, we've made the decision to fight. <strong class="font-weight-700">Today, Monday, September 8th, Toby started his first round of chemotherapy.</strong> We are under no illusions about what this means. This is not a cure, but a fight for a significant period of good, happy, high-quality time.
+            </p>
 
-          {/* WEDNESDAY, SEPTEMBER 3rd - BACKGROUND CONTEXT */}
-          <div class="relative timeline-entry">
-            <div class="timeline-day-circle flex-shrink-0 w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-md">
-              <span class="text-sm font-weight-900 text-gray-700">WED</span>
-            </div>
-            <div class="timeline-content ml-8 flex-1">
-              <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <h3 class="text-xl font-weight-850 text-gray-800 mb-2">The Lead-Up</h3>
-                <p class="text-gray-700 font-weight-500">
-                  This all started around our trip to D.C. He was already showing some signs of being sick before or during the trip, mostly not eating and being really lethargic. When we got back home early on Wednesday, September 3rd, he got much, much worse.
-                </p>
-              </div>
-            </div>
+            <p>
+              The daily updates on this page were a lifeline for me during the diagnostic whirlwind, but that phase is now over. The road ahead requires our complete focus, as a family, in private. For that reason, <strong class="font-weight-700">this will be the last update I post here.</strong> We need to shift all our energy from reporting on the battle to simply fighting it.
+            </p>
+
+            <p class="text-lg font-weight-600">
+              Thank you, from the bottom of my heart, for rooting for my little guy. Your support has meant the world.
+            </p>
           </div>
         </div>
-      </div>
     </main>
   </div>
 </Layout>
@@ -259,16 +139,33 @@ const description = "Health updates for our little fighter";
     }
     50% {
       opacity: 0.8;
-      transform: scale(1.1);
-      box-shadow: 0 0 0 6px rgba(251, 191, 36, 0);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 8px rgba(251, 191, 36, 0);
     }
   }
-  
+
   .animate-pulse-gentle {
-    animation: pulse-gentle 2s ease-in-out infinite;
+    animation: pulse-gentle 2s infinite;
   }
-  
-  
+
+  /* Mobile responsive timeline classes */
+  @media (max-width: 640px) {
+    .timeline-entry {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .timeline-day-circle {
+      align-self: flex-start;
+      margin-bottom: 1rem;
+    }
+    
+    .timeline-content {
+      margin-left: 0 !important;
+      width: 100%;
+    }
+  }
+
   /* Header scroll behavior */
   header {
     backdrop-filter: blur(10px);
@@ -283,40 +180,6 @@ const description = "Health updates for our little fighter";
   .header-visible {
     transform: translateY(0);
     transition: transform 0.3s ease-in-out;
-  }
-  
-  /* Mobile timeline layout */
-  @media (max-width: 640px) {
-    .timeline-entry {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    
-    .timeline-day-circle {
-      align-self: center;
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 10;
-    }
-    
-    .timeline-content {
-      margin-left: 0 !important;
-      width: 100%;
-    }
-    
-    /* Hide the timeline line on mobile */
-    .timeline-entries::before {
-      display: none;
-    }
-  }
-  
-  /* Desktop timeline layout */
-  @media (min-width: 641px) {
-    .timeline-entry {
-      display: flex;
-      align-items: flex-start;
-    }
   }
 </style>
 
